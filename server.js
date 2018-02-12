@@ -12,7 +12,7 @@ require("./server/config/mongoose");
 require("./server/config/routes");
 
 app.all('*',(req,res,next) =>{
-    res.sendfile(path.resolve('./front-end/dist/index.html'))
+    res.sendfile(path.resolve('./client/dist/index.html'))
 });
 
 app.listen(8000, function(){
