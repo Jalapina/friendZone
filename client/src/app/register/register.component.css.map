@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "styles-app-loading.sass"
+        "register.component.scss"
     ],
     "names": [],
-    "file": "styles-app-loading.css"
+    "file": "register.component.css"
 }

@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "styles-app-loading.sass"
+        "home.component.scss"
     ],
     "names": [],
-    "file": "styles-app-loading.css"
+    "file": "home.component.css"
 }
