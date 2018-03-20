@@ -2,7 +2,7 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "home.component.scss"
+        "home.component.sass"
     ],
     "names": [],
     "file": "home.component.css"
