@@ -27,4 +27,8 @@ div.signUp {
   height: 50px;
   font-size: 16px;
 }
+
+.foward:hover {
+  background-color: #33663a;
+}
 /*# sourceMappingURL=landing.component.css.map */

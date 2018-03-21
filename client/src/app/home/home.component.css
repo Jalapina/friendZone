@@ -1,1 +1,18 @@
-/* No CSS *//*# sourceMappingURL=home.component.css.map */
+.categories {
+  padding: 5px 0px 0px 0px;
+}
+
+.category {
+  background-color: #6ACCCB;
+  color: white;
+  text-align: center;
+  height: 200px;
+  margin: 5px 0px 0px 1px;
+  width: 99%;
+  display: inline-block;
+}
+
+.category:hover {
+  background-color: #447272;
+}
+/*# sourceMappingURL=home.component.css.map */

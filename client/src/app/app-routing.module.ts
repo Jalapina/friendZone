@@ -6,12 +6,23 @@ import { LandingComponent } from './landing/landing.component'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
+import { ProfileComponent } from './profile/profile.component'
  
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: LandingComponent,
+  },
+  {
+    path: 'home',
+    pathMatch: 'full',
+    component: HomeComponent,
+  },
+  {
+    path: 'profile',
+    pathMatch: 'full',
+    component: ProfileComponent,
   },
   {
     path: 'login',
