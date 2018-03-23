@@ -1,15 +1,7 @@
-.app {
-  height: 100vh;
-}
-
-.logo {
-  color: white;
-  padding: 35px;
-}
-
 nav {
   background-color: #30415D;
   min-height: 15%;
   text-align: center;
+  padding-top: 20px;
 }
 /*# sourceMappingURL=app.component.css.map */

@@ -1,12 +1,16 @@
 .user-image {
   height: 350px;
   margin: 5px;
-  background-color: #44cecd;
 }
 
 .profile {
   padding: 5px;
   text-align: center;
+}
+
+.user-bio {
+  height: 200px;
+  overflow: scroll;
 }
 
 .options {
