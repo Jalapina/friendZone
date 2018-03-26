@@ -14,7 +14,16 @@ div.login {
 
 .form-button {
   background-color: #031424;
+  text-transform: uppercase;
+  transition-property: background-color color border-width;
+  transition-duration: 1s;
   color: white;
+}
+
+.form-button:hover {
+  background-color: #eeeeee;
+  color: black;
+  border-width: 1px;
 }
 
 .form-input {

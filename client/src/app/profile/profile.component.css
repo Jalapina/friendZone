@@ -13,21 +13,27 @@
   overflow: scroll;
 }
 
+.card {
+  margin: 0;
+  height: 625px;
+}
+
 .options {
   width: 100%;
   bottom: 0;
-  margin-top: 5px;
+  margin-top: 150px;
   left: 0;
 }
 
 .options .option {
+  background-color: #cfd8dc;
   border: 0px;
   width: 49%;
   height: 45px;
 }
 
 .options .option:hover {
-  background-color: #818787;
+  background-color: #90a4ae;
   color: white;
 }
 /*# sourceMappingURL=profile.component.css.map */
