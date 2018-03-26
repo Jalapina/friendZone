@@ -1,12 +1,69 @@
 .dialog
-    text-align: center
-    padding-top: 75px
-    margin: 25px
-    font-size: 30px
-    font-family: Arial, Helvetica, sans-serif
+    // text-align: center
+    // padding-top: 75px
+    // margin: 25px
+    // font-size: 30px
+    // font-family: Arial, Helvetica, sans-serif
     // color: white
     // background-color: red
-    position: fixed
+    // position: fixed
+
+.slide-1, .slide-2, .slide-3
+    position: absolute 
+    display: block
+    font-size: 2.5em;
+    text-align: center
+    margin-top: 50px
+    width: 50%;
+    animation-duration: 20s
+    animation-timing-function: ease-in-out
+    animation-iteration-count: infinite
+
+.slide-1
+	animation-name: slide1
+    // margin-top: 20px
+
+.slide-2
+	animation-name: slide2
+    // margin-top: 80px
+
+.slide-3
+	animation-name: slide3
+    // margin-top: 20px
+
+
+@keyframes slide1
+    0%, 8.3%
+        left: -100%
+        opacity: 0
+    8.3%, 25%
+        left: 25% 
+        opacity: 1
+    33.33%,100%
+        left: 110% 
+        opacity: 0
+
+@keyframes slide2
+    0%, 33.33%
+        left: -100%
+        opacity: 0
+    41.63%, 58.29%
+        left: 25%
+        opacity: 1
+    66.66%, 100% 
+        left: 110%
+        opacity: 0
+
+@keyframes slide3
+    0%, 66.66% 
+        left: -100%
+        opacity: 0
+    74.96%, 91.62%
+        left: 25%
+        opacity: 1
+    100%
+        left: 110%
+        opacity: 0
 
 div.signUp
     margin-top: 313px
@@ -15,7 +72,7 @@ div.signUp
     left: 0
     position: absolute
     display: inline-block
-    // background-color: antiquewhite
+    background-color: antiquewhite
 
 .foward
     background-color: #4CAF50
