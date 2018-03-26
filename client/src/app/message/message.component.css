@@ -1,0 +1,26 @@
+.message-board {
+  height: 78.8%;
+}
+
+input {
+  margin: 0;
+  background-color: white;
+  border: 0px;
+}
+
+.message-input {
+  width: 70%;
+}
+
+.message-button {
+  width: 29%;
+  border-radius: 0px;
+  height: 45px;
+  background-color: #8d6e63;
+  border: 0px;
+}
+
+.message-button:hover {
+  background-color: #a1887f;
+}
+/*# sourceMappingURL=message.component.css.map */
