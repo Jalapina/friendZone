@@ -12,6 +12,20 @@ div.login {
   border: 0px;
 }
 
+.button-link {
+  background-color: #eeeeee;
+  text-transform: uppercase;
+  transition-property: background-color color border-width;
+  transition-duration: 1s;
+  color: black;
+}
+
+.button-link:hover {
+  background-color: #031424;
+  color: white;
+  border-width: 1px;
+}
+
 .form-button {
   background-color: #031424;
   text-transform: uppercase;

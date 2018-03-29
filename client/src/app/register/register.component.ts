@@ -10,12 +10,14 @@ import { User } from './user'
 export class RegisterComponent implements OnInit {
 
   constructor(private _userService:UserService) { }
+  
+  user:any = {}
 
   ngOnInit() {
   }
 
-  register(user:User){
-    this._userService.create(user)
+  create(){
+    this._userService.create(this.user)
   }
 
 }

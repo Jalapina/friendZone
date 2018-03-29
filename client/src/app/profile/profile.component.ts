@@ -17,5 +17,8 @@ export class ProfileComponent implements OnInit {
     this._userService.getUser()
     .then(user => user)
   }
+  test(){
+    console.log("Test is working")
+  }
 
 }

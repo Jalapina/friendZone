@@ -24,6 +24,19 @@ div.register {
 .form-button:hover {
   background-color: #eeeeee;
   color: black;
+}
+
+.button-link {
+  background-color: #eeeeee;
+  text-transform: uppercase;
+  transition-property: background-color color border-width;
+  transition-duration: 1s;
+  color: black;
+}
+
+.button-link:hover {
+  background-color: #031424;
+  color: white;
   border-width: 1px;
 }
 /*# sourceMappingURL=register.component.css.map */
