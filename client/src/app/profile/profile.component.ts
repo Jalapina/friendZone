@@ -8,9 +8,14 @@ import { UserService } from '../_services/user.service'
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService:UserService) { }
 
   ngOnInit() {
+  }
+
+  getUser(){
+    this._userService.getUser()
+    .then(user => user)
   }
 
 }

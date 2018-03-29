@@ -9,16 +9,21 @@ export class UserService {
 
   constructor(private _http: Http) { }
 
-  loadUser(){
-    return._http.get('/api/users/loadUser')
+  getUsers(){
+    return this._http.get('/api/users/loadUser')
     .map(users => users.json()).toPromise()
+  }
+
+  getUser(){
+    return this._http.get('/api/users/:id')
+    .map(user => user.json()).toPromise()
   }
 
   create(user:any){
     return this._http.post('/api/users/create',user)
     .map(data => data.json()).toPromise()
   }
-  
+
   login(user:any){
     return this._http.post('/api/users/login',user)
     .map(data => data.json()).toPromise()
