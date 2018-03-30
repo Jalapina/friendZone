@@ -11,4 +11,9 @@ export class MessageService {
     .map(messages => messages.json()).toPromise()
   }
 
+  sendMessage(message:any){
+    return this._http.post('/api/createMessage',message)
+    .map(data => data.json()).toPromise()
+  }
+
 }

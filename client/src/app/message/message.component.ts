@@ -10,6 +10,8 @@ export class MessageComponent implements OnInit {
 
   constructor( private messageService:MessageService) { }
 
+  message:any = {}
+
   ngOnInit() {
     this.getMessages()
   }
@@ -17,6 +19,10 @@ export class MessageComponent implements OnInit {
   getMessages(){
     this.messageService.getMessages()
     .then(messages => messages)
+  }
+  sendMessage(){
+    this.messageService.sendMessage(this.message)
+    .then(status => this.getMessages())
   }
 
 }

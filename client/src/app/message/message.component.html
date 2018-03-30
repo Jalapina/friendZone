@@ -1,15 +1,9 @@
 <div class="message-board">
-
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-
 </div>
 
-<form class="message-form" action="">
+<form class="message-form" (submit)="createMessage()">
   
-  <input class="message message-input" type="text" placeholder="Say something ...">
-  <input class="message message-button" type="button" value="Send">
+  <input class="message message-input" type="text" placeholder="Say something ..." name="message" [(ngModel)]="message.message">
+  <input class="message message-button" type="submit" value="Send">
 
 </form>

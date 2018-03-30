@@ -21,6 +21,10 @@
   height: 550px;
 }
 
+.card-image {
+  height: 52%;
+}
+
 .options {
   width: 99%;
   bottom: 7px;
