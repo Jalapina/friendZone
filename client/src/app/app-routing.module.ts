@@ -32,7 +32,7 @@ const routes: Routes = [
     component: ProfileComponent,
   },
   {
-    path: 'message',
+    path: 'messages',
     pathMatch: 'full',
     component: MessageComponent,
   },
