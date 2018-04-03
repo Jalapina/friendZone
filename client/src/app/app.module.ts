@@ -9,10 +9,11 @@ import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
-import { MessageService } from './_services/message.service'
+import { MessageService } from './_services/message.service';
+import { ProfileComponent } from './profile/profile.component'
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { MessageService } from './_services/message.service'
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent,
-    MessageComponent
+    UsersComponent,
+    MessageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

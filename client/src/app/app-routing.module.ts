@@ -6,9 +6,10 @@ import { LandingComponent } from './landing/landing.component'
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
-import { ProfileComponent } from './profile/profile.component'
+import { UsersComponent } from './users/users.component'
 import { MessageComponent } from './message/message.component'
- 
+import { ProfileComponent } from './profile/profile.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'home',
     pathMatch: 'full',
     component: HomeComponent,
+  },
+  {
+    path: 'users',
+    pathMatch: 'full',
+    component: UsersComponent,
   },
   {
     path: 'profile',
