@@ -8,6 +8,8 @@ import { UserService } from '../_services/user.service'
 })
 export class UsersComponent implements OnInit {
 
+  isClassVisible: false;
+
   constructor(private _userService:UserService) { }
 
   ngOnInit() {

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
+  isClassVisible: false;
+
   constructor() { }
 
   ngOnInit() {
