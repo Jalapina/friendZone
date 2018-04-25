@@ -1,16 +1,19 @@
 <div class="main">
   
     <div class="card">
+
         <div class="profile-image">
             <img class="activator" height="300px" width="100%" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
         </div>
 
         <div class="profile-bio">
+            
             <div (click)="isClassVisible = !isClassVisible;" class="profile-name">
                 <p>David</p>
                 <i class="material-icons">more_vert</i>
             </div>
             <p>I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!</p>
+
         </div>
 
         <div [ngClass]="{'card-show': isClassVisible }" class="card-hide">
@@ -26,14 +29,25 @@
             </p>
 
         </div>
+
+    </div>
+
+    <div class="options">
+            
+        <form (submit)="test()">
+            <input type="submit" class="option" value="Pass">
+            <input type="submit" class="option" value="Friendzone">
+        </form>
+              
     </div>
 
 </div>
 
-
 <!-- <div class="options">
+
   <form (submit)="test()">
     <input type="submit" class="option" value="Pass">
     <input type="submit" class="option" value="Friendzone">
   </form>
+
 </div> -->
