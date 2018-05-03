@@ -13,7 +13,8 @@ import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
 import { MessageService } from './_services/message.service';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
+import { FriendsComponent } from './friends/friends.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component'
     RegisterComponent,
     UsersComponent,
     MessageComponent,
-    ProfileComponent
+    ProfileComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,18 @@ import { RegisterComponent } from './register/register.component'
 import { UsersComponent } from './users/users.component'
 import { MessageComponent } from './message/message.component'
 import { ProfileComponent } from './profile/profile.component'
+import { FriendsComponent } from './friends/friends.component'
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: LandingComponent,
+  },
+  {
+    path: 'friends',
+    pathMatch: 'full',
+    component: FriendsComponent,
   },
   {
     path: 'home',
