@@ -3,7 +3,13 @@
     // height: auto
     .card-image
         width: 100%
+        text-align: center
         height: 300px
+        img
+            height: 300px
+            // width: 100%
+            width: 375px
+
     .card-content 
         text-align: center
         // background: transparent
@@ -13,10 +19,11 @@
         // text-align: center
 
         .chips
-            // background: #bbdefb 
+            background: transparent
             width: 90%
             margin: auto
             // padding: 10px
+            min-height: 100px
             text-align: left
             // margin: 9px
             .chip
@@ -30,6 +37,12 @@
                 margin-top: 5px
                 padding: 5px
                 border-radius: 5px
+            >input
+                border: 0px
+                background: transparent
+                border-bottom: 1px solid black
+                padding: 0px
+                margin: 0px
                 
         >input
             border: none
@@ -42,20 +55,31 @@
             // background-color: red
     // .my-class
         // color: #bcaaa4
-textarea
+.bio
     // margin: auto
     margin-top: 10px 
     resize: none
     border: 0
     outline: none
     // overflow: visible
-    // background: transparent
+    background: transparent
     // padding: 0
     // border-bottom: none
     height: 150px
     direction: ltr
     // text-align: left
     width: 90%
-
+textarea
+    min-height: 80px
+    width: 90%
+    resize: none
+    border: 0
+    background: transparent
 .closebtn:hover
     cursor: default
+select
+    width: 300px
+    background: transparent
+    border: 0px
+    border-radius: 5px
+    
