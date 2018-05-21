@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -15,6 +16,7 @@ import { UserService } from './_services/user.service'
 import { MessageService } from './_services/message.service';
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FriendsComponent } from './friends/friends.component'
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule,
+    BrowserAnimationsModule,
+    TagInputModule,
   ],
   providers: [
     UserService,

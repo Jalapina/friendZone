@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { TagInputModule } from 'ngx-chips';
+
+TagInputModule.withDefaults({
+  tagInput: {
+      placeholder: 'Add a Hobby',
+      // add here other default values for tag-input
+  },
+  dropdown: {
+      displayBy: 'my-display-value',
+      // add here other default values for tag-input-dropdown
+  }
+});
 
 @Component({
   selector: 'app-profile',
@@ -6,9 +18,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-
+  
   isClassVisible: false;
-
+  itemsAsObjects = ["Running","Reading"]
   constructor() { }
 
   ngOnInit() {
