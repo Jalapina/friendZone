@@ -9,6 +9,7 @@ import { UserService } from '../_services/user.service'
 export class UsersComponent implements OnInit {
 
   isClassVisible: false;
+  itemsAsObjects = ["Running","Reading"]
 
   constructor(private _userService:UserService) { }
 

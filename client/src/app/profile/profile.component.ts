@@ -4,12 +4,13 @@ import { TagInputModule } from 'ngx-chips';
 TagInputModule.withDefaults({
   tagInput: {
       placeholder: 'Add a Hobby',
+      
       // add here other default values for tag-input
   },
   dropdown: {
       displayBy: 'my-display-value',
-      // add here other default values for tag-input-dropdown
-  }
+  },
+  
 });
 
 @Component({
