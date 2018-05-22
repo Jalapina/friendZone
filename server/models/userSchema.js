@@ -18,6 +18,11 @@ var userSchema = mongoose.Schema({
         //     message: "Email is invalid."
         // },
     },
+    password:{
+        type: String,
+        // require: true,
+        // minlength: 5,
+    },
 
 },{
     timestamps: true,   
