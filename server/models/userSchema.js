@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
     },
     email:{
         type: String,
-        // required: true,
+        required: true,
         // unique: true,
         // validate: {
         //     validator: function(value){
@@ -20,12 +20,26 @@ var userSchema = mongoose.Schema({
     },
     password:{
         type: String,
-        // require: true,
+        require: true,
         // minlength: 5,
     },
 
 },{
     timestamps: true,   
 });
+
+userSchema.methods.generateHAsh = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+};
+  
+userSchema.methods.validPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+};
+
+userSchema.pre("save", function(done){
+    this.password = this.generateHAsh(this.password)
+    done()
+});
+  
 
 mongoose.model("User",userSchema);

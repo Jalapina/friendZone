@@ -3,7 +3,28 @@ let User = mongoose.model('User');
 
 module.exports.login = function(request,response){
     console.log("Login Info",request.body);
-    
+    User.findOne({email:request.body.email},function(err,user){
+        if(err){
+            console.log("ERROR \n",err)
+        }
+        else if(user.validPassword(request.body.password)){
+            response.json({
+                id: user._id,
+                first_name: first_name,
+            })
+        }
+        else if(!user.validPassword(request.body.password)){
+            console.log('Wrong password')
+            response.status(403).json({
+                message: "Password Invalid"
+            })
+        }
+        else{
+            response.status(403).json({
+                message: "Email Invalid"
+            })
+        }
+    })
 }
 
 module.exports.registration = function(request,response){
@@ -27,7 +48,7 @@ module.exports.registration = function(request,response){
         });    
     }
     else{
-        console.log("Else on reg");
+        console.log("Else on registration");
         response.status(403).json({
             message:"Passwords do not match!"
         });
