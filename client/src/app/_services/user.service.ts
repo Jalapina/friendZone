@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map'
 import { User } from '../login/user'
 
 @Injectable()
+
 export class UserService {
 
   constructor(private _http: Http) { }
@@ -24,8 +25,8 @@ export class UserService {
     .map(data => data.json()).toPromise()
   }
 
-  login(user:any){
-    return this._http.post('/api/users/login',user)
+  authenticate(user:any){
+    return this._http.post('/api/users/authenticate',user)
     .map(data => data.json()).toPromise()
   }
 
