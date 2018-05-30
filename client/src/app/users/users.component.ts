@@ -17,8 +17,8 @@ export class UsersComponent implements OnInit {
   }
 
   getUser(){
-    this._userService.getUser()
-    .then(user => user)
+    // this._userService.getUser()
+    // .then(user => user)
   }
   test(){
     console.log("Test is working")

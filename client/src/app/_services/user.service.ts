@@ -1,33 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http'
+// import { Http, Response } from '@angular/http'
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { User } from '../login/user'
+// import { User } from '../login/user'
 
 @Injectable()
 
 export class UserService {
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
+
+  authenticate(user:any){
+    return this._http.post('/api/users/authenticate',user)
+    .map((data) => {
+      console.log(data);
+    })
+    // .catch(err => console.log(err))
+  }
+
+  create(user:any){
+    
+    console.log("create Service",user)
+    
+    return this._http.post('/api/users/create',user)
+    .map((data) => {
+      console.log(data);
+    });
+
+  }
 
   getUsers(){
     return this._http.get('/api/users/loadUser')
-    .map(users => users.json()).toPromise()
+    .map((data) => {
+      console.log(data);
+    });
   }
 
   getUser(){
     return this._http.get('/api/users/:id')
-    .map(user => user.json()).toPromise()
-  }
-
-  create(user:any){
-    return this._http.post('/api/users/create',user)
-    .map(data => data.json()).toPromise()
-  }
-
-  authenticate(user:any){
-    return this._http.post('/api/users/authenticate',user)
-    .map(data => data.json()).toPromise()
-  }
+    .map((data) => {
+      console.log(data);
+    });
+  }  
 
 }

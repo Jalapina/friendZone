@@ -8,7 +8,7 @@ module.exports.authenticate = function(request,response){
     User.findOne({email:request.body.email}, function(err,user){
 
         if(err){
-            console.log("ERROR \n",err)
+            console.log("ERROR \n", err)
         }
 
         else if(user.validPassword(request.body.password)){
@@ -45,7 +45,7 @@ module.exports.create = function(request,response){
     });
 
     if( user.password == request.body.confirm_password){
-        
+
         user.save(function(err,newUser){
 
             if(err){
@@ -61,7 +61,7 @@ module.exports.create = function(request,response){
 
     else{
         console.log("Else on registration");
-        response.status(403).json({
+        response.status(401).json({
             message:"Passwords do not match!"
         });
     }
