@@ -14,7 +14,7 @@ module.exports.authenticate = function(request,response){
         else if(user.validPassword(request.body.password)){
             response.json({
                 id: user._id,
-                first_name: first_name,
+                first_name: user.first_name,
             })
         }
 
