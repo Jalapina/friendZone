@@ -38,6 +38,28 @@ module.exports.create = function(request,response){
 
     console.log("Reg Info",request.body);
     
+    const first_name = request.body.first_name
+    const email = request.body.email
+    const password = request.body.password
+    const confirm_password = request.body.confirm_password
+    
+
+    if(!first_name){
+        return response.status(401).json({
+            message:"No First Name"
+        })
+    }
+    if(!email){
+        return response.status(401).json({
+            message: "No Email"
+        })
+    }
+    if(!password || !confirm_password){
+        return response.status(401).json({
+            message: "Passwords do not match!"
+        })
+    }
+
     let user = new User({
         first_name: request.body.first_name,
         email: request.body.email,
@@ -51,9 +73,13 @@ module.exports.create = function(request,response){
             if(err){
                 console.log("Error savig user \n",err)
             }
+
             else{
                 response.json({
-                    user:newUser
+                    user:{
+                        first_name: newUser.first_name,
+                        id: newUser._id,
+                    }
                 });
             }
         });    
