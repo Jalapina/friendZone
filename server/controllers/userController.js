@@ -3,31 +3,42 @@ let User = mongoose.model('User');
 
 module.exports.authenticate = function(request,response){
 
-    console.log("Login Info",request.body);
-    
-    User.findOne({email:request.body.email}, function(err,user){
+    const _email = request.body.email;
 
+    if(validateEmail(_email)){
+        console.log("Email works")
+    }
+    else{
+        console.log("User does not exist")
+        
+        return response.status(404).json({
+            message:"User does not exist"
+        })
+    }
+    
+    User.findOne({email:_email}, function(err,user){
+        
         if(err){
-            console.log("ERROR \n", err)
+            console.log(err)
         }
 
-        else if(user.validPassword(request.body.password)){
+        else if(user && user.validPassword(request.body.password)){
             response.json({
                 id: user._id,
                 first_name: user.first_name,
             })
         }
 
-        else if(!user.validPassword(request.body.password)){
+        else if(user && !user.validPassword(request.body.password)){
             console.log('Wrong password')
             response.status(403).json({
-                message: "Password Invalid"
+                message: "Invalid Email or Password"
             })
         }
 
         else{
             response.status(403).json({
-                message: "Email Invalid"
+                message: "User does not exist"
             })
         }
 
