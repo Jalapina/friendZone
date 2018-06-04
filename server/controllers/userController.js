@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
-
+var jwt = require('jsonwebtoken');
+var secret = "asdfasdf"
 module.exports.authenticate = function(request,response){
 
     const _email = request.body.email;
@@ -16,16 +17,20 @@ module.exports.authenticate = function(request,response){
         })
     }
     
-    User.findOne({email:_email}, function(err,user){
+    User.findOne({email:_email}).select('first_name _id password').exec(function(err,user){
         
         if(err){
             console.log(err)
         }
 
         else if(user && user.validPassword(request.body.password)){
+
+            const token = jwt.sign({ id: user._id,
+                first_name: user.first_name,}, secret,{expiresIn: '24hr'});            
+
             response.json({
-                id: user._id,
-                first_name: user.first_name,
+                message:"User is Authenicated!",
+                token: token,
             })
         }
 
