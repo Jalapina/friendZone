@@ -17,14 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    // console.log("Localstorage",this.user.token)
-
-    if(this._authenticateService.isLoggedIn()){
-        this.userInfo()
-    }else{
-      this.route.navigateByUrl('/')
-    }
+    this.userInfo()
   }
 
   userInfo(){

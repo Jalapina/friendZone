@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
+import { GuardAuthenticationService } from './_services/guard-authentication.service'
 import { MessageService } from './_services/message.service';
 import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
@@ -45,6 +46,7 @@ import { TagInputModule } from 'ngx-chips';
   providers: [
     UserService,
     MessageService,
+    GuardAuthenticationService,
     AuthenticateService,
     {
       provide: HTTP_INTERCEPTORS,
