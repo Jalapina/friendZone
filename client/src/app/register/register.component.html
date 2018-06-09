@@ -1,6 +1,6 @@
 <div class="register">
   <div class="form">
-    <form (submit)="create()">
+    <form #myForm="ngForm" (submit)="create()">
         
         <input type="text" class="form-group validate" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
         <input type="email" class="form-group" placeholder="Email" name="email" [(ngModel)]="user.email">

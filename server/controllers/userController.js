@@ -84,18 +84,29 @@ module.exports.create = function(request,response){
 
     if( user.password == request.body.confirm_password){
 
-        user.save(function(err,newUser){
-
+        user.save(function(err,newUser){           
+            
             if(err){
                 console.log("Error savig user \n",err)
             }
 
             else{
-                response.json({
-                    user:{
+                
+                const token = jwt.sign(
+                    { 
+                        id: newUser._id, 
                         first_name: newUser.first_name,
-                        id: newUser._id,
-                    }
+                    },
+                    secret,
+                    { 
+                        expiresIn: '24h' 
+                    }); 
+
+                response.json({
+                    
+                        message: "User is Authenicated!",
+                        token: token,
+                    
                 });
             }
         });    

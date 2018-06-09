@@ -22,8 +22,6 @@ export class HomeComponent implements OnInit {
 
     if(this._authenticateService.isLoggedIn()){
         this.userInfo()
-        
-  
     }else{
       this.route.navigateByUrl('/')
     }
