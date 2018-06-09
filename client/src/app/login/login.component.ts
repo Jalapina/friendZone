@@ -10,9 +10,11 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   constructor(private _userService:UserService, private _router:Router) { }
+  
   user:any = {}
   
   ngOnInit() {
+    
   }
 
   authenticate(){

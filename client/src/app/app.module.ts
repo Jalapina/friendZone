@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtInterceptor } from './_helpers/jwt.interceptor'
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './landing/landing.component';
@@ -14,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
 import { MessageService } from './_services/message.service';
+import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
@@ -42,7 +44,13 @@ import { TagInputModule } from 'ngx-chips';
   ],
   providers: [
     UserService,
-    MessageService
+    MessageService,
+    AuthenticateService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

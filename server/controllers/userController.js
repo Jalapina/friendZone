@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
 var jwt = require('jsonwebtoken');
-var secret = "asdfasdf"
+var secret = 'asdfasdf'
+
 module.exports.authenticate = function(request,response){
 
     const _email = request.body.email;
@@ -25,8 +26,7 @@ module.exports.authenticate = function(request,response){
 
         else if(user && user.validPassword(request.body.password)){
 
-            const token = jwt.sign({ id: user._id,
-                first_name: user.first_name,}, secret,{expiresIn: '24hr'});            
+            const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });            
 
             response.json({
                 message:"User is Authenicated!",
@@ -109,3 +109,35 @@ module.exports.create = function(request,response){
     }
 
 }
+
+module.exports.authToken = function(req, res, next){
+    
+    var token = req.headers['header']
+    // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMGVmMzI5MzQyODdlMTkwYWJiY2QzNiIsImZpcnN0X25hbWUiOiJEYXZpZCIsImlhdCI6MTUyODUxMzIwOSwiZXhwIjoxNTI4NTk5NjA5fQ.1MsEofOdpVkUl37ftWBNqM7NoSrDum0GIbXBt7k_0E8"
+
+    console.log("working....", token   )
+    
+    if(token){
+        jwt.verify(token, secret, function(err,decoded){
+            if(err){
+                console.log(err)
+                res.json({
+                    message: "Token is invalid"
+                });
+            }else{
+                req.decoded = decoded
+                next();
+            }
+        });
+    }else{
+        res.json({ success: false, message: 'No token provided' });
+    }
+
+}
+
+module.exports.tokenDecode = function(req, res) {
+    console.log("Getting decoded.....", req.decoded);
+    return res.send(req.decoded); // Return the token acquired from middleware
+};
+
+
