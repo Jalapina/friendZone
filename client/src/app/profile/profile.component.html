@@ -6,6 +6,7 @@
 
   <div class="card-content">
 
+   <form action="">
     <input type="text"  value="Harold">
     <h3>Blur</h3>
     <textarea>I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down I'm trying to get a quic
@@ -30,7 +31,11 @@
     <h1>Hobbies</h1>
 
     <tag-input [ngModel]="itemsAsObjects" [maxItems]='10' theme='dark'></tag-input>
-   
+   </form>
+    
+    <button (click)="save()" class="saveButton">Save</button>
+    
+    <button (click)="logout()" class="logoutButton">LogOut</button>
 
   </div>
 

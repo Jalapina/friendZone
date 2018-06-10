@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     this._userService.create(this.user)
     .subscribe(
       data =>{
-        this._router.navigateByUrl('home')
+        this._router.navigateByUrl('profile')
       });
   }
 

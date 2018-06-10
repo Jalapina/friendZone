@@ -120,6 +120,12 @@ module.exports.create = function(request,response){
 
 }
 
+module.exports.update = function(request,response){
+    
+    User.findById({_id:request.body._id}, function(err,user){
+    })
+}
+
 module.exports.authToken = function(req, res, next){
     
     var token = req.headers['authorization']
