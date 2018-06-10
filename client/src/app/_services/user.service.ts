@@ -12,6 +12,7 @@ export class UserService {
   constructor(private _http: HttpClient) { }
 
   authenticate(user:any){
+    
     return this._http.post('/api/users/authenticate',user)
     .map((data) => {
       const token = data['token']
@@ -21,8 +22,6 @@ export class UserService {
   }
 
   create(user:any){
-    
-    console.log("create Service",user)
     
     return this._http.post('/api/users/create',user)
     .map((data) => {

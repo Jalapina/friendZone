@@ -113,7 +113,6 @@ module.exports.create = function(request,response){
     }
 
     else{
-        console.log("Else on registration");
         response.status(401).json({
             message:"Passwords do not match!"
         });
@@ -123,10 +122,9 @@ module.exports.create = function(request,response){
 
 module.exports.authToken = function(req, res, next){
     
-    var token = req.headers['header']
-    // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMGVmMzI5MzQyODdlMTkwYWJiY2QzNiIsImZpcnN0X25hbWUiOiJEYXZpZCIsImlhdCI6MTUyODUxMzIwOSwiZXhwIjoxNTI4NTk5NjA5fQ.1MsEofOdpVkUl37ftWBNqM7NoSrDum0GIbXBt7k_0E8"
+    var token = req.headers['authorization']
 
-    console.log("working....", token   )
+    console.log("working....", req.headers   )
     
     if(token){
         jwt.verify(token, secret, function(err,decoded){

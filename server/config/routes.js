@@ -1,7 +1,7 @@
-let users = require("../controllers/userController")
+let users = require("../controllers/userController");
+let messages = require("../controllers/chatController");
 
 module.exports = function(app){
-    
     
     app.post('/api/users/authenticate', users.authenticate)
     app.post('/api/users/create', users.create)

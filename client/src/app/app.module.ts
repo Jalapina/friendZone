@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor'
 import { AppComponent } from './app.component';

@@ -9,3 +9,5 @@ mongoose.connect("mongodb://localhost/friendzone", function (err) {
 });
 
 require("../models/userSchema");
+require("../models/messageSchema");
+require("../models/friendshipSchema");
