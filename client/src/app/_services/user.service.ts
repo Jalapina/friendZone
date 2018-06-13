@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { Http, Response } from '@angular/http'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 // import { User } from '../login/user'
@@ -32,10 +32,14 @@ export class UserService {
   }
 
   getUsers(){
-    return this._http.get('/api/users/loadUser')
-    .map((data) => {
+    console.log("getusers service")
+    return this._http.get('/api/users/users').subscribe(data => {
       console.log(data);
     });
+    // .map(data => data.json()).toPromise();
+    // .map((data) => {
+    //   console.log(data);
+    // });
   }
 
   getUser(){

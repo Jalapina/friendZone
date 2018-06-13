@@ -8,7 +8,7 @@ module.exports.authenticate = function(request,response){
     const _email = request.body.email;
 
     if(validateEmail(_email)){
-        console.log("Email works")
+        // console.log("Email works")
     }
     else{
         console.log("User does not exist")
@@ -51,8 +51,6 @@ module.exports.authenticate = function(request,response){
 }
 
 module.exports.create = function(request,response){
-
-    console.log("Reg Info",request.body);
     
     const first_name = request.body.first_name
     const email = request.body.email
@@ -120,17 +118,30 @@ module.exports.create = function(request,response){
 
 }
 
+module.exports.users = function(request,response){
+    console.log("Getting users")
+    User.find({}).select('first_name').exec(function(err,users){
+        if(err){
+            console.log(err)
+        }else{
+            response.json({
+                users:users
+            })
+        }
+    });
+}
+
 module.exports.update = function(request,response){
     
-    User.findById({_id:request.body._id}, function(err,user){
-    })
+    // User.findById({_id:request.body._id}, function(err,user){
+    // })
 }
 
 module.exports.authToken = function(req, res, next){
     
     var token = req.headers['authorization']
 
-    console.log("working....", req.headers   )
+    // console.log("working....", req.headers   )
     
     if(token){
         jwt.verify(token, secret, function(err,decoded){
@@ -151,7 +162,7 @@ module.exports.authToken = function(req, res, next){
 }
 
 module.exports.tokenDecode = function(req, res) {
-    console.log("Getting decoded.....", req.decoded);
+    // console.log("Getting decoded.....", req.decoded);
     return res.send(req.decoded); // Return the token acquired from middleware
 };
 

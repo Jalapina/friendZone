@@ -11,6 +11,7 @@ import {UsersComponent} from './users/users.component'
 import {MessageComponent} from './message/message.component'
 import {ProfileComponent} from './profile/profile.component'
 import {FriendsComponent} from './friends/friends.component'
+import {ProfilePreviewComponent} from './profile-preview/profile-preview.component'
 
 const routes: Routes = [
   {
@@ -41,6 +42,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: ProfileComponent,
     // canActivate: [AuthGuard],
+  },
+  {
+    path: 'preview',
+    pathMatch: 'full',
+    component: ProfilePreviewComponent,
+    // canActivate: [AuthGuard],    
   },
   {
     path: 'messages',

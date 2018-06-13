@@ -28,7 +28,6 @@ export class JwtInterceptor implements HttpInterceptor {
       }
       return next.handle(request)
       .catch(err => { 
-        console.log('Caught error', err);
         return Observable.throw(err);
       });
     }

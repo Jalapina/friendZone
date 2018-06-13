@@ -20,6 +20,7 @@ import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
+import { ProfilePreviewComponent } from './profile-preview/profile-preview.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TagInputModule } from 'ngx-chips';
     UsersComponent,
     MessageComponent,
     ProfileComponent,
-    FriendsComponent
+    FriendsComponent,
+    ProfilePreviewComponent
   ],
   imports: [
     BrowserModule,

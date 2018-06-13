@@ -9,15 +9,16 @@ import { UserService } from '../_services/user.service'
 export class UsersComponent implements OnInit {
 
   isClassVisible: false;
-  itemsAsObjects = ["Running","Reading"]
 
   constructor(private _userService:UserService) { }
 
   ngOnInit() {
+    this.getUsers()
   }
 
-  getUser(){
-    // this._userService.getUser()
+  getUsers(){
+    console.log("getUsers")
+    this._userService.getUsers()
     // .then(user => user)
   }
   test(){
