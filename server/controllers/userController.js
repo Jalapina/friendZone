@@ -138,25 +138,28 @@ module.exports.authToken = function(req, res, next){
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     
     jwt.verify(token, secret, function(err, decoded) {
+        console.log("decoded",decoded)
       if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       
       User.findById(decoded.id, { password: 0 },function (err, user) {
+          console.log(user)
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
-        // res.status(200).send(user); Comment this out!
-        next(user); // add this line
+        res.status(200).send(user);
+        // next(user); // add this line
       });
     });
 
 }
 
 module.exports.tokenDecode = function(user, req, res,next) {
-    console.log(user)
-    res.send(user); 
+    
+    // res.send(user); 
 };
 
 module.exports.user = function(request,response){
     console.log(request.params)
+
     User.findById(request.params.id, function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
 

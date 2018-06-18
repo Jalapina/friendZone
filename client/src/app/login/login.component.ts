@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(){
-    console.log("Loging in C...",this.user)
     this._userService.authenticate(this.user)
     .subscribe(data=>{
       console.log("response",data)

@@ -43,11 +43,16 @@ export class ProfileComponent implements OnInit {
   }
 
   getUser(){
-    const userId = this.user._id
+    const userId = this.user
     this.userService.getUser(userId).subscribe( data =>{ 
+      console.log(data,"data")
       this.name = data['user'].first_name
       
     })
+  }
+
+  updateUser(){
+    
   }
 
   logout(){

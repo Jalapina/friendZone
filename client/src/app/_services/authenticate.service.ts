@@ -20,11 +20,12 @@ export class AuthenticateService {
 
   getUserInfo(){
     if(this.isLoggedIn()){
-      console.log("getting user info")
+      
       return this._http.get('/api/me')
-      .map(Response => {
-        localStorage.setItem('user',JSON.stringify(Response['_id']))
-        console.log(Response)}
+      .subscribe(data => {
+        localStorage.setItem('user',JSON.stringify(data['_id']))
+        console.log('res',data)
+      }
       )
     }
   }
@@ -34,6 +35,6 @@ export class AuthenticateService {
   }
 
   logout(){
-    localStorage.removeItem('token');
+    localStorage.clear()
   }
 }

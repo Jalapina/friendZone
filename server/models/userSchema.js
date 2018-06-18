@@ -25,17 +25,20 @@ var userSchema = mongoose.Schema({
     },
     blur:{
         type: String,
-        require:false,
+        default: '',
     },
     bio:{
         type:String,
-
+        require: true,
+        default: '',
     },
     activity:{
         type:String,
+        default: '',
     },
     active:{
         type: Boolean,
+        default: false,
     },
 },{
     timestamps: true,   
