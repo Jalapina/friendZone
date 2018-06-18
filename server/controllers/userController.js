@@ -131,39 +131,40 @@ module.exports.users = function(request,response){
     });
 }
 
-module.exports.update = function(request,response){
-    
-    // User.findById({_id:request.body._id}, function(err,user){
-    // })
-}
-
 module.exports.authToken = function(req, res, next){
     
     var token = req.headers['authorization']
 
-    // console.log("working....", req.headers   )
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     
-    if(token){
-        jwt.verify(token, secret, function(err,decoded){
-            if(err){
-                console.log(err)
-                res.json({
-                    message: "Token is invalid"
-                });
-            }else{
-                req.decoded = decoded
-                next();
-            }
-        });
-    }else{
-        res.json({ success: false, message: 'No token provided' });
-    }
+    jwt.verify(token, secret, function(err, decoded) {
+      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+      
+      User.findById(decoded.id, { password: 0 },function (err, user) {
+        if (err) return res.status(500).send("There was a problem finding the user.");
+        if (!user) return res.status(404).send("No user found.");
+        // res.status(200).send(user); Comment this out!
+        next(user); // add this line
+      });
+    });
 
 }
 
-module.exports.tokenDecode = function(req, res) {
-    // console.log("Getting decoded.....", req.decoded);
-    return res.send(req.decoded); // Return the token acquired from middleware
+module.exports.tokenDecode = function(user, req, res,next) {
+    console.log(user)
+    res.send(user); 
 };
 
+module.exports.user = function(request,response){
+    console.log(request.params)
+    User.findById(request.params.id, function(err,user){
+        if(err) return response.json({err:err,message:"NO USER"})
+
+        console.log(user)
+        response.json({
+            message:"Here is the user",
+            user:user
+        })
+    })
+}
 

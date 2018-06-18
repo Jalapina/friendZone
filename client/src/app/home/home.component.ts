@@ -13,21 +13,16 @@ export class HomeComponent implements OnInit {
   user
 
   constructor(private _userService:UserService, private _authenticateService:AuthenticateService,private route:Router) { 
-    this.user = (localStorage.getItem('token'));
   }
 
   ngOnInit() {
     this.userInfo()
+    
   }
 
   userInfo(){
     this._authenticateService.getUserInfo()
-    .subscribe(data =>{
-      console.log("data",data['first_name'])
-      if(data['first_name'] === undefined ){
-        this.route.navigateByUrl('/')        
-      }
-    })
   }
+  
 
 }

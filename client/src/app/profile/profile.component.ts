@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
+import { UserService } from '../_services/user.service'
+import { Response } from '@angular/http/src/static_response';
 
 TagInputModule.withDefaults({
   tagInput: {
@@ -24,14 +26,32 @@ export class ProfileComponent implements OnInit {
   
   isClassVisible: false;
   itemsAsObjects = ["Running","Reading"]
-  constructor(private auth:AuthenticateService, private router:Router) { }
+  user:any
+  userInfo:any
+  name
+  bio
+  blur
+
+
+  constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
+    this.user = JSON.parse(localStorage.getItem('user'));
+    
+  }
 
   ngOnInit() {
+    this.getUser()
+  }
+
+  getUser(){
+    const userId = this.user._id
+    this.userService.getUser(userId).subscribe( data =>{ 
+      this.name = data['user'].first_name
+      
+    })
   }
 
   logout(){
-    console.log("Logout")
-    this.auth.logout()
+    this.authenticateService.logout()
     this.router.navigateByUrl('/login')
   }
 

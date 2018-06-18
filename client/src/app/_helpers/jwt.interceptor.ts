@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
       let token = this.auth.getToken();
-      console.log("TOKEN",token)
+      // console.log("TOKEN",token)
       if(token){
 
         request = request.clone({

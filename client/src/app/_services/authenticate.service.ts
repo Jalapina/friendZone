@@ -19,14 +19,14 @@ export class AuthenticateService {
   }
 
   getUserInfo(){
-    if(this.getToken()){
-      return this._http.get('/api/users/me')
-    }else{
-      console.log("No token")
+    if(this.isLoggedIn()){
+      console.log("getting user info")
+      return this._http.get('/api/me')
+      .map(Response => {
+        localStorage.setItem('user',JSON.stringify(Response['_id']))
+        console.log(Response)}
+      )
     }
-    // .toPromise().then(function(data){
-
-    // })
   }
 
   getToken(){

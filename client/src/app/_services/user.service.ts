@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-// import { Http, Response } from '@angular/http'
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-// import { User } from '../login/user'
 
 @Injectable()
 
@@ -16,7 +14,8 @@ export class UserService {
     return this._http.post('/api/users/authenticate',user)
     .map((data) => {
       const token = data['token']
-      localStorage.setItem('token', token);      
+      localStorage.setItem('token', token);     
+      return data 
     })
     // .catch(err => console.log(err))
   }
@@ -32,21 +31,18 @@ export class UserService {
   }
 
   getUsers(){
-    console.log("getusers service")
     return this._http.get('/api/users/users').subscribe(data => {
       console.log(data);
     });
-    // .map(data => data.json()).toPromise();
-    // .map((data) => {
-    //   console.log(data);
-    // });
+
   }
 
-  getUser(){
-    return this._http.get('/api/users/:id')
-    .map((data) => {
-      console.log(data);
-    });
+  getUser(id){
+   
+    return this._http.get('/api/users/'+ id).map((res:Response)=>{
+      return res;
+    })
+    
   }  
 
 }
