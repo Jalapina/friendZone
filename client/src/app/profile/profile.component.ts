@@ -51,6 +51,8 @@ export class ProfileComponent implements OnInit {
       // console.log(data,"data")
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
+      this.userInfo.blur = data['user'].blur
+      this.userInfo.bio = data['user'].bio
     })
   }
 
