@@ -6,6 +6,7 @@ module.exports = function(app){
     //Users
     app.post('/api/users/authenticate', users.authenticate)
     app.post('/api/users/create', users.create)
+    app.put('/api/users/edit',users.edit)
     app.get('/api/users/users', users.users)
     app.get('/api/users/:id',users.user)
 

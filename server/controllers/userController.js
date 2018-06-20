@@ -158,7 +158,7 @@ module.exports.tokenDecode = function(user, req, res,next) {
 };
 
 module.exports.user = function(request,response){
-    console.log(request.params)
+    // console.log(request.params)
 
     User.findById(request.params.id, function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
@@ -169,5 +169,36 @@ module.exports.user = function(request,response){
             user:user
         })
     })
+}
+
+module.exports.edit = function(request,response){
+    console.log("Updating user",request.body)
+
+
+
+    User.findById(request.body._id,function(err,user){
+        if(err){
+            console.log(err)
+            response.status(404).json({
+                error:err
+            })
+        }else{
+            user.blur = request.body.blur
+            user.bio = request.body.bio
+            user.activity = request.body.activity
+            user.hobbies = request.body.hobbies
+            console.log(user)
+            user.save(function(err,editedUser){
+                if(err){
+                    console.log(err);
+                    response.status(404).json({
+                        error:err,
+                        message:"Error"
+                    })
+                }
+            })
+        }
+    })
+
 }
 

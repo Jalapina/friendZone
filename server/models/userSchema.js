@@ -40,6 +40,9 @@ var userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    hobbies:[{
+        type:String,
+    }],
 },{
     timestamps: true,   
 });

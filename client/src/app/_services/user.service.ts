@@ -37,12 +37,12 @@ export class UserService {
 
   }
 
+  editUser(userInfo){
+    return this._http.put('/api/users/edit',userInfo)
+  }
+
   getUser(id){
-   
-    return this._http.get('/api/users/'+ id).map((res:Response)=>{
-      return res;
-    })
-    
+    return this._http.get('/api/users/'+ id)
   }  
 
 }

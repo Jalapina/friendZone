@@ -4,18 +4,19 @@ import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
 import { UserService } from '../_services/user.service'
 import { Response } from '@angular/http/src/static_response';
+import { concat } from 'rxjs/operator/concat';
 
 TagInputModule.withDefaults({
+  
   tagInput: {
       placeholder: 'Add a Hobby',
+      secondaryPlaceholder: 'Add a Hobby',
       
-      // add here other default values for tag-input
-  },
-  dropdown: {
-      displayBy: 'my-display-value',
-  },
-  
+      maxItems: 10,
+  }
 });
+
+
 
 @Component({
   selector: 'app-profile',
@@ -25,9 +26,10 @@ TagInputModule.withDefaults({
 export class ProfileComponent implements OnInit {
   
   isClassVisible: false;
-  itemsAsObjects = ['Running','Reading']
+  items: string[] = []
   user:any
   userInfo:any = {}
+  bool = "hello"
   name
   bio
   blur
@@ -46,14 +48,20 @@ export class ProfileComponent implements OnInit {
   getUser(){
     const userId = this.user
     this.userService.getUser(userId).subscribe( data =>{ 
-      console.log(data,"data")
+      // console.log(data,"data")
       this.name = data['user'].first_name
-      
+      this.items = data['user'].hobbies
     })
   }
 
-  updateUser(){
+  editUser(){
+    this.userInfo._id = this.user
+    this.userInfo.hobbies = this.items
     console.log("Updating user",this.userInfo)
+    this.userService.editUser(this.userInfo).subscribe(data =>{
+      console.log("updated user", data)
+      this.getUser()
+    })
   }
 
   logout(){

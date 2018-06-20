@@ -8,11 +8,11 @@
 
     <h1 class="left" id="name">{{ name }}</h1>
 
-   <form (submit)="updateUser()">
+   <form (submit)="editUser()">
     
     <h3 class="left">Blur</h3>
 
-    <textarea placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur"></textarea>
+    <textarea placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" ></textarea>
 
     <div>
         <h3 class="left" >Activity</h3>
@@ -27,9 +27,9 @@
       </div>
     </div>
     <h3 class="left">Bio</h3>
-    <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you"></textarea>
+    <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you" ></textarea>
     <h3 class="left">Hobbies</h3>
-    <tag-input [ngModel]="itemsAsObjects" [maxItems]='5'  theme='dark' name="item"></tag-input>
+    <tag-input [(ngModel)]="items" [modelAsStrings]="true"  theme='dark' name="item"></tag-input>
 
     <input type="submit" value="Submit">
    </form>
