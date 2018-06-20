@@ -25,12 +25,13 @@ TagInputModule.withDefaults({
 export class ProfileComponent implements OnInit {
   
   isClassVisible: false;
-  itemsAsObjects = ["Running","Reading"]
+  itemsAsObjects = ['Running','Reading']
   user:any
-  userInfo:any
+  userInfo:any = {}
   name
   bio
   blur
+  activity
 
 
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
@@ -52,7 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(){
-    
+    console.log("Updating user",this.userInfo)
   }
 
   logout(){
