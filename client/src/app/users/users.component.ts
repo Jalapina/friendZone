@@ -75,8 +75,10 @@ export class UsersComponent implements OnInit {
     let removedCard = this.cards.pop();
     // this.addNewCards(1);
     if (like) {
+      console.log("like")
       this.recentCard = 'You liked: ' + removedCard.email;
     } else {
+      console.log("No")      
       this.recentCard = 'You disliked: ' + removedCard.email;
     }
   }
