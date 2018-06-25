@@ -20,6 +20,7 @@ import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
+import { SwingModule } from 'angular2-swing';
 import { ProfilePreviewComponent } from './profile-preview/profile-preview.component';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ProfilePreviewComponent } from './profile-preview/profile-preview.compo
     RouterModule,
     BrowserAnimationsModule,
     TagInputModule,
+    SwingModule,
   ],
   providers: [
     UserService,

@@ -31,6 +31,7 @@ export class AuthenticateService {
   }
 
   getToken(){
+    
     return localStorage.getItem('token')
   }
 

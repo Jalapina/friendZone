@@ -5,47 +5,60 @@ var secret = 'asdfasdf'
 
 module.exports.authenticate = function(request,response){
 
-    const _email = request.body.email;
-
-    if(validateEmail(_email)){
-        // console.log("Email works")
-    }
-    else{
-        console.log("User does not exist")
-        
-        return response.status(404).json({
-            message:"User does not exist"
-        })
-    }
+    const email = request.body.email
     
-    User.findOne({email:_email}).select('first_name _id password').exec(function(err,user){
+    User.findOne({email:email}).select('first_name _id password').exec(function(err,user){
         
         if(err){
             console.log(err)
-        }
-
-        else if(user && user.validPassword(request.body.password)){
-
-            const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });            
-
-            response.json({
-                message:"User is Authenicated!",
-                token: token,
+        }else if(!user){
+            response.status(404).json({
+                message:"User does not exist"
             })
+        }else{
+            if(!request.body.password){
+                response.json({
+                    message:"No password provided."
+                })
+            }else{
+                let validPassword = user.validPassword(request.body.password)
+                if(!validPassword){
+                    response.json({
+                        success:false,
+                        message:"Could not authenticate password"
+                    })
+                }else{
+                    const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });
+                    response.json({
+                        message:"User is Authenicated!",
+                        token: token,
+                    })
+                }
+            }
         }
 
-        else if(user && !user.validPassword(request.body.password)){
-            console.log('Wrong password')
-            response.status(403).json({
-                message: "Invalid Email or Password"
-            })
-        }
+        // else if(user && user.validPassword(request.body.password)){
 
-        else{
-            response.status(403).json({
-                message: "User does not exist"
-            })
-        }
+        //     const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });            
+
+        //     response.json({
+        //         message:"User is Authenicated!",
+        //         token: token,
+        //     })
+        // }
+
+        // else if(user && !user.validPassword(request.body.password)){
+        //     console.log('Wrong password')
+        //     response.status(403).json({
+        //         message: "Invalid Email or Password"
+        //     })
+        // }
+
+        // else{
+        //     response.status(403).json({
+        //         message: "User does not exist"
+        //     })
+        // }
 
     })
 }
@@ -119,7 +132,7 @@ module.exports.create = function(request,response){
 }
 
 module.exports.users = function(request,response){
-    console.log("Getting users")
+
     User.find({}).select('first_name').exec(function(err,users){
         if(err){
             console.log(err)
@@ -129,6 +142,7 @@ module.exports.users = function(request,response){
             })
         }
     });
+    
 }
 
 module.exports.authToken = function(req, res, next){

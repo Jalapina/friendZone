@@ -47,6 +47,11 @@ var userSchema = mongoose.Schema({
     timestamps: true,   
 });
 
+validateEmail = function(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 userSchema.methods.generateHAsh = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
@@ -56,14 +61,11 @@ userSchema.methods.validPassword = function(password){
 };
 
 userSchema.pre("save", function(done){
+
+    if(!this.isModified(this.password)) return done()
+
     this.password = this.generateHAsh(this.password)
     done()
 });
   
-validateEmail = function(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-
-
 mongoose.model("User",userSchema);

@@ -1,4 +1,23 @@
-<div class="main">
+<ul swing-stack #myswing1  (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
+    <li class="card" #mycards1 swing-card *ngFor="let c of cards">{{ c.first_name }}</li>
+</ul>
+
+<button ion-button clear small icon-left color="primary" (click)="voteUp(true)">
+<button ion-button clear small icon-left color="primary" (click)="voteUp(false)">
+
+<!-- <div id="viewport">
+    <ul class="stack" swing-stack  [stackConfig]="stackConfig"  #myswing1 (throwout)="onThrowOut($event)">
+        <li swing-card #mycards1 [ngClass]="c.name" *ngFor="let c of cards">{{ c.symbol }}</li>
+    </ul>
+</div> -->
+
+<!-- <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
+    <div *ngFor="let user of cards">
+        <p>{{ user.first_name }}</p>
+    </div>
+</div> -->
+
+<!-- <div class="main">
   
     <div class="card">
 
@@ -9,26 +28,23 @@
         <div class="profile-bio">
             
             <div (click)="isClassVisible = !isClassVisible;" class="profile-name">
-                <p>David</p>
+                <p>{{ name }}</p>
                 <i class="material-icons">more_vert</i>
             </div>
-            <p>I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!</p>
+            <p>{{ blur }}</p>
 
         </div>
 
-        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide">
+        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide" ngDefaultControl>
             
             <div (click)="isClassVisible = !isClassVisible;" class="label">
-                <p>David</p>
+                <p>{{ name }}</p>
                 <i class="material-icons">close</i>
             </div>
         
             <p>
-                I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down! I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!
-                I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!
+                {{ bio }}
             </p>
-
-            <div [ngModel]="itemsAsObjects" ></div>
 
         </div>
 
@@ -43,4 +59,4 @@
               
     </div>
 
-</div>
+</div> -->

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
 import { AuthenticateService } from '../_services/authenticate.service'
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  
-  user
 
   constructor(private _userService:UserService, private _authenticateService:AuthenticateService,private route:Router) { 
   }
 
   ngOnInit() {
-    this.userInfo()
+      this.userInfo()
+
     
   }
 

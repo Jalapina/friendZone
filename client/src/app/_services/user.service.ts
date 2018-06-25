@@ -31,9 +31,7 @@ export class UserService {
   }
 
   getUsers(){
-    return this._http.get('/api/users/users').subscribe(data => {
-      console.log(data);
-    });
+    return this._http.get('/api/users/users')
 
   }
 
