@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor'
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
 import { GuardAuthenticationService } from './_services/guard-authentication.service'
+import { FriendshipService } from './_services/friendship.service'
 import { MessageService } from './_services/message.service';
 import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
@@ -50,6 +51,7 @@ import { ProfilePreviewComponent } from './profile-preview/profile-preview.compo
   providers: [
     UserService,
     MessageService,
+    FriendshipService,
     GuardAuthenticationService,
     AuthenticateService,
     {

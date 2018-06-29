@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt");
+var Schema=mongoose.Schema;
 
 var userSchema = mongoose.Schema({
 
@@ -42,6 +43,11 @@ var userSchema = mongoose.Schema({
     },
     hobbies:[{
         type:String,
+    }],
+	friendList:[{
+        // type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
+        ref:"User"
     }],
 },{
     timestamps: true,   

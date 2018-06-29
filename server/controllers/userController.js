@@ -21,19 +21,19 @@ module.exports.authenticate = function(request,response){
                     message:"No password provided."
                 })
             }else{
-                let validPassword = user.validPassword(request.body.password)
-                if(!validPassword){
-                    response.json({
-                        success:false,
-                        message:"Could not authenticate password"
-                    })
-                }else{
+                // let validPassword = user.validPassword(request.body.password)
+                // if(!validPassword){
+                //     response.json({
+                //         success:false,
+                //         message:"Could not authenticate password"
+                //     })
+                // }else{
                     const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });
                     response.json({
                         message:"User is Authenicated!",
                         token: token,
                     })
-                }
+                // }
             }
         }
 

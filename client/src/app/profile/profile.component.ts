@@ -35,7 +35,6 @@ export class ProfileComponent implements OnInit {
   blur
   activity
 
-
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
     this.user = JSON.parse(localStorage.getItem('user'));
     

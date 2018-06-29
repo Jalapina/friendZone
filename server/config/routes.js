@@ -1,5 +1,6 @@
 let users = require("../controllers/userController");
 let messages = require("../controllers/chatController");
+let friendships = require("../controllers/friendShipController")
 
 module.exports = function(app){
     
@@ -14,5 +15,6 @@ module.exports = function(app){
     app.get('/api/me',users.authToken)
     app.use(users.tokenDecode)
     
-    
+    //Friendships
+    app.post('/api/friendships',friendships.create)
 }
