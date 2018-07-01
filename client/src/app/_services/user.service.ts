@@ -30,8 +30,8 @@ export class UserService {
 
   }
 
-  getUsers(){
-    return this._http.get('/api/users/users')
+  getUsers(id){
+    return this._http.get('/api/users/users/'+id)
 
   }
 

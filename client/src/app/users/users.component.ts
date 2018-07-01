@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(){
-    this._userService.getUsers().subscribe(result => {
+    this._userService.getUsers(this.user).subscribe(result => {
  
       this.cards = result['users']
     })

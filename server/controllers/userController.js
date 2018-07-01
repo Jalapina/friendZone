@@ -132,16 +132,34 @@ module.exports.create = function(request,response){
 }
 
 module.exports.users = function(request,response){
+    
+    let userArray = []
 
-    User.find({}).select('first_name').exec(function(err,users){
+    User.findById(request.params.id).select("friendList").exec(function(err,user){
+
         if(err){
-            console.log(err)
+            response.json({error:err})
         }else{
-            response.json({
-                users:users
+            friendList = user.friendList
+            friendList.pop()
+            friendList.push(request.params.id)
+            console.log(friendList)
+
+            User.find({'_id':{ $nin:friendList}}).select('first_name').exec(function(err,users){
+
+                console.log(users)
+                if(err){
+                    console.log(err)
+                }else{
+                    response.json({
+                        users:users
+                    })
+                }
             })
         }
     });
+
+    
     
 }
 
@@ -187,8 +205,6 @@ module.exports.user = function(request,response){
 
 module.exports.edit = function(request,response){
     console.log("Updating user",request.body)
-
-
 
     User.findById(request.body._id,function(err,user){
         if(err){

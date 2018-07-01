@@ -17,15 +17,15 @@ module.exports.create = function(request,response){
         }else{
             console.log(user.friendList)
             array = user.friendList
-            array.forEach(element => {
-                console.log(element)
-                if(element == likee){
-                    console.log("Already friends")
-                    response.json({message:"Already friends"})
-                }else{
-                    console.log("Not friends")
-                }
-            });
+            // array.forEach(element => {
+            //     console.log(element)
+            //     if(element == likee){
+            //         console.log("Already friends")
+            //         response.json({message:"Already friends"})
+            //     }else{
+            //         console.log("Not friends")
+            //     }
+            // });
             user.friendList.push(likee)
             // User.findById(likee,function(err,user2){
             //     if(err){
