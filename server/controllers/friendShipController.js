@@ -54,3 +54,22 @@ module.exports.create = function(request,response){
     });
 
 }
+
+module.exports.friends = function(request,response){
+    User.findById(request.params.id).select('friendList').exec(function(err,user){
+
+       let friendList = user.friendList
+        console.log(friendList)
+        User.find({'_id':{$in:friendList}}).select('first_name').exec(function(err,users){
+            if(err){
+                response.json({
+                    error:err
+                })
+            }else{
+                response.json({
+                    users:users
+                })
+            }
+        })
+    })
+}

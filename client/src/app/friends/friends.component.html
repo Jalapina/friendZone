@@ -1,13 +1,8 @@
 <div>
-  
   <p>Friends</p>
 
-  <ul>
-    <li><a [routerLink]="['/messages']">David</a></li>
-    <li><a [routerLink]="['/messages']">Steve</a></li>
-    <li><a [routerLink]="['/messages']">Lio</a></li>
-    <li><a [routerLink]="['/messages']">Bob</a></li>
-    <li><a [routerLink]="['/messages']">Rob</a></li>
+  <ul *ngFor="let friend of friendList">
+    <li><a [routerLink]="['/messages']">{{friend.first_name}}</a></li>
   </ul>
 
 

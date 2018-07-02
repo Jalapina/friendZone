@@ -17,4 +17,5 @@ module.exports = function(app){
     
     //Friendships
     app.post('/api/friendships',friendships.create)
+    app.get('/api/friendships/:id',friendships.friends)
 }
