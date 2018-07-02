@@ -18,11 +18,11 @@ export class MessageComponent implements OnInit {
 
   getMessages(){
     this.messageService.getMessages()
-    .then(messages => messages)
+    // .then(messages => messages)
   }
   sendMessage(){
     this.messageService.sendMessage(this.message)
-    .then(status => this.getMessages())
+    // .then(status => this.getMessages())
   }
 
 }

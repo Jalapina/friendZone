@@ -1,13 +1,14 @@
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
+let Message = mongoose.model('Message')
 let FriendShip = mongoose.model('FriendShip');
 
 module.exports.create = function(request,response){
-
+    usersArray = []
     let like = request.body.like
     let liker = request.body.userId
     let likee = request.body.id
-    
+    usersArray.push(liker,likee)
     User.findById(liker,function(err,user){
 
         if(err){
@@ -15,41 +16,40 @@ module.exports.create = function(request,response){
                 err:err
             });
         }else{
-            console.log(user.friendList)
             array = user.friendList
-            // array.forEach(element => {
-            //     console.log(element)
-            //     if(element == likee){
-            //         console.log("Already friends")
-            //         response.json({message:"Already friends"})
-            //     }else{
-            //         console.log("Not friends")
-            //     }
-            // });
+            array.forEach(element => {
+                if(element == likee){
+                    response.json({message:"Already friends"})
+                }
+            });
             user.friendList.push(likee)
-            // User.findById(likee,function(err,user2){
-            //     if(err){
-            //         response.json({error:err});
-            //     }else{
-            //         array = user2.friendList
-            //         array.forEach(element => {
-            //             console.log(element)
-            //             if(element == likee){
-            //                 console.log("Already friends")
-            //                 response.json({message:"Already friends"})
-            //             }
-            //         });
-            //         user2.friendList.push(liker);
-            //         // user2.save();
-            //     }
-            // });
-            // user.save(function(err){
-            //     if(err){
-            //         response.json({error:err});
-            //     }else{
-            //         response.json({message:"FriendRequest accepted"});
-            //     }
-            // });
+            User.findById(likee,function(err,user2){
+                if(err){
+                    response.json({error:err});
+                }else{
+                    friendList = user2.friendList
+                    friendList.forEach(element => {
+                        if(element == likee){
+                            response.json({message:"Already friends"})
+                        }
+                    });
+                    user2.friendList.push(liker);
+                    user2.save();
+                }
+            });
+            user.save(function(err){
+                if(err){
+                    response.json({error:err});
+                }else{
+                    let message = new Message({
+                        participants: usersArray,
+                    })
+                    message.save(function(err){
+                        if(err) console.log(err);
+                    })
+                    response.json({message:"FriendRequest accepted"});
+                }
+            });
         }
     });
 

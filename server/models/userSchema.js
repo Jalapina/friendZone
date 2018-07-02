@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var bcrypt = require("bcrypt");
-var Schema=mongoose.Schema;
+let mongoose = require('mongoose');
+let bcrypt = require("bcrypt");
+let Schema = mongoose.Schema;
 
-var userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
 
     first_name:{
         type: String,
@@ -54,7 +54,7 @@ var userSchema = mongoose.Schema({
 });
 
 validateEmail = function(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 

@@ -1,22 +1,16 @@
 const mongoose = require('mongoose');
 const user = require('./userSchema');
+const Schema = mongoose.Schema;
 
 var messageSchema = mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
+    participants:[{
+        type: Schema.Types.ObjectId,
         ref: 'User',
-    },
-    message:{
+    }],
+    message:[{
         type:String, 
         trim: true,
-        minlength: 1,
-        require: true,
-    },
-
-    chat:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Chat',
-    }
+    }],
 },{
 timestamp: true,
 });
