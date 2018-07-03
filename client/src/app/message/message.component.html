@@ -1,18 +1,23 @@
-<div class="speech-bubble">
-    <p>Hello. How are you today?</p>
-    <span class="time-right">11:00</span>
-</div>
+<div *ngIf="chat.length > 1">
 
-<div class="speech-bubble dark">
-    <p>Hello. How are you today?</p>
-    <span class="time-right">11:00</span>
+    <div class="speech-bubble">
+        <p>Hello. How are you today?</p>
+        <span class="time-right">11:00</span>
+    </div>
+    
+    <div class="speech-bubble dark">
+        <p>Hello. How are you today?</p>
+        <span class="time-right">11:00</span>
+    </div>
 </div>
-
-<form class="message-form" (submit)="createMessage()">
+<div class="pending" *ngIf="chat.length < 1">
+    <p>Say something.</p>
+</div>
+<form class="message-form" (submit)="sendMessage()">
 
     <!-- <input class="message message-input" type="text" placeholder="Say something ..." name="message" [(ngModel)]="message.message"> -->
-    <textarea class="message message-input" placeholder="Say something" type="text" ></textarea>
+    <textarea class="message message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
     <!-- <input class="message message-button" type="submit" value="Send"> -->
-    <button type="submit" class="message-button">Send</button>
+    <input type="submit" class="message-button" value="Send">
 
 </form>

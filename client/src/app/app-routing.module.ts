@@ -50,7 +50,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard],    
   },
   {
-    path: 'messages',
+    path: 'chat/:id',
     pathMatch: 'full',
     component: MessageComponent,
     canActivate: [AuthGuard],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 import { MessageService } from '../_services/message.service'
 
 @Component({
@@ -8,21 +9,33 @@ import { MessageService } from '../_services/message.service'
 })
 export class MessageComponent implements OnInit {
 
-  constructor( private messageService:MessageService) { }
+  constructor( private messageService:MessageService, private _params:ActivatedRoute) { }
 
+  chatUserId = this._params.snapshot.params['id']; 
+  user = JSON.parse(localStorage.getItem('user'));
+  usersId = [this.chatUserId,this.user]
   message:any = {}
-
+  chat:any = []
+  
   ngOnInit() {
+    // setInterval(()=>{this.getMessages()},5000)
     this.getMessages()
   }
 
   getMessages(){
-    this.messageService.getMessages()
-    // .then(messages => messages)
+    this.messageService.getMessages(this.user,this.chatUserId).subscribe(messages=>{
+      console.log(messages['chat'][0].message.text)
+      this.chat = messages['chat'][0].message.text
+    })
   }
   sendMessage(){
+    this.message.sender = this.user
+    this.message.reciever = this.chatUserId
+    console.log(this.message)
     this.messageService.sendMessage(this.message)
-    // .then(status => this.getMessages())
+    .subscribe(data=>{
+      console.log(data)
+    })
   }
 
 }

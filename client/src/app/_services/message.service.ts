@@ -6,14 +6,12 @@ export class MessageService {
 
   constructor(private _http: HttpClient) { }
 
-  getMessages(){
-    return this._http.get('/api/getMessages/')
-    // .map(messages => messages.json()).toPromise()
+  getMessages(sender,reciever){
+    return this._http.get('/api/messages/'+sender+'/'+reciever)
   }
 
   sendMessage(message:any){
-    return this._http.post('/api/createMessage',message)
-    // .map(data => data.json()).toPromise()
+    return this._http.post('/api/messages/create',message)
   }
 
 }

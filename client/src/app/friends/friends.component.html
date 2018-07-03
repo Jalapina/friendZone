@@ -2,7 +2,7 @@
   <p>Friends</p>
 
   <ul *ngFor="let friend of friendList">
-    <li><a [routerLink]="['/messages']">{{friend.first_name}}</a></li>
+    <li><a [routerLink]="['/chat',friend._id]">{{friend.first_name}}</a></li>
   </ul>
 
 

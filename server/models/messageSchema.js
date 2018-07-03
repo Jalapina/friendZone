@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
-const user = require('./userSchema');
+const User = require('./userSchema');
 const Schema = mongoose.Schema;
 
-var messageSchema = mongoose.Schema({
-    participants:[{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+const messageSchema = mongoose.Schema({
+    message:{
+        text: { type:String, required:true }
+    },
+    users:[{
+        type:mongoose.Schema.Types.ObjectId, ref:'User', required:true
     }],
-    message:[{
-        type:String, 
-        trim: true,
-    }],
-},{
-timestamp: true,
+    sender: { type:mongoose.Schema.Types.ObjectId, ref:'User', required:true },
+    read: { type:Date }
+},
+{
+    timestamps: true
 });
 
 mongoose.model('Message',messageSchema);
