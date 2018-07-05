@@ -16,7 +16,8 @@ export class MessageComponent implements OnInit {
   usersId = [this.chatUserId,this.user]
   message:any = {}
   chat:any = []
-  
+  firstName
+
   ngOnInit() {
     // setInterval(()=>{this.getMessages()},5000)
     this.getMessages()
@@ -25,7 +26,8 @@ export class MessageComponent implements OnInit {
 
   getMessages(){
     this.messageService.getMessages(this.user,this.chatUserId).subscribe(messages=>{
-      console.log(messages['chat'][0])
+      console.log(messages['chat'][0].users[1].first_name)
+      this.firstName = messages['chat'][0].users[1].first_name
       this.chat = messages['chat']
     })
   }
