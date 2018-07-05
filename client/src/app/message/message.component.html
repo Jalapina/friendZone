@@ -1,14 +1,17 @@
+<div class="friend">{{friendName}}</div>
 <div *ngIf="chat.length > 1">
 
-    <div class="speech-bubble">
-        <p>Hello. How are you today?</p>
-        <span class="time-right">11:00</span>
-    </div>
-    
-    <div class="speech-bubble dark">
-        <p>Hello. How are you today?</p>
-        <span class="time-right">11:00</span>
-    </div>
+    <ul *ngFor="let message of chat" >
+        <li class="speech-bubble" *ngIf="user == message.sender" >
+            <p>{{message.message.text}}</p>
+            <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
+        </li>
+        <li class="speech-bubble dark" *ngIf="user != message.sender">
+            <p>{{message.message.text}}</p>
+            <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
+        </li>
+    </ul>
+
 </div>
 <div class="pending" *ngIf="chat.length < 1">
     <p>Say something.</p>

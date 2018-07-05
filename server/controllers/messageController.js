@@ -36,18 +36,19 @@ module.exports.create = function(request,response){
 
 module.exports.getMessages = function(request,response){
 
-    let users = []
-    users.push(request.params.sender,request.params.reciever)
+    let users = [];
+    users.push(request.params.reciever,request.params.sender);
 
     console.log(users)
 
-    Message.find({users:{$in:users}}).exec(function(err,chat){
+    Message.find({'users':{$all:users}}).populate("users","first_name").exec(function(err,chat){
         if(err){
+            console.log(err)
             response.json({
                 error:err
             })
         }else{
-            console.log("Chat",chat)
+            console.log("Chat",chat[0])
             response.json({
                 chat:chat
             })

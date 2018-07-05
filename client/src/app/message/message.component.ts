@@ -20,12 +20,13 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
     // setInterval(()=>{this.getMessages()},5000)
     this.getMessages()
+    console.log(this.chatUserId)
   }
 
   getMessages(){
     this.messageService.getMessages(this.user,this.chatUserId).subscribe(messages=>{
-      console.log(messages['chat'][0].message.text)
-      this.chat = messages['chat'][0].message.text
+      console.log(messages['chat'][0])
+      this.chat = messages['chat']
     })
   }
   sendMessage(){
@@ -35,6 +36,8 @@ export class MessageComponent implements OnInit {
     this.messageService.sendMessage(this.message)
     .subscribe(data=>{
       console.log(data)
+      this.getMessages()
+      this.message.message = ''
     })
   }
 
