@@ -6,9 +6,13 @@
 
   <div class="card-content">
 
-    <h1 class="left" id="name">{{ name }}</h1>
+    <div class="header">
+        <h1 class="left" id="name">{{ name }}</h1>
+        <input type="checkbox" name="" id="switch">
+        <label for="switch"></label>
+    </div>
 
-   <form (submit)="editUser()">
+    <form (submit)="editUser()">
     
     <h3 class="left">Blur</h3>
 
