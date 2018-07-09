@@ -1,27 +1,31 @@
 .slide-1, .slide-2, .slide-3
     position: absolute 
     display: block
-    font-size: 2.5em;
+    color: #fff
+    font-size: 2.5em
     text-align: center
-    margin-top: 50px
-    width: 50%;
+    // top: 100px
+    width: 50%
     animation-duration: 20s
     animation-timing-function: ease-in-out
     animation-iteration-count: infinite
     
+.landing-page-intro
+    min-height: 76%
+    background-image: url("https://www.drweil.com/wp-content/uploads/2016/12/health-wellness_body-mind-spirit_mental-health_can-coffee-keep-your-mind-sharp_2716×1810_87102737-1024x768.jpg")
+    background-repeat: no-repeat, repeat
+    background-size: 400px 600px
+    .slide-1
+        animation-name: slide1
+        top: 150px
+        // margin: auto
+    .slide-2
+        animation-name: slide2
+        top: 230px
 
-.slide-1
-	animation-name: slide1
-    // margin-top: 20px
-
-.slide-2
-	animation-name: slide2
-    // margin-top: 80px
-
-.slide-3
-	animation-name: slide3
-    // margin-top: 20px
-
+    .slide-3
+        animation-name: slide3
+        top: 200px
 
 @keyframes slide1
     0%, 8.3%
@@ -56,22 +60,21 @@
         left: 45%
         opacity: 0
 
-div.signUp
-    margin-top: 313px
-    // right: 0
-    bottom: 0
-    // left: 0
-    position: absolute
-    display: block
-    // background-color: antiquewhite
+.signUp
+  position: absolute
+  height: 80px
+  width: 100%
+  text-align: center
+//   bottom: 0
+  
+
 
 .foward
     background-color: #4CAF50
     color: white
     border: none
-    width: 100%
-    // cursor: pointer
-    margin-bottom: 0.5px
+    width: 400px
+    cursor: pointer
     height: 50px
     font-size: 16px
     &:hover
