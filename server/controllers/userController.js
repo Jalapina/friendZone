@@ -145,7 +145,7 @@ module.exports.users = function(request,response){
             friendList.push(request.params.id)
             console.log(friendList)
 
-            User.find({'_id':{ $nin:friendList}}).select('first_name').exec(function(err,users){
+            User.find({'_id':{ $nin:friendList},'active':true}).select('first_name').exec(function(err,users){
 
                 console.log(users)
                 if(err){
@@ -232,3 +232,12 @@ module.exports.edit = function(request,response){
 
 }
 
+module.exports.userActivation = function(request,response){
+    console.log(request.body)
+    User.findById(request.body.user).exec(function(err,user){
+        user.active = request.body.active
+        user.save(function(err){
+            if(err) response.json({error:err})
+        })
+    })
+}

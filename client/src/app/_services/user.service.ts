@@ -30,9 +30,13 @@ export class UserService {
 
   }
 
+  userActivate(userActivation){
+    console.log(userActivation)
+    return this._http.put('/api/users/useractivation',userActivation).subscribe()
+  }
+
   getUsers(id){
     return this._http.get('/api/users/users/'+id)
-
   }
 
   editUser(userInfo){

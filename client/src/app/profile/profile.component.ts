@@ -26,32 +26,43 @@ TagInputModule.withDefaults({
 export class ProfileComponent implements OnInit {
   
   isClassVisible: false;
+  userIsActive:boolean;
   items: string[] = []
-  user:any
   userInfo:any = {}
   bool = "hello"
+  userActivation:any = {}
   name
   bio
   blur
   activity
+  user = JSON.parse(localStorage.getItem('user'));  
 
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
-    this.user = JSON.parse(localStorage.getItem('user'));
-    
+      
   }
 
   ngOnInit() {
     this.getUser()
   }
 
+  userActive(){
+    this.userIsActive = !this.userIsActive
+    console.log(this.userIsActive)
+    this.userActivation.active = this.userIsActive
+    this.userActivation.user = this.user
+
+    this.userService.userActivate(this.userActivation)
+  }
+
   getUser(){
     const userId = this.user
     this.userService.getUser(userId).subscribe( data =>{ 
-      // console.log(data,"data")
+      console.log(data,"data")
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
       this.userInfo.blur = data['user'].blur
       this.userInfo.bio = data['user'].bio
+      this.userIsActive = data['user'].active
     })
   }
 
