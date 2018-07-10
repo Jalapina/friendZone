@@ -1,22 +1,35 @@
-<div class="homeComponent">
-  <div class="categories"> 
-      <a [routerLink]="['/users']">
-        <div id="breakfast" class="category"><img src="../../assets/breakfast.jpg" alt=""> <p>BREAKFAST</p> </div>
-      </a>
-      <a [routerLink]="['/users']">
-        <div id="physical" class="category"><img src="../../assets/running.jpg" alt=""> <p>PHYSICAL</p> </div>
-      </a>
-      <a [routerLink]="['/users']">
-        <div id="cinema" class="category"><img src="../../assets/cinema.jpg" alt=""> <p>CINEMA</p> </div>
-      </a>
-      <a [routerLink]="['/users']">
-        <div id="bar" class="category"><img src="../../assets/bar.jpg" alt=""> <p>BAR</p> </div>
-      </a>
-      <a [routerLink]="['/users']">
-        <div id="music" class="category"><img src="../../assets/music.jpeg" alt=""> <p>MUSIC</p> </div>
-      </a>
-      <a [routerLink]="['/users']">
-        <div id="dancing" class="category"><img src="../../assets/dance.jpg" alt=""> <p>DANCING</p> </div>
-      </a>
+<app-header></app-header>
+
+<div class="categories"> 
+      
+  <div [routerLink]="['/users']" id="breakfast" class="category">
+    <img src="../../assets/breakfast.jpg" alt="Breakfast">
+    <p>BREAKFAST</p> 
   </div>
-</div>
+
+  <div [routerLink]="['/users']" id="physical" class="category">
+    <img src="../../assets/running.jpg" alt="Breakfast"> 
+    <p>PHYSICAL</p> 
+  </div>
+
+  <div [routerLink]="['/users']" id="cinema" class="category">
+    <img src="../../assets/cinema.jpg" alt="Breakfast"> 
+    <p>CINEMA</p> 
+  </div>
+
+  <div [routerLink]="['/users']" id="bar" class="category">
+    <img src="../../assets/bar.jpg" alt="Breakfast">
+    <p>BAR</p> 
+  </div>
+
+  <div [routerLink]="['/users']" id="music" class="category">
+    <img src="../../assets/music.jpeg" alt="Breakfast"> 
+    <p>MUSIC</p> 
+  </div>
+
+  <div [routerLink]="['/users']" id="dancing" class="category"> 
+    <img src="../../assets/dance.jpg" alt="Breakfast">
+    <p>DANCING</p> 
+  </div>
+
+  </div>

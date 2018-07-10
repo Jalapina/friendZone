@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common'
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor'
@@ -23,6 +24,8 @@ import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
 import { SwingModule } from 'angular2-swing';
 import { ProfilePreviewComponent } from './profile-preview/profile-preview.component';
+import { HeaderComponent } from './_shared/header/header.component';
+import { LandingHeaderComponent } from './_shared/landing-header/landing-header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { ProfilePreviewComponent } from './profile-preview/profile-preview.compo
     MessageComponent,
     ProfileComponent,
     FriendsComponent,
-    ProfilePreviewComponent
+    ProfilePreviewComponent,
+    HeaderComponent,
+    LandingHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,10 @@ import { ProfilePreviewComponent } from './profile-preview/profile-preview.compo
     BrowserAnimationsModule,
     TagInputModule,
     SwingModule,
+    CommonModule,
+  ],
+  exports:[
+    HeaderComponent
   ],
   providers: [
     UserService,
