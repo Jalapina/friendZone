@@ -3,8 +3,7 @@ import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
 import { UserService } from '../_services/user.service'
-import { Response } from '@angular/http/src/static_response';
-import { concat } from 'rxjs/operator/concat';
+import { Category } from './Category'
 
 TagInputModule.withDefaults({
   
@@ -24,7 +23,12 @@ TagInputModule.withDefaults({
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  
+  categories = [
+    new Category(1, 'Music' ),
+    new Category(2, 'Bar' ),
+    new Category(3, 'Gym' ),
+    new Category(4, 'Food'),
+ ];
   isClassVisible: false;
   userIsActive:boolean;
   items: string[] = []

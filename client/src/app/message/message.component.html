@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="friend" >{{firstName}}</div>
-<div *ngIf="chat.length > 1">
+<div class="chatBox" *ngIf="chat.length > 1">
 
     <ul *ngFor="let message of chat" >
         <li class="speech-bubble" *ngIf="user == message.sender" >
@@ -14,7 +14,7 @@
     </ul>
 
 </div>
-<div class="pending" *ngIf="chat.length < 1">
+<div class="pending chatBox" *ngIf="chat.length < 1">
     <p>Say something.</p>
 </div>
 <form class="message-form" (submit)="sendMessage()">

@@ -1,28 +1,34 @@
 @import "../../../node_modules/ngx-chips/core/styles/core/_core.scss"
 
-.card
-    form
-        display: inline-table
-    .card-image
-        width: 100%
-        text-align: center
+.card-image
+    width: 100%
+    text-align: center
+    height: 300px
+    img
         height: 300px
-        img
-            height: 300px
-            width: 375px
+        width: 375px
 
-    .card-content 
-        text-align: center
-        width: 90%
-        margin: 15px auto
-        
-        .logoutButton
-            margin: 20px
-            height: 40px
-            font-weight: bold
-            width: 90px
-            border: 0px
-            background: #e53935
+.card-content 
+    text-align: center
+    width: 90%
+    margin: 15px auto
+    .saveButton
+        width: 100%
+        height: 40px
+        margin-top: 10px
+        font-weight: bold
+        border: 0px
+        background: green
+        &:hover
+            color: #fff
+            background-color: black
+    .logoutButton
+        margin-top: 10px
+        height: 40px
+        font-weight: bold
+        width: 100%
+        border: 0px
+        background: #e53935
 
 .bio
     margin-top: 10px 
@@ -37,6 +43,7 @@
 textarea
     min-height: 80px
     width: 90%
+    font-size: 15px
     resize: none
     border: 0
     background: transparent
@@ -47,10 +54,14 @@ textarea
 .left
     text-align: left
     margin: 5px
+    
 .header
+    height: 46px
+    width: 100%
+    background: lavenderblush
     #name
         color: #333333
-        font-family: "Helvetica Neue"
+        font-family: 'Song Myung', serifc
         font-size: 25px
         font-weight: norma
         margin-bottom: 15px

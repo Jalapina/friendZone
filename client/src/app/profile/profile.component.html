@@ -1,47 +1,45 @@
 <app-header></app-header>
-<div class="card">
+
+
       
-  <div class="card-image">
-    <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
+<div class="card-image">
+  <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
+</div>
+
+<div class="card-content">
+
+  <div class="header">
+      <h1 class="left" id="name">{{ name }}</h1>
+      <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
+      <label for="switch"></label>
   </div>
 
-  <div class="card-content">
-
-    <div class="header">
-        <h1 class="left" id="name">{{ name }}</h1>
-        <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
-        <label for="switch"></label>
-    </div>
-
-    <form (submit)="editUser()">
+  <form (submit)="editUser()">
     
     <h3 class="left">Blur</h3>
 
     <textarea placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
 
-    <div>
-        <h3 class="left" >Activity</h3>
-      <div class="option">
-          <select [(ngModel)]="userInfo.activity" name="activity" >
-              <option [value]="0" selected>What are you trying to do?</option>
-              <option [value]="1">Music</option>
-              <option [value]="2">Bar</option>
-              <option [value]="3">Gym</option>
-              <option [value]="4">Food</option>
-          </select>
-      </div>
-    </div>
+    <h3 class="left" >Activity</h3>
+    <select [(ngModel)]="userInfo" name="activity"> 
+      <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+    </select>
+
     <h3 class="left">Bio</h3>
+
     <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you" ></textarea>
+
     <h3 class="left">Hobbies</h3>
+
     <tag-input [(ngModel)]="items" [modelAsStrings]="true"  theme='dark' name="item"></tag-input>
 
-    <input type="submit" value="Submit">
-   </form>
+    <input type="submit" class="saveButton" value="SAVE">
+  
+  </form>
     
-    <button (click)="logout()" class="logoutButton">LogOut</button>
-
-  </div>
+  <button (click)="logout()" class="logoutButton">LogOut</button>
 
 </div>
+
+
   
