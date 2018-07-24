@@ -16,20 +16,22 @@
 
   <form (submit)="editUser()">
     
-    <h3 class="left">Blur</h3>
+    <p class="left">Blur</p>
 
-    <textarea placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
+    <textarea class="blur" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
 
-    <h3 class="left" >Activity</h3>
-    <select [(ngModel)]="userInfo" name="activity"> 
-      <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
-    </select>
-
-    <h3 class="left">Bio</h3>
+    <p class="left" >Activity</p>
+    
+    <div class="container" >
+      <div class="dropdown-head">
+        <button class="options" *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</button>
+      </div>
+    </div>
+    <p class="left">About</p>
 
     <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you" ></textarea>
 
-    <h3 class="left">Hobbies</h3>
+    <p class="left">Hobbies</p>
 
     <tag-input [(ngModel)]="items" [modelAsStrings]="true"  theme='dark' name="item"></tag-input>
 
