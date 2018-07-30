@@ -10,7 +10,7 @@
 
         <div class="profile-bio">
             
-            <div (click)="isClassVisible = !isClassVisible;" class="profile-name">
+            <div (click)="isClassVisible = !isClassVisible" class="profile-name">
                 <p>{{ user.first_name }}</p>
                 <i class="material-icons">more_vert</i>
             </div>
@@ -18,7 +18,7 @@
 
         </div>
 
-        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide" ngDefaultControl>
+        <div [ngClass]="{'card-show': !isClassVisible }" class="card-hide" ngDefaultControl>
             
             <div (click)="isClassVisible = !isClassVisible;" class="label">
                 <p>{{ user.first_name }}</p>

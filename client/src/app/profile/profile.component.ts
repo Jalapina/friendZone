@@ -29,8 +29,8 @@ export class ProfileComponent implements OnInit {
     new Category(3, 'Gym' ),
     new Category(4, 'Food'),
  ];
-  isClassVisible: false;
-  userIsActive:boolean;
+  classVisible: false
+  userIsActive:boolean
   items: string[] = []
   userInfo:any = {}
   bool = "hello"

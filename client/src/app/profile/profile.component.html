@@ -22,11 +22,13 @@
 
     <p class="left" >Activity</p>
     
-    <div class="container" >
-      <div class="dropdown-head">
+    <div class="container">
+      <div class="dropdown-container" (click)="classVisible = !classVisible" ></div>
+      <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">
         <button class="options" *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</button>
       </div>
     </div>
+    
     <p class="left">About</p>
 
     <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you" ></textarea>
