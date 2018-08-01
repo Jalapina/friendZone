@@ -67,6 +67,8 @@ export class ProfileComponent implements OnInit {
       this.userInfo.blur = data['user'].blur
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
+      // if(data['user'].activity){}
+      this.activity = "Bar" 
     })
   }
 

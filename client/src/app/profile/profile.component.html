@@ -20,12 +20,13 @@
 
     <textarea class="blur" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
 
-    <p class="left" >Activity</p>
+    <p class="left" >What do you want to do?</p>
     
     <div class="container">
-      <div class="dropdown-container" (click)="classVisible = !classVisible" ></div>
+      <div class="dropdown-container" (click)="classVisible = !classVisible" *ngIf="!activity">Activities</div>
+      <div class="dropdown-container" (click)="classVisible = !classVisible" *ngIf="activity">{{activity}}</div>
       <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">
-        <button class="options" *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</button>
+        <button class="options" *ngFor="let category of categories" value="{{category.id}}" (click)="classVisible = false">{{category.name}}</button>
       </div>
     </div>
     
