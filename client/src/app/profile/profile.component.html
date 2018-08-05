@@ -1,12 +1,9 @@
 <app-header></app-header>
 
-
-      
-<div class="card-image">
-  <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
-</div>
-
 <div class="card-content">
+  <div class="card-image">
+    <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
+  </div>
 
   <div class="header">
       <h1 class="left" id="name">{{ name }}</h1>
@@ -15,7 +12,7 @@
   </div>
 
   <form (submit)="editUser()">
-    
+
     <p class="left">Blur</p>
 
     <textarea class="blur" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
@@ -23,10 +20,10 @@
     <p class="left" >What do you want to do?</p>
     
     <div class="container">
-      <div class="dropdown-container" (click)="classVisible = !classVisible" *ngIf="!activity">Activities</div>
-      <div class="dropdown-container" (click)="classVisible = !classVisible" *ngIf="activity">{{activity}}</div>
+      <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="!placeHolder">Activities</div>
+      <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="placeHolder">{{activity}}</div>
       <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">
-        <button class="options" *ngFor="let category of categories" value="{{category.id}}" (click)="classVisible = false">{{category.name}}</button>
+        <button class="options" *ngFor="let category of categories" value="{{category.id}}" (click)="classVisible = false; placeHolder = !placeHolder; selectedActivity(category.name)"  >{{category.name}}</button>
       </div>
     </div>
     

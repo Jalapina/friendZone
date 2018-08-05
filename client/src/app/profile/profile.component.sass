@@ -1,38 +1,50 @@
 @import "../../../node_modules/ngx-chips/core/styles/core/_core.scss"
 
 .card-image
-    width: 100%
     text-align: center
     height: 300px
+    bottom: 5px
     img
         height: 300px
-        width: 375px
+        width: 350px
 
 .card-content 
     text-align: center
-    width: 100%
+    padding: 10px
+    border: 0px solid
+    max-width: 750px
     margin: 15px auto
+    @media screen and (min-width: 750px)
+        box-shadow: 0px 7px 40px 1px #888888
     .saveButton
-        width: 100%
+        width: 350px
         height: 40px
         margin-top: 10px
         font-weight: bold
         border: 0px
         cursor: pointer
-        background: green
+        border-radius: 30px
+        background: #66bb6a
         &:hover
             color: #fff
-            background-color: black
+            font-size: 10px
+            background-color: #00c853
     .logoutButton
         margin-top: 10px
         height: 40px
         font-weight: bold
-        width: 100%
+        width: 350px
         border: 0px
-        background: #e53935
+        border-radius: 30px
+        background: #ef5350
         cursor: pointer
+        &:hover
+            color: #fff
+            background: #d50000
+            font-size: 10px
     .blur
         background: #f5f5f5
+        padding: 5px
     .bio
         margin-top: 10px 
         resize: none
@@ -40,12 +52,13 @@
         outline: none
         height: 150px
         direction: ltr
+        padding: 5px
         background: #f5f5f5
-        width: 100%
+        width: 95%
 
     textarea
         min-height: 80px
-        width: 100%
+        width: 95%
         font-size: 15px
         resize: none
         border: 0
@@ -62,8 +75,8 @@
     
 .header
     height: 46px
-    width: 100%
-    background: #f5f5f5
+    margin: auto
+    margin-top: 10px
     #name
         color: #333333
         font-family: 'Song Myung', serifc
@@ -138,14 +151,16 @@
     border: 0px
     cursor: pointer
     &:hover
-        background: #eeeeee
+        background: #f5f5f5
 .dropdown-head
     width: 190px
     background: #e0e0e0
     margin: auto
     display: none
+    
 .options-active
     display: block
+    animation: fadeInUp 800ms
 .dropdown-container
     background-color: #ffffff
     border-bottom: 1px solid
@@ -157,3 +172,12 @@
     margin: auto
     &:hover
         background: #e0e0e0
+
+@keyframes fadeInUp
+    from
+        opacity: 0
+        transform: translate3d(0, 20px, 0)
+    to
+        opacity: 1
+        transform: none
+

@@ -40,7 +40,7 @@ export class UserService {
   }
 
   editUser(userInfo){
-    return this._http.put('/api/users/edit',userInfo)
+    return this._http.put('/api/users/edit',userInfo).subscribe()
   }
 
   getUser(id){
