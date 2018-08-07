@@ -65,8 +65,8 @@ module.exports.friends = function(request,response){
             
             friendList.forEach(function(x){
                 Message.find({'users':{$all:[request.params.id,x]}}).populate("users","first_name").select("updatedAt users message").limit(1).sort([['createdAt', 'descending']]).exec(function(err,msg){
-                    user = msg[0].users.splice(0,1)
-                    console.log(msg)
+                    msg[0].users.splice(0,1)
+                    // console.log(msg)
                     friends.push(msg)
                     
                 })

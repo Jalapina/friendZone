@@ -1,10 +1,11 @@
 .container
     max-width: 750px
-    height: 85%
+    min-height: 85%
+    padding: 10px
     margin: auto
     @media screen and (min-width: 750px)
         box-shadow: 0px 7px 40px 1px #888888
-        animation: boxShadow 1000ms
+        transition: 3s
 .photo
     background: #ffcc80
     height: 50px
@@ -21,14 +22,24 @@
     letter-spacing: 5px
     font-size: 25px
     text-align: center
-ul > li
+.friend
     font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
-    transition: all 500ms
+    transition:  500ms
     padding: 5px
     background: #fff
     height: 60px;
     margin: 5px
     list-style: none
+    @media screen and (min-width: 750px)
+        &:hover
+            font-size: 22px
+            box-shadow: 0px 7px 50px 1px #888888
+            width: 700px
+            margin: auto
+            border-radius: 10px
+            position: relative
+            transition: 2000ms
+    
 .username
     color: #000000
     cursor: pointer
@@ -40,20 +51,8 @@ ul > li
 .preview
     font-family: 'Source Sans Pro', sans-serif
     overflow-y: hidden
-    width: 275px
+    width: 280px
     height: 30px
     @media screen and (min-width: 750px)
         width: 590px
-    // background-color: salmon
-ul > li:hover
-    font-size: 22px
-    box-shadow: 0px 7px 40px 1px #888888
-    width: 700px
-    margin: auto
-    transition: 2000ms
 
-@keyframes boxShadow
-    from
-        opacity: 0
-    to
-        opacity: 1

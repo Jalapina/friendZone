@@ -1,25 +1,12 @@
 <app-header></app-header>
-<div class="friend" >{{firstName}}</div>
-<div class="chatBox" *ngIf="chat.length > 0">
+<div class="container">
 
-    <ul *ngFor="let message of chat" >
-        <li class="speech-bubble" *ngIf="user == message.sender" >
-            <p>{{message.message.text}}</p>
-            <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
-        </li>
-        <li class="speech-bubble dark" *ngIf="user != message.sender">
-            <p>{{message.message.text}}</p>
-            <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
-        </li>
-    </ul>
-
-</div>
-<div class="pending chatBox" *ngIf="chat.length < 1">
-    <p>Say something.</p>
+    <div class="pending chatBox" ></div>
+    
 </div>
 <form class="message-form" (submit)="sendMessage()">
-
-    <textarea class="message message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
-    <input type="submit" class="message-button" value="Send">
-
+    
+        <textarea class="message message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
+        <input type="submit" class="message-button" value="Send">
+    
 </form>

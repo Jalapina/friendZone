@@ -18,7 +18,7 @@ export class FriendsComponent implements OnInit {
   friends(){
     this.userService.getFriends(this.user).subscribe(data=>{
       this.friendList = data['users']
-      console.log(this.friendList[0][0])
+      console.log(this.friendList)
     })
   }
 

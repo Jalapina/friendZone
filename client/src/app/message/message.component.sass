@@ -1,10 +1,22 @@
+.container
+    height: 82%
+    margin: auto
+    box-shadow: 0px 0px 40px 0px #888888
+    text-align: center
+    transition-duration: 2s
+    @media screen and (min-width: 750px)
+        transition: 1s
+        transition-timing-function: linear
+        width: 600px
+        0px 7px 40px 1px #888888
+        border-radius: 55px
+
 .chatBox
     height: 77.5%
     overflow: scroll
 .message-form
-    margin-top: 10px
-    width: 100%
-    background-color: #e0e0e0
+    max-width: 600px
+    margin: auto
     bottom: 0px
     height: 53px
     .message-input
@@ -29,7 +41,6 @@
     background: tomato
     height: 50px
     margin-top: 10px
-    // width: 70%
     padding: 5px
     position: relative
     list-style: none
@@ -38,6 +49,21 @@
     font-weight: bold
     font-size: 20px
     text-align: center
+    display: inline-block
+    margin-top: 200px
+    height: 80px
+    width: 200px
+    border-radius: 30px
+    box-shadow: 0px 7px 40px 1px #888888
+    background-color: #ffcc80
+    transition: 1000ms
+    @media screen and (max-height: 450px)
+        margin-top: 20px
+.pending::after
+    content: "Say Something!"
+    position: relative
+    top: 25px
+    font-family: 'Bree Serif', serif
 
 .dark
     background-color: #ddd
