@@ -56,20 +56,36 @@ module.exports.create = function(request,response){
 }
 
 module.exports.friends = function(request,response){
+    friends = []
     User.findById(request.params.id).select('friendList').exec(function(err,user){
 
-       let friendList = user.friendList
-        console.log(friendList)
+        let friendList = user.friendList
+        // console.log(friendList)
         User.find({'_id':{$in:friendList}}).select('first_name').exec(function(err,users){
-            if(err){
-                response.json({
-                    error:err
+            
+            friendList.forEach(function(x){
+                Message.find({'users':{$all:[request.params.id,x]}}).populate("users","first_name").select("updatedAt users message").limit(1).sort([['createdAt', 'descending']]).exec(function(err,msg){
+                    user = msg[0].users.splice(0,1)
+                    console.log(msg)
+                    friends.push(msg)
+                    
                 })
-            }else{
-                response.json({
-                    users:users
-                })
-            }
+            })
+            // console.log()
+            
+            setTimeout(function(){
+                // console.log(friends)
+                if(err){
+                    response.json({
+                        error:err
+                    })
+                }else{
+                    response.json({
+                        users:friends
+                    })
+                }
+            },1000)
+            
         })
     })
 }

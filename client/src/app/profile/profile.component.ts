@@ -75,9 +75,9 @@ export class ProfileComponent implements OnInit {
       this.userInfo.blur = data['user'].blur
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
-      if(data['user'].activity !== undefined ){
+      if(data['user'].activity){
         console.log(data['user'].activity,"activity")
-        this.placeHolder = true
+        this.placeHolder = false
         this.activity = data['user'].activity
       }
        

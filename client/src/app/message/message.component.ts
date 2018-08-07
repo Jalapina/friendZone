@@ -21,7 +21,7 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
     // setInterval(()=>{this.getMessages()},5000)
     this.getMessages()
-    console.log(this.chatUserId)
+    // console.log(this.chatUserId)
   }
 
   getMessages(){
