@@ -1,15 +1,17 @@
 <app-header></app-header>
-<div>
-  <p>Friends</p>
+<div class="container">
+
+  <p class="head">The Friend Zone</p>
   <div *ngFor="let friend of friendList">
     <ul *ngFor="let user of friend">
-      <li *ngFor="let name of user.users">
-        {{name.first_name}}
-        <a [routerLink]="['/chat',name._id]">{{ user.message.text }}</a>
+      <li *ngFor="let name of user.users" [routerLink]="['/chat',name._id]">
+        <div class="photo"></div>
+        <div class="username">
+          <p class="name">{{name.first_name}}</p>
+          <p class="preview">{{ user.message.text }}</p>
+        </div>
       </li>
     </ul>
   </div>
-  
-
 
 </div>
