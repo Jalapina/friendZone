@@ -14,6 +14,7 @@ export class UserService {
     return this._http.post('/api/users/authenticate',user)
     .map((data) => {
       const token = data['token']
+      console.log(token)
       localStorage.setItem('token', token);     
       return data 
     })
@@ -25,6 +26,7 @@ export class UserService {
     return this._http.post('/api/users/create',user)
     .map((data) => {
       const token = data['token'];
+      
       localStorage.setItem('token', token); 
     });
 

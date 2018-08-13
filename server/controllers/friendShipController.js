@@ -60,32 +60,42 @@ module.exports.friends = function(request,response){
     User.findById(request.params.id).select('friendList').exec(function(err,user){
 
         let friendList = user.friendList
+
         // console.log(friendList)
         User.find({'_id':{$in:friendList}}).select('first_name').exec(function(err,users){
-            
-            friendList.forEach(function(x){
-                Message.find({'users':{$all:[request.params.id,x]}}).populate("users","first_name").select("updatedAt users message").limit(1).sort([['createdAt', 'descending']]).exec(function(err,msg){
-                    msg[0].users.splice(0,1)
-                    // console.log(msg)
-                    friends.push(msg)
-                    
+            if(err){
+                response.json({
+                    error:err
                 })
-            })
-            // console.log()
-            
-            setTimeout(function(){
-                // console.log(friends)
-                if(err){
-                    response.json({
-                        error:err
-                    })
-                }else{
-                    response.json({
-                        users:friends
-                    })
-                }
-            },1000)
-            
+            }else{
+                response.json({
+                    users:users
+                })
+            }
         })
+
+        // friendList.forEach(function(x){
+        //     Message.find({'users':{$all:[request.params.id,x]}}).populate("users","first_name").select("updatedAt users message").limit(1).sort({updatedAt: "desc"}).exec(function(err,msg){
+
+        //         if(msg.length > 0){
+        //             console.log(msg)
+        //             msg[0].users.splice(0,1)
+        //             sort(msg,friends)
+        //         }
+                
+        //     })
+        // })
+            
+        // setTimeout(function(){
+        //     if(err){
+        //         response.json({
+        //             error:err
+        //         })
+        //     }else{
+        //         response.json({
+        //             users:friends
+        //         })
+        //     }
+        // },1000)
     })
 }

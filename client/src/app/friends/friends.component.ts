@@ -18,8 +18,14 @@ export class FriendsComponent implements OnInit {
   friends(){
     this.userService.getFriends(this.user).subscribe(data=>{
       this.friendList = data['users']
-      console.log(this.friendList)
     })
+  }
+
+  sort(friendList){
+    // // console.log(friendList)
+    // friendList.forEach(element => {
+    //   console.log(element[0].updatedAt.getTime())
+    // });
   }
 
 }

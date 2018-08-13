@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { MessageService } from '../_services/message.service'
-
+// import {  }
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -15,29 +15,34 @@ export class MessageComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   usersId = [this.chatUserId,this.user]
   message:any = {}
-  chat:any = []
+  chat
   firstName
+  sender
+  reciever
 
+  @ViewChild("chatbox") chatbox;
+  
   ngOnInit() {
-    // setInterval(()=>{this.getMessages()},5000)
     this.getMessages()
-    // console.log(this.chatUserId)
+    // console.log(this.chatbox.nativeElement)
   }
 
   getMessages(){
     this.messageService.getMessages(this.user,this.chatUserId).subscribe(messages=>{
-      console.log(messages['chat'][0].users[1].first_name)
-      this.firstName = messages['chat'][0].users[1].first_name
-      this.chat = messages['chat']
+      if(messages['chat'].length > 0){
+        console.log(messages['chat'])
+        this.sender = messages['chat'][0].users[0].first_name
+        this.reciever = messages['chat'][0].users[1].first_name
+        this.chat = messages['chat']
+      }
+      
     })
   }
   sendMessage(){
     this.message.sender = this.user
     this.message.reciever = this.chatUserId
-    console.log(this.message)
     this.messageService.sendMessage(this.message)
     .subscribe(data=>{
-      console.log(data)
       this.getMessages()
       this.message.message = ''
     })

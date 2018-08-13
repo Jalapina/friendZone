@@ -2,7 +2,17 @@
 <div class="container">
 
   <p class="head">The Friend Zone</p>
-  <div *ngFor="let friend of friendList">
+  <div >
+    <ul *ngFor="let friend of friendList">
+      <li class="friend" [routerLink]="['/chat',friend._id]">
+        <div class="photo"></div>
+        <div class="username">
+          <p class="name">{{friend.first_name}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- <div *ngFor="let friend of friendList">
     <ul *ngFor="let user of friend">
       <li class="friend" *ngFor="let name of user.users" [routerLink]="['/chat',name._id]">
         <div class="photo"></div>
@@ -12,6 +22,6 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 
 </div>

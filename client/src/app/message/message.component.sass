@@ -11,9 +11,15 @@
         0px 7px 40px 1px #888888
         border-radius: 55px
 
-.chatBox
-    height: 77.5%
+.chatbox
+    margin: auto
+    position: relative
     overflow: scroll
+    height: 92%
+    top: 1px
+    width: 500px
+    @media screen and (max-width: 500px)
+        width: 375px
 .message-form
     max-width: 600px
     margin: auto
@@ -38,13 +44,18 @@
         line-height: 1
 
 .speech-bubble
-    background: tomato
-    height: 50px
     margin-top: 10px
+    height: auto
+    min-height: 25px
     padding: 5px
     position: relative
     list-style: none
-    
+    width: 330px
+    @media screen and (min-width: 500px)
+        width: 250px
+    @media screen and (max-width: 500px)
+        width: 220px
+
 .pending
     font-weight: bold
     font-size: 20px
@@ -64,9 +75,16 @@
     position: relative
     top: 25px
     font-family: 'Bree Serif', serif
-
+.right-bubble
+    background: #FFE06D
+    left: 219px
+    border-radius: 5px 30px 0px 30px
+    @media screen and (max-width: 500px)
+        left: 140px
 .dark
     background-color: #ddd
+    border-radius: 35px 5px 30px 0px
+    left: 5px
 .friend
     text-align: center
     font-size: x-large
@@ -74,3 +92,38 @@
     font-family: sans-serif
 .friend::after
     content: "."
+.time-right
+    position: absolute
+    right: 275px
+    bottom: 10px
+    color: #BDBDCF
+    font-size: 10px
+    width: 40px
+    @media screen and (max-width: 500px)
+        right: 250px
+.time-left
+    position: absolute
+    left: 275px
+    bottom: 10px
+    color: #BDBDCF
+    font-size: 10px
+    width: 40px
+    @media screen and (max-width: 500px)
+        left: 250px
+.name
+    height: 45px
+    position: relative
+    top: 1px
+    display: inline-block
+    width: 150px
+    font-size: 30px
+    font-family: 'Song Myung', serifc;
+    text-align: right
+.name::before
+    content: ""
+    height: 40px
+    position: absolute
+    left: 5px
+    top: 2px
+    width: 55px
+    background-color: tomato

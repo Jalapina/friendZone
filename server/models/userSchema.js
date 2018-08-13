@@ -58,6 +58,55 @@ validateEmail = function(email) {
     return re.test(email);
 }
 
+mergeSort = function(friendList){
+    if(friendList.length < 2){
+        return friendList
+    }
+
+    let middle = Math.floor(friendList.length/2);
+    let left = friendList.slice(0,middle);
+    let right = friendList.slice(middle);
+
+    return merge(left,right)
+}
+
+function merge(left,right){
+    
+    let result = []
+    let indexLeft = 0;
+    let indexRight = 0;
+    // console.log(left[indexLeft][0].updatedAt.getTime(),right[indexRight][0].updatedAt.getTime())
+
+    while(indexLeft < left.length && indexRight < right.length){
+        if(left[indexLeft][0].updatedAt.getTime() < right[indexRight][0].updatedAt.getTime()){
+            result.push(left[indexLeft])
+            indexLeft++
+        }else{
+            result.push(right[indexRight])
+            indexRight++
+        }
+    }
+
+    result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
+    console.log(result)
+    return result
+}
+
+sort = function(friend,array){
+    let x = 0
+    if(array.length === 0){
+        array.push(friend)
+        return array
+    }else{
+        while(x < array.length){
+
+            console.log()
+            x++
+        }
+    }
+    return array
+}
+
 userSchema.methods.generateHAsh = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
