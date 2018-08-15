@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { MessageService } from '../_services/message.service'
 // import {  }
@@ -9,6 +9,8 @@ import { MessageService } from '../_services/message.service'
 })
 export class MessageComponent implements OnInit {
 
+  @ViewChild("scrollMe", { read: ElementRef }) scrollMe: ElementRef;
+  
   constructor( private messageService:MessageService, private _params:ActivatedRoute) { }
 
   chatUserId = this._params.snapshot.params['id']; 
@@ -20,11 +22,9 @@ export class MessageComponent implements OnInit {
   sender
   reciever
 
-  @ViewChild("chatbox") chatbox;
-  
   ngOnInit() {
     this.getMessages()
-    // console.log(this.chatbox.nativeElement)
+    console.log(this.scrollMe)
   }
 
   getMessages(){

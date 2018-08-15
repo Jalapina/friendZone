@@ -3,7 +3,7 @@
     <div class="name">
         {{reciever}}
     </div>
-    <div #chatbox class="chatbox" *ngIf="chat">
+    <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
         
         <ul *ngFor="let message of chat" >
             <li class="speech-bubble right-bubble" *ngIf="user == message.sender" >
