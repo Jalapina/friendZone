@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
 
   getUsers(){
     this._userService.getUsers(this.user).subscribe(result => {
- 
+      console.log(result['users'])
       this.cards = result['users']
     })
   }

@@ -145,7 +145,7 @@ module.exports.users = function(request,response){
             friendList.push(request.params.id)
             console.log(friendList)
 
-            User.find({'_id':{ $nin:friendList},'active':true}).select('first_name').exec(function(err,users){
+            User.find({'_id':{ $nin:friendList},'active':true}).select('first_name blur bio hobbies').exec(function(err,users){
 
                 console.log(users)
                 if(err){
