@@ -31,8 +31,8 @@ export class MessageComponent implements OnInit {
     this.messageService.getMessages(this.user,this.chatUserId).subscribe(messages=>{
       if(messages['chat'].length > 0){
         console.log(messages['chat'])
-        this.sender = messages['chat'][0].users[0].first_name
-        this.reciever = messages['chat'][0].users[1].first_name
+        this.reciever = messages['chat'][0].users[0].first_name
+        this.sender = messages['chat'][0].users[1].first_name
         this.chat = messages['chat']
       }
       

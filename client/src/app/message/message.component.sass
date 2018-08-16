@@ -2,24 +2,132 @@
     height: 82%
     margin: auto
     box-shadow: 0px 0px 40px 0px #888888
+    background: #e0e0e0
     text-align: center
     transition-duration: 2s
     @media screen and (min-width: 750px)
         transition: 1s
         transition-timing-function: linear
         width: 600px
-        0px 7px 40px 1px #888888
+        box-shadow: 0px 7px 40px 1px #888888
         border-radius: 55px
+.bubble-container
+    display: inline-block
+    // background-color: darkgreen
+    width: 95%
+    margin: 5px
+    text-align: left
+// .bubble-container:nth-child(even)
+//     background-color: darkgreen
 
 .chatbox
     margin: auto
     position: relative
     overflow: scroll
     height: 94%
-    top: 1px
-    width: 500px
+    top: 15px
+
+.chatbox::-webkit-scrollbar
+    width: 0px
+
+.speech-bubble
+    // margin-top: 25px
+    position: relative
+    list-style: none
+    text-align: left
+    border-radius: 15px
+    padding: 5px
+    display: inline-block
+    max-width: 220px
+        
+.right-bubble
+    background: #FFE06D
+    // left: 295px
+    float: right
+    .name
+        font-family: 'Song Myung', serifc
+        width: auto
+        padding: 3px
+        text-transform: uppercase
+        position: relative
+        // left: 5px
+        text-align: left
+        display: inline-block
+        max-width: 110px
+        overflow-y: hidden
+    .message
+        color: #fff
+        // width: 230px
+        position: relative
+        // left: 5px
+        bottom: 5px
+        padding: 3px 
+
+.left-bubble
+    background-color: #757575
+    left: 5px
+    .name
+        font-family: 'Song Myung', serifc
+        width: auto
+        padding: 3px
+        text-transform: uppercase
+        position: relative
+        // left: 5px
+        text-align: left
+        display: inline-block
+        max-width: 110px
+        overflow-y: hidden
+       
+    .message
+        color: #fff
+        // width: 230px
+        position: relative
+        // left: 5px
+        bottom: 5px
+        padding: 3px    
+
+.time-right
+    position: absolute
+    right: 255px
+    bottom: 7px
+    color: #BDBDCF
+    font-size: 10px
+    width: 40px
+    transform: rotate(270deg)
     @media screen and (max-width: 500px)
-        width: 375px
+        right: 250px
+
+.time-left
+    position: absolute
+    left: 275px
+    bottom: 10px
+    color: #BDBDCF
+    font-size: 10px
+    width: 40px
+    @media screen and (max-width: 500px)
+        left: 250px
+
+.pending
+    font-weight: bold
+    font-size: 20px
+    text-align: center
+    display: inline-block
+    margin-top: 200px
+    height: 80px
+    width: 200px
+    border-radius: 30px
+    box-shadow: 0px 7px 40px 1px #888888
+    background-color: #ffcc80
+    transition: 1000ms
+    @media screen and (max-height: 450px)
+        margin-top: 20px
+
+.pending::after
+    content: "Say Something!"
+    position: relative
+    top: 25px
+    font-family: 'Bree Serif', serif
+
 .message-form
     max-width: 600px
     margin: auto
@@ -43,87 +151,32 @@
         float: right
         line-height: 1
 
-.speech-bubble
-    margin-top: 10px
-    height: auto
-    min-height: 25px
-    padding: 5px
-    position: relative
-    list-style: none
-    width: 330px
-    @media screen and (min-width: 500px)
-        width: 250px
-    @media screen and (max-width: 500px)
-        width: 220px
 
-.pending
-    font-weight: bold
-    font-size: 20px
-    text-align: center
+// .name
+//     height: 33px
+//     position: relative
+//     top: 1px
+//     font-size: 30px
+//     font-family: 'Song Myung', serifc;
+//     text-align: center
+//     box-shadow: 0px 2px 10px 0px #888888
+//     @media screen and (min-width: 750px)
+//         width: 500px
+//         margin: auto
+//         box-shadow: 0px 0px 0px 0px #888888
+.image
+    height: 45px
     display: inline-block
-    margin-top: 200px
-    height: 80px
-    width: 200px
-    border-radius: 30px
-    box-shadow: 0px 7px 40px 1px #888888
-    background-color: #ffcc80
-    transition: 1000ms
-    @media screen and (max-height: 450px)
-        margin-top: 20px
-.pending::after
-    content: "Say Something!"
+    width: 45px
     position: relative
-    top: 25px
-    font-family: 'Bree Serif', serif
-.right-bubble
-    background: #FFE06D
-    left: 219px
-    border-radius: 5px 30px 0px 30px
-    @media screen and (max-width: 500px)
-        left: 140px
-.dark
-    background-color: #ddd
-    border-radius: 35px 5px 30px 0px
-    left: 5px
-.friend
-    text-align: center
-    font-size: x-large
-    font-weight: bold
-    font-family: sans-serif
-.friend::after
-    content: "."
-.time-right
-    position: absolute
-    right: 275px
-    bottom: 10px
-    color: #BDBDCF
-    font-size: 10px
-    width: 40px
-    @media screen and (max-width: 500px)
-        right: 250px
-.time-left
-    position: absolute
-    left: 275px
-    bottom: 10px
-    color: #BDBDCF
-    font-size: 10px
-    width: 40px
-    @media screen and (max-width: 500px)
-        left: 250px
-.name
-    height: 33px
-    position: relative
-    top: 1px
-    // display: inline-block
-    // width: 150px
-    font-size: 30px
-    font-family: 'Song Myung', serifc;
-    text-align: center
-    box-shadow: 0px 2px 10px 0px #888888
-    @media screen and (min-width: 750px)
-        width: 500px
-        margin: auto
-        box-shadow: 0px 0px 0px 0px #888888
+    right: 75px
+    border-radius: 25px
+    background: tomato
+    >img
+        height: 45px
+        display: inline-block
+        width: 45px
+        border-radius: 25px
         
 // .name::before
 //     content: ""

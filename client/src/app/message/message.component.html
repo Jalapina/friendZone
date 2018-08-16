@@ -1,18 +1,18 @@
 <app-header></app-header>
 <div class="container">
-    <div class="name">
-        {{reciever}}
-    </div>
+    
     <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
-        
-        <ul *ngFor="let message of chat" >
+    
+        <ul class="bubble-container" *ngFor="let message of chat" >
             <li class="speech-bubble right-bubble" *ngIf="user == message.sender" >
-                <p>{{message.message.text}}</p>
-                <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
+                <p class="name">{{sender}}</p>
+                <p class="message">{{message.message.text}}</p>
+                <!-- <span class="time-right">{{message.createdAt | date: format : timezone}}</span> -->
             </li>
-            <li class="speech-bubble dark" *ngIf="user != message.sender">
-                <p>{{message.message.text}}</p>
-                <span class="time-left">{{message.createdAt | date: format : timezone}}</span>
+            <li class="speech-bubble left-bubble" *ngIf="user != message.sender">
+                <p class="name">{{reciever}}</p>                    
+                <p class="message">{{message.message.text}}</p>
+                <!-- <span class="time-left">{{message.createdAt | date: format : timezone}}</span> -->
             </li>
         </ul>
         
@@ -22,8 +22,6 @@
     
 </div>
 <form class="message-form" (submit)="sendMessage()">
-    
         <textarea class="message message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
         <input type="submit" class="message-button" value="Send">
-    
 </form>
