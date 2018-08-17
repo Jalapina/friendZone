@@ -1,87 +1,96 @@
-div.main
+.main
     text-align: center
-    // width: 800px
     margin: auto
     height: 580px
     position: relative
-    background-color: tomato
-    div.card
-        border: 1px solid black
-        height: 580px
+    @media screen and (min-height: 800px)
+        height: 665px
+       
+.card
+    border: 1px solid black
+    height: 580px
+    width: 350px
+    margin: auto
+    position: absolute
+    background-color: #fff
+    right: 0
+    top: 10px
+    bottom: 0
+    left: 0
+    box-shadow: 0px 7px 40px 1px #888888
+    @media screen and (width: 320px)
+        width: 300px
+        bottom: 70px
+        top: 0px;
+        height:         
+.profile-image
+    height: 250px
+    width: 100%
+    background-color: #b2dfdb
+    img
         width: 350px
-        margin: auto
-        position: absolute
-        right: 0
-        top: 0
-        bottom: 0
-        left: 0
-    div.profile-image
-      
-        height: 300px
-        width: 100%
-    div.profile-bio
-        height: 270px
-        // width: 370px
-        // margin-left: 5px
+        height: 250px
+.profile-bio
+    // height: 270px
+    // width: 370px
+    // margin-left: 5px
         
-        div.profile-name
-            font-size: 15px
-            height: 50px
-            >p
-                font-size: 25px
-                cursor: pointer
-                font-family: Arial
-                position: absolute
-                text-transform: uppercase
-                margin: 10px 0px 0px 5px
-            >i  
-                cursor: pointer
-                float: right
-                padding-top: 12px
+.user-name
+    height: 40px
+    box-shadow: 0px 1px 19px -7px
+    // background-color: tomato
+    .name
+        float: left
+        font-size: 25px
+        cursor: pointer
+        font-family: 'Song Myung', serifc
+        text-transform: uppercase
+        position: relative
+        top: 3px
+        left: 10px
+.icon
+    cursor: pointer
+    float: right
+    position: relative
+    top: 5px
+    font-size: 30px
+.card-hide
+    height: 0px
+    position: absolute
+    width: 350px
+    bottom: 0
+    background-color: #ffffff
+    overflow: hidden
+    transition: all 800ms
+    border-bottom: 1px solid black
+    @media screen and (width: 320px)
+        width: 300px
+        
+    >p
+        text-align: left
+        width: 90%
+        margin: auto
+.blue
+    background-color: darkgray
+    height: 60px
+    width: 330px
+    margin: auto
+    text-align: left
 
-    div.card-hide
-        height: 0px
-        position: absolute
-        width: 350px
-        bottom: 0
-        background-color: #ffffff
-        overflow: hidden
-        transition: all 800ms
-        border-bottom: 1px solid black
-        >p
-            text-align: left
-            width: 90%
-            margin: auto
-        .label
-            font-size: 15px
-            height: 50px
-            width: 90%
-            margin: auto
-            >p
-                font-size: 25px
-                cursor: pointer
-                font-family: Arial
-                position: absolute
-                text-transform: uppercase
-                margin: 10px 0px 0px 0px
-            >i  
-                cursor: pointer
-                float: right
-                padding-top: 12px
-
-    div.card-show
-        height: 570px
+.card-show
+    height: 579px
+    
 
 .options
-    // margin-top: 10px
     position: relative
-    width: 350px
+    width: 370px
     margin: auto
     right: 0
     left: 0
-    top: 5px
-    background-color: green
+    top: 10px
     text-align: center
+    @media screen and (width: 320px)
+        width: 310px
     .option
         background-color: #cfd8dc
         height: 45px

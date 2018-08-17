@@ -1,29 +1,29 @@
 <app-header></app-header>
 
-<div class="main" >   
+<div class="main" swing-stack #myswing1  (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" >   
   
-    <div class="card" *ngFor="let user of cards" >
+    <div class="card" #mycards1 swing-card *ngFor="let user of cards" >
       
         <div class="profile-image">
-            <img class="activator" height="300px" width="100%" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
+            <img src="http://materializecss.com/images/office.jpg" alt="Profile Picture">
         </div>
 
         <div class="profile-bio">
             
-            <div (click)="isClassVisible = !isClassVisible" class="profile-name">
-                <!-- <p>{{ user.first_name }}</p> -->
-                <!-- <i class="material-icons">more_vert</i> -->
+            <div (click)="isClassVisible = !isClassVisible" class="user-name">
+                <p class="name">{{ user.first_name }}</p>
+                <i class="icon material-icons">more_vert</i>
             </div>
-            <p>{{ user.blur }}</p>
-            <p>{{ user.bio }}</p>
+            <p class="blur">{{ user.blur }}</p>
+            <p class="bio">{{ user.bio }}</p>
 
         </div>
 
         <div [ngClass]="{'card-show': isClassVisible }" class="card-hide" ngDefaultControl>
             
-            <div (click)="isClassVisible = false;" class="label">
-                <p>{{ user.first_name }}</p>
-                <i class="material-icons">close</i>
+            <div (click)="isClassVisible = false;" class="user-name">
+                <p class="name">{{ user.first_name }}</p>
+                <i class="icon material-icons">close</i>
             </div>
         
             <p>
