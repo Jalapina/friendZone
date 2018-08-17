@@ -1,8 +1,8 @@
 <app-header></app-header>
 
-<div class="main" swing-stack #myswing1  (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)">  
+<div class="main" >   
   
-    <div class="card" #mycards1 swing-card *ngFor="let user of cards" >
+    <div class="card" *ngFor="let user of cards" >
       
         <div class="profile-image">
             <img class="activator" height="300px" width="100%" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
@@ -11,10 +11,11 @@
         <div class="profile-bio">
             
             <div (click)="isClassVisible = !isClassVisible" class="profile-name">
-                <p>{{ user.first_name }}</p>
-                <i class="material-icons">more_vert</i>
+                <!-- <p>{{ user.first_name }}</p> -->
+                <!-- <i class="material-icons">more_vert</i> -->
             </div>
             <p>{{ user.blur }}</p>
+            <p>{{ user.bio }}</p>
 
         </div>
 
@@ -33,14 +34,12 @@
 
     </div>
 
-
-  
+    
 
 </div>
-
 <div class="options">
-
-    <button type="submit" class="option" (click)="voteUp(false)" >Pass</button>
-    <button type="submit" class="option" (click)="voteUp(true)">Friendzone</button>
-       
+        
+                <button type="submit" class="option" (click)="voteUp(false)" >Pass</button>
+                <button type="submit" class="option" (click)="voteUp(true)">Friendzone</button>
+               
 </div>

@@ -1,23 +1,30 @@
-.main
-    width: 400px
+div.main
+    text-align: center
+    // width: 800px
     margin: auto
-    height: 576px
-    padding-top: 20px
+    height: 580px
     position: relative
-    .card
+    background-color: tomato
+    div.card
         border: 1px solid black
-        width: 380px
+        height: 580px
+        width: 350px
+        margin: auto
         position: absolute
-        background: #fafafa
-    .profile-image
-        width: 100%
+        right: 0
+        top: 0
+        bottom: 0
+        left: 0
+    div.profile-image
+      
         height: 300px
-    .profile-bio
+        width: 100%
+    div.profile-bio
         height: 270px
-        width: 370px
-        margin-left: 5px
+        // width: 370px
+        // margin-left: 5px
         
-        .profile-name
+        div.profile-name
             font-size: 15px
             height: 50px
             >p
@@ -32,15 +39,15 @@
                 float: right
                 padding-top: 12px
 
-    .card-hide
+    div.card-hide
         height: 0px
         position: absolute
-        width: 380px
+        width: 350px
         bottom: 0
         background-color: #ffffff
         overflow: hidden
-        transition: all 1s
-        
+        transition: all 800ms
+        border-bottom: 1px solid black
         >p
             text-align: left
             width: 90%
@@ -62,11 +69,19 @@
                 float: right
                 padding-top: 12px
 
-    .card-show
-        height: 575px
+    div.card-show
+        height: 570px
 
 .options
-    margin-top: 10px
+    // margin-top: 10px
+    position: relative
+    width: 350px
+    margin: auto
+    right: 0
+    left: 0
+    top: 5px
+    background-color: green
+    text-align: center
     .option
         background-color: #cfd8dc
         height: 45px
