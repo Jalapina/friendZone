@@ -1,9 +1,11 @@
 <nav class="waves-effect">
-  <h1 [routerLink]="['/home']" class="brand-logo left">Friend<i>Zone</i></h1>  
-  <div class="icons">
+  <p [routerLink]="['/home']" class="brand-logo left">Friend<i>Zone</i></p>  
 
-    <i class="material-icons" id="messageIcon" [routerLink]="['/friends']">message</i>
-    <i class="material-icons" id="accountIcon" [routerLink]="['/profile']">account_box</i>
+  <div class="icons">
+    
+    <img class="icon" [routerLink]="['/friends']" src="../../assets/icons/message.svg" alt="">
+    <img class="icon" [routerLink]="['/profile']" src="../../assets/icons/profile.svg" alt="">
     
   </div>
+
 </nav> 

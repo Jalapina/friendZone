@@ -14,8 +14,8 @@
                 <p class="name">{{ user.first_name }}</p>
                 <i class="icon material-icons">more_vert</i>
             </div>
-            <p class="blur">{{ user.blur }}</p>
-            <p class="bio">{{ user.bio }}</p>
+            <p class="user-info blur">{{ user.blur }}</p>
+            <p class="user-info">{{ user.bio }}</p>
 
         </div>
 
@@ -24,11 +24,12 @@
             <div (click)="isClassVisible = false;" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
                 <i class="icon material-icons">close</i>
+
             </div>
         
-            <p>
-                {{ bio }}
-            </p>
+            <div class="chips" *ngFor="let hobbie of user.hobbies">
+                {{ hobbie }}
+            </div>
 
         </div>
 
