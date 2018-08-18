@@ -12,26 +12,13 @@
             
             <div (click)="isClassVisible = !isClassVisible" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
-                <i class="icon material-icons">more_vert</i>
             </div>
             <p class="user-info blur">{{ user.blur }}</p>
             <p class="user-info">{{ user.bio }}</p>
 
         </div>
 
-        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide" ngDefaultControl>
-            
-            <div (click)="isClassVisible = false;" class="user-name">
-                <p class="name">{{ user.first_name }}</p>
-                <i class="icon material-icons">close</i>
-
-            </div>
-        
-            <div class="chips" *ngFor="let hobbie of user.hobbies">
-                {{ hobbie }}
-            </div>
-
-        </div>
+       
 
     </div>
 
@@ -40,7 +27,7 @@
 </div>
 <div class="options">
         
-                <button type="submit" class="option" (click)="voteUp(false)" >Pass</button>
-                <button type="submit" class="option" (click)="voteUp(true)">Friendzone</button>
+                <button type="submit" class="pass option" (click)="voteUp(false)" >Pass</button>
+                <button type="submit" class="friendzone option" (click)="voteUp(true)">Friendzone</button>
                
 </div>

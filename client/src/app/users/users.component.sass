@@ -21,8 +21,7 @@
     @media screen and (width: 320px)
         width: 300px
         bottom: 70px
-        top: 0px;
-        height:         
+
 .profile-image
     height: 250px
     width: 100%
@@ -30,10 +29,9 @@
     img
         width: 350px
         height: 250px
-.profile-bio
-    // height: 270px
-    // width: 370px
-    // margin-left: 5px
+        @media screen and (width: 320px)
+            width: 300px
+
 .user-info
     height: 90px   
     padding: 5px
@@ -92,7 +90,6 @@
 .card-show
     height: 579px
     
-
 .options
     position: relative
     width: 370px
@@ -103,9 +100,14 @@
     text-align: center
     @media screen and (width: 320px)
         width: 310px
-    .option
-        background-color: #cfd8dc
-        height: 45px
-        width: 47%
-        &:hover
-            background-color: #bdbdbd 
+.option
+    background-color: #cfd8dc
+    height: 45px
+    width: 47%
+    border-radius: 20px
+    border: 0
+    
+.pass
+    background: #ef5350
+.friendzone
+    background: #66bb6a
