@@ -42,19 +42,22 @@ export class UsersComponent implements OnInit {
   }
 
   voteUp(like: boolean) {
+
     let removedCard = this.cards.pop();
-    // this.addNewCards(1);
+
     if (like) {
       console.log("like")
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard)
-      console.log(this.recentCard);
+      console.log(like,this.recentCard);
+      
     } else {
       console.log("No")      
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard)  
-      console.log(this.recentCard);
+      console.log(like,this.recentCard);
     }
+
   }
 
   create(like:any,id){
@@ -62,7 +65,6 @@ export class UsersComponent implements OnInit {
     this.friend.userId = this.user
     this.friend.id = id
 
-    console.log("id",this.friend)
     this._friendshipService.create(this.friend)
     
   }

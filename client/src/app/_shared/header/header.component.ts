@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.authenticateService.isLoggedIn()
-    console.log(this.loggedIn,"---")
   }
 
 }

@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
-const user = require('./userSchema');
+const User = require('./userSchema');
+const Schema = mongoose.Schema;
 
 const friendShipSchema = mongoose.Schema({
+    // status:{
+    //     type:Boolean
+    // },
     // friend:[ {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'User',
