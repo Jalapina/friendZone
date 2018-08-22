@@ -11,7 +11,6 @@ TagInputModule.withDefaults({
   tagInput: {
       placeholder: 'Add a Hobby',
       secondaryPlaceholder: 'Add a Hobby',
-      
       maxItems: 10,
   }
 });
@@ -63,7 +62,12 @@ export class ProfileComponent implements OnInit {
 
   selectedActivity(activity:String){
     this.activity = activity
+  }
 
+  checkActivty(){
+    if(this.activity){
+      this.placeHolder = false
+    }
   }
 
   getUser(){
@@ -76,7 +80,6 @@ export class ProfileComponent implements OnInit {
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
       if(data['user'].activity){
-        console.log(data['user'].activity,"activity")
         this.placeHolder = false
         this.activity = data['user'].activity
       }
