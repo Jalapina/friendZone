@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  editUser(){
+  private editUser(){
     this.userInfo._id = this.user
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items

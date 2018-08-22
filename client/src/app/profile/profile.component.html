@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <div class="card-content">
+
   <div class="card-image">
     <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
   </div>
@@ -23,7 +24,7 @@
       <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="placeHolder">Activities</div>
       <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="!placeHolder">{{activity}}</div>
       <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">
-        <button class="options" *ngFor="let category of categories" value="{{category.id}}" (click)="classVisible = false; placeHolder = !placeHolder; selectedActivity(category.name)"  >{{category.name}}</button>
+        <button class="options" *ngFor="let category of categories" value="{{category.id}}" (click)="classVisible = false; placeHolder = !placeHolder; selectedActivity(category.name)">{{category.name}}</button>
       </div>
     </div>
     
