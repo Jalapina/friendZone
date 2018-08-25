@@ -2,106 +2,101 @@ let mongoose = require('mongoose');
 let User = mongoose.model('User');
 let FriendShip = mongoose.model('FriendShip');
 var jwt = require('jsonwebtoken');
-var secret = 'asdfasdf'
+let bcrypt = require('bcrypt');
+const saltRounds = 10;
+var secret = 'asdfasdf';
+let check = require('validator').check
 
 module.exports.authenticate = function(request,response){
 
     const email = request.body.email
+    const password = request.body.password
+
+    if(!password){
+        response.json({
+            message:"No password provided."
+        })
+    } 
     
-    User.findOne({email:email}).select('first_name _id password').exec(function(err,user){
+    User.findOne({email:email}).select('first_name password').exec(function(err,user){
         
         if(err){
             console.log(err)
         }else if(!user){
             response.status(404).json({
-                message:"User does not exist"
-            })
-        }else{
-            if(!request.body.password){
-                response.json({
-                    message:"No password provided."
-                })
-            }else{
-                // let validPassword = user.validPassword(request.body.password)
-                // if(!validPassword){
-                //     response.json({
-                //         success:false,
-                //         message:"Could not authenticate password"
-                //     })
-                // }else{
+                message:"Invalid Email or Password"
+            });
+        }else{ 
+            
+            const hash = user.password
+
+            bcrypt.compare(password, hash, function(err, res) {
+                if(err) console.log(err);
+                console.log(res)
+                if(res === false){
+                    response.status(404).json({
+                        message:"Invalid Email or Password"
+                    });
+                }else{
                     const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });
                     response.json({
                         message:"User is Authenicated!",
                         token: token,
-                    })
-                // }
-            }
+                    });
+                }
+            });
+            
         }
-
-        // else if(user && user.validPassword(request.body.password)){
-
-        //     const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });            
-
-        //     response.json({
-        //         message:"User is Authenicated!",
-        //         token: token,
-        //     })
-        // }
-
-        // else if(user && !user.validPassword(request.body.password)){
-        //     console.log('Wrong password')
-        //     response.status(403).json({
-        //         message: "Invalid Email or Password"
-        //     })
-        // }
-
-        // else{
-        //     response.status(403).json({
-        //         message: "User does not exist"
-        //     })
-        // }
 
     })
 }
 
 module.exports.create = function(request,response){
-    
-    const first_name = request.body.first_name
+
+    const name = request.body.first_name
     const email = request.body.email
     const password = request.body.password
-    const confirm_password = request.body.confirm_password
-    
 
-    if(!first_name){
-        return response.status(401).json({
-            message:"No First Name"
-        })
-    }
-    if(!email){
-        return response.status(401).json({
-            message: "No Email"
-        })
-    }
-    if(!password || !confirm_password){
-        return response.status(401).json({
-            message: "Passwords do not match!"
+    if(!name && !email && !password){
+        return response.status(422).json({
+            error: "Yo everything is empty"
         })
     }
 
-    let user = new User({
-        first_name: request.body.first_name,
-        email: request.body.email,
-        password: request.body.password,
-    });
+    bcrypt.hash(password, saltRounds, function(err, hash) {
 
-    if( user.password == request.body.confirm_password){
+        if(err) console.log();
+
+        if(!name){
+            return response.status(422).send({
+                error:"Name must be filled"
+            })
+        }
+        else if(!password){
+            return response.status(422).json({
+                error:"Password must be filled"
+            })
+        }else if(!email){
+            return response.status(422).json({
+                error:"Email must be filled"
+            })
+        }
+
+        let user = new User({
+            first_name: name,
+            email: email,
+            password: hash,
+        });
 
         user.save(function(err,newUser){           
             
             if(err){
-                console.log("Error savig user \n",err)
+                    console.log(err)                
+                    response.status(404).json({
+                    message: err
+                })
             }
-
+    
             else{
                 
                 const token = jwt.sign(
@@ -113,7 +108,7 @@ module.exports.create = function(request,response){
                     { 
                         expiresIn: '24h' 
                     }); 
-
+    
                 response.json({
                     
                         message: "User is Authenicated!",
@@ -122,14 +117,8 @@ module.exports.create = function(request,response){
                 });
             }
         });    
-    }
 
-    else{
-        response.status(401).json({
-            message:"Passwords do not match!"
-        });
-    }
-
+      });
 }
 
 module.exports.users = function(request,response){
@@ -213,11 +202,12 @@ module.exports.edit = function(request,response){
                 error:err
             })
         }else{
+
             user.blur = request.body.blur
             user.bio = request.body.bio
             user.activity = request.body.activity
             user.hobbies = request.body.hobbies
-            console.log(user)
+            
             user.save(function(err,editedUser){
                 if(err){
                     console.log(err);

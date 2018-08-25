@@ -1,17 +1,20 @@
 <app-landing-header></app-landing-header>
 <div class="register">
+  
   <div class="form">
+
     <form #myForm="ngForm" (submit)="create()">
         
         <input type="text" class="form-group validate" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
         <input type="email" class="form-group" placeholder="Email" name="email" [(ngModel)]="user.email">
-        <input type="password" class="form-group" placeholder="Password" name="password" [(ngModel)]="user.password">
-        <input type="password" class="form-group" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
-        <input type="submit" class="form-group form-button" value="Register">
-
+        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="compare()" placeholder="Password" name="password" [(ngModel)]="user.password">
+        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="compare()" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
+        <input type="submit" [ngClass]="{'form-active': formActive }" class="form-group form-button" value="Register">
     </form>
       
     <button [routerLink]="['/login']" class="form-group button-link">Login</button>
-      
+    <p class="error-message" *ngIf="message">{{message}}</p>
+    <p *ngIf="isClassVisible === false">Passwords do not match</p>
+    
   </div>
 </div>
