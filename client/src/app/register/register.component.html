@@ -5,10 +5,10 @@
 
     <form #myForm="ngForm" (submit)="create()">
         
-        <input type="text" class="form-group validate" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
-        <input type="email" class="form-group" placeholder="Email" name="email" [(ngModel)]="user.email">
-        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="compare()" placeholder="Password" name="password" [(ngModel)]="user.password">
-        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="compare()" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
+        <input type="text" class="form-group validate" (input)="validate()" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
+        <input type="email" class="form-group" placeholder="Email" (input)="validate()" name="email" [(ngModel)]="user.email">
+        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate()" placeholder="Password" name="password" [(ngModel)]="user.password">
+        <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate()" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
         <input type="submit" [ngClass]="{'form-active': formActive }" class="form-group form-button" value="Register">
     </form>
       

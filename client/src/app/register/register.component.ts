@@ -16,13 +16,18 @@ export class RegisterComponent implements OnInit {
   formActive: Boolean = false
   ngOnInit() {
   }
-  compare(){
-    console.log(this.user)
-    if(this.user.password === this.user.confirm_password){
+
+  validate(){
+    if(this.user.first_name && this.user.email && this.user.password && this.user.confirm_password){
+      this.formActive = true
+      if(this.user.password === this.user.confirm_password){
       this.isClassVisible = true
-    }else{
+      }else{
       this.isClassVisible = false
-    }
+      }
+    }else{
+      this.formActive = false
+    }    
   }
 
   validation(){
@@ -37,7 +42,6 @@ export class RegisterComponent implements OnInit {
 
   create(){
 
-    if(this.user.first_name && this.user.email && this.user.password && this.user.confirm_password){
       this.formActive = true
       this._userService.create(this.user)
       .subscribe(
@@ -48,9 +52,6 @@ export class RegisterComponent implements OnInit {
           console.log(error.error)
         }
       );
-    }else{
-      this.formActive = false
     }
-  }
 
 }

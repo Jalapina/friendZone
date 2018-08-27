@@ -13,7 +13,7 @@ div.login
 
 .button-link
     background-color: #eeeeee 
-    text-transform: uppercase;
+    text-transform: uppercase
     transition-property: background-color color border-width
     transition-duration: 1s
     color: black
@@ -23,16 +23,23 @@ div.login
         border-width: 1px
 
 .form-button
-    background-color: #031424
-    text-transform: uppercase;
+    background-color: #eeeeee
+    text-transform: uppercase
     transition-property: background-color color border-width
     transition-duration: 1s
-    color: white
+    color: #fff
+    cursor: not-allowed
+    pointer-events: none
     
     &:hover
         background-color: #eeeeee 
         color: black
         border-width: 1px
+.form-active
+    pointer-events: auto
+    background-color: black
+    color: #fff
+    cursor: pointer
 
 .form-input
     padding-left: 10px

@@ -14,11 +14,18 @@ export class LoginComponent implements OnInit {
   
   user:any = {}
   message = ""
-
+  formActive:Boolean = false
+  
   ngOnInit() {
     
   }
-
+  validate(){
+    if(this.user.email && this.user.password){
+      this.formActive = true
+    }else{
+      this.formActive = false
+    }    
+  }
   authenticate(){
     this._userService.authenticate(this.user)
     .subscribe(
