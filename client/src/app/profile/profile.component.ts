@@ -91,10 +91,10 @@ export class ProfileComponent implements OnInit {
     this.userInfo._id = this.user
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items
-    console.log("Updating user",this.userInfo)
     this.userService.editUser(this.userInfo)
-    this.getUser()
-  
+    setTimeout(()=>{
+      this.getUser()
+    }, 3000);
   }
 
   logout(){
