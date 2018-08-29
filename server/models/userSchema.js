@@ -1,23 +1,48 @@
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 let validate = require('mongoose-validator'); // Import Mongoose Validator Plugin
-    
+
+let nameValidator = [
+    validate({
+      validator: 'isLength',
+      arguments: [2, 10],
+      message: 'Name should be between 2-10 characters'
+    }),
+    validate({
+        validator: 'matches',
+        arguments: /^[a-zA-Z\-]+$/i,
+        message: 'Name should contain characters only'
+      
+    })
+  ];
 
 let userSchema = mongoose.Schema({
+
     first_name:{
         type: String,
-        require: [true,"Name cannot be empty"],
-        minlength: 2,
+        trim: true,
+        lowercase: true,
+        require: [true, "Name cannot be empty"],
+        validate: nameValidator,
     },
     email:{
         type: String,
+        trim: true,
         required: true,
+        lowercase: true,        
         unique: true,
+        validate: {
+            validator: function(email){
+                return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+            },
+            message: "Email is invalid."
+        },
     },
     password:{
         type: String,
+        trim: true,        
         require: true,
-        minlength: 6,
+        minlength: [5,"Password Must Be Longer Than 5 Characters"],
     },
     blur:{
         type: String,
@@ -30,6 +55,7 @@ let userSchema = mongoose.Schema({
     activity:{
         type:String,
         default: '',
+        trim: true,        
     },
     active:{
         type: Boolean,
@@ -37,6 +63,7 @@ let userSchema = mongoose.Schema({
     },
     hobbies:[{
         type:String,
+        trim: true,        
     }],
 	friendList:[{
         userId:{

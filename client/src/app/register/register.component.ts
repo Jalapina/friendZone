@@ -10,13 +10,17 @@ import { Router } from '@angular/router'
 export class RegisterComponent implements OnInit {
 
   constructor(private _userService:UserService, private _router:Router) { }
+  
   isClassVisible:Boolean
   user:any = {}
   message = ""
   formActive: Boolean = false
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"; 
+  myform;
+
   ngOnInit() {
   }
-
+  
   validate(){
     if(this.user.first_name && this.user.email && this.user.password && this.user.confirm_password){
       this.formActive = true
@@ -30,12 +34,14 @@ export class RegisterComponent implements OnInit {
     }    
   }
 
-  validation(){
+  validation(){ 
+    console.log(this.user.password.length)
 
-    if(this.user.password === this.user.confirm_password){
+    if(this.user.password === this.user.confirm_password && this.user.password.length > 5 && this.user.password.length > 5){
       this.isClassVisible = true
     }else{
       this.isClassVisible = false
+      this.formActive = false
     }
     
   }
@@ -48,7 +54,7 @@ export class RegisterComponent implements OnInit {
         data =>{
           this._router.navigateByUrl('profile')
         },error=>{
-          this.message = error.error.error
+          this.message = error.error.message
           console.log(error.error)
         }
       );

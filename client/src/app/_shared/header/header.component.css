@@ -1,0 +1,41 @@
+nav {
+  background-color: #5d4037;
+  min-height: 70px;
+}
+
+nav > p {
+  height: 35px;
+  width: 140px;
+}
+
+nav .brand-logo {
+  color: white;
+  cursor: pointer;
+  font-family: 'Song Myung', serif;
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  left: 5px;
+  font-size: 25px;
+}
+
+nav .brand-logo:hover {
+  color: #e0e0e0;
+}
+
+nav .brand-logo > i {
+  color: #ffcc80;
+}
+
+nav .icons {
+  float: right;
+  text-align: center;
+  margin: 15px;
+  margin-right: 5px;
+}
+
+nav .icon {
+  cursor: pointer;
+  height: 35px;
+}
+/*# sourceMappingURL=header.component.css.map */

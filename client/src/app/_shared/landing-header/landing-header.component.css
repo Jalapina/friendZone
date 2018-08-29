@@ -1,0 +1,17 @@
+nav {
+  min-height: 80px;
+  background-color: #30415D;
+  color: #fff;
+  text-align: center;
+}
+
+nav .brand-logo {
+  padding: 20px;
+  font-size: 30px;
+  font-family: 'Song Myung', serif;
+}
+
+nav .brand-logo > i {
+  color: #ffcc80;
+}
+/*# sourceMappingURL=landing-header.component.css.map */

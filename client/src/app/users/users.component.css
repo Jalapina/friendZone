@@ -1,47 +1,179 @@
-.user-image {
-  height: 350px;
-  margin: 5px;
-}
-
-.profile {
-  padding: 5px;
+.main {
   text-align: center;
+  margin: auto;
+  height: 580px;
+  position: relative;
 }
 
-.user-bio {
-  height: 200px;
-  overflow: scroll;
+@media screen and (min-height: 800px) {
+  .main {
+    height: 665px;
+  }
 }
 
 .card {
-  margin: 0;
-  top: 10px;
-  left: 10px;
-  width: 95%;
-  height: 550px;
+  border: 1px solid black;
+  height: 580px;
+  width: 350px;
+  margin: auto;
+  position: absolute;
+  background-color: #fff;
+  right: 0;
+  top: 20px;
+  bottom: 0;
+  left: 0;
+  -webkit-box-shadow: 0px 0px 15px 0px #888888;
+          box-shadow: 0px 0px 15px 0px #888888;
 }
 
-.card-image {
-  height: 52%;
+@media screen and (width: 320px) {
+  .card {
+    width: 300px;
+    bottom: 70px;
+  }
+}
+
+.profile-image {
+  height: 250px;
+  width: 100%;
+  background-color: #b2dfdb;
+}
+
+.profile-image img {
+  width: 350px;
+  height: 250px;
+}
+
+@media screen and (width: 320px) {
+  .profile-image img {
+    width: 300px;
+  }
+}
+
+.user-info {
+  height: 90px;
+  padding: 5px;
+  text-align: left;
+}
+
+.chips {
+  background-color: sandybrown;
+  width: 60px;
+  padding: 5px;
+  display: inline-block;
+  position: relative;
+  margin: 5px;
+  top: 5px;
+  border-radius: 15px;
+}
+
+.user-name {
+  height: 40px;
+  -webkit-box-shadow: 0px 1px 19px -7px;
+          box-shadow: 0px 1px 19px -7px;
+}
+
+.user-name .name {
+  float: left;
+  font-size: 25px;
+  cursor: pointer;
+  font-family: 'Song Myung', serifc;
+  text-transform: uppercase;
+  position: relative;
+  top: 3px;
+  left: 10px;
+}
+
+.user-name .icon {
+  float: right;
+  padding: 2px;
+}
+
+.icon {
+  cursor: pointer;
+  float: right;
+  position: relative;
+  top: 5px;
+  font-size: 30px;
+}
+
+.card-hide {
+  height: 0px;
+  position: absolute;
+  width: 350px;
+  bottom: 0;
+  background-color: #ffffff;
+  overflow: hidden;
+  -webkit-transition: all 800ms;
+  transition: all 800ms;
+  border-bottom: 1px solid black;
+}
+
+@media screen and (width: 320px) {
+  .card-hide {
+    width: 300px;
+  }
+}
+
+.card-hide > p {
+  text-align: left;
+  width: 90%;
+  margin: auto;
+}
+
+.blue {
+  background-color: darkgray;
+  height: 60px;
+  width: 330px;
+  margin: auto;
+  text-align: left;
+}
+
+.card-show {
+  height: 285px;
 }
 
 .options {
-  width: 99%;
-  bottom: 7px;
-  left: 2px;
-  position: absolute;
+  position: relative;
+  width: 370px;
+  margin: auto;
+  right: 0;
+  left: 0;
+  top: 20px;
   text-align: center;
 }
 
-.options .option {
-  background-color: #cfd8dc;
-  border: 0px;
-  width: 47%;
-  height: 45px;
+@media screen and (width: 320px) {
+  .options {
+    width: 310px;
+  }
 }
 
-.options .option:hover {
-  background-color: #90a4ae;
-  color: white;
+.option {
+  -webkit-box-shadow: 0px 5px 15px 2px #888888;
+          box-shadow: 0px 5px 15px 2px #888888;
+  height: 45px;
+  width: 47%;
+  border-radius: 20px;
+  border: 0;
+  text-transform: uppercase;
+  color: #fff;
 }
-/*# sourceMappingURL=profile.component.css.map */
+
+.pass {
+  background: #ef5350;
+}
+
+.friendzone {
+  background: #66bb6a;
+}
+
+.hobbie {
+  background-color: #b2ebf2;
+  margin: 5px;
+  display: inline-block;
+  padding: 7px;
+  border-radius: 15px;
+  float: left;
+}
+/*# sourceMappingURL=users.component.css.map */

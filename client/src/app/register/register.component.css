@@ -14,11 +14,15 @@ div.register {
 }
 
 .form-button {
-  background-color: #031424;
+  background-color: #eeeeee;
   text-transform: uppercase;
+  -webkit-transition-property: background-color color border-width;
   transition-property: background-color color border-width;
-  transition-duration: 1s;
-  color: white;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  color: #fff;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .form-button:hover {
@@ -26,11 +30,25 @@ div.register {
   color: black;
 }
 
+.form-active {
+  pointer-events: auto;
+  background-color: black;
+  color: #fff;
+  cursor: pointer;
+}
+
+.password-compare {
+  background-color: #c8e6c9;
+  color: black;
+}
+
 .button-link {
   background-color: #eeeeee;
   text-transform: uppercase;
+  -webkit-transition-property: background-color color border-width;
   transition-property: background-color color border-width;
-  transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
   color: black;
 }
 
@@ -38,5 +56,12 @@ div.register {
   background-color: #031424;
   color: white;
   border-width: 1px;
+}
+
+.error-message {
+  color: red;
+  width: 200px;
+  margin: 4px auto;
+  padding: 5px;
 }
 /*# sourceMappingURL=register.component.css.map */

@@ -60,12 +60,21 @@ module.exports.create = function(request,response){
     if(!name && !email && !password){
         return response.status(422).json({
             error: "Yo everything is empty"
-        })
+        });
     }
-
+    // User.findOne({email:email},function(err,existingUser){
+    //     if(err){
+    //         // console.log(err);
+    //     }
+    //     if(existingUser !== null){
+    //         return response.status(404).json({
+    //             message: "Email already exist"
+    //         })
+    //     }
+    // })
     bcrypt.hash(password, saltRounds, function(err, hash) {
-
-        if(err) console.log();
+        
+        if(err) console.log(err);
 
         if(!name){
             return response.status(422).send({
@@ -88,17 +97,37 @@ module.exports.create = function(request,response){
             password: hash,
         });
 
-        user.save(function(err,newUser){           
-            
-            if(err){
-                    console.log(err)                
-                    response.status(404).json({
-                    message: err
-                })
-            }
-    
-            else{
-                
+        user.save(function(error,newUser){ 
+
+            if(error){
+                if(error.errors !== undefined){
+                    if(error.errors.email){
+                        return response.status(422).json({
+                            message:error.errors.email.properties.message
+                        })
+                    }else if(error.errors.first_name){
+                        return response.status(422).json({
+                            message:error.errors.first_name.properties.message
+                        })
+                    }else if(error.errors.password){
+                        return response.status(422).json({
+                            message:error.errors.password.properties.message
+                        })
+                    }else {
+                        return response.status(422).json({
+                            message: error
+                        })
+                    }
+                }else if(error){
+                    if (error.code == 11000) {
+                        return response.status(404).json({
+                            message: "Email already exist"
+                        })
+                    } else {
+                        response.json({ success: false, message: err }); // Display any other error
+                    }
+                }
+            }else{
                 const token = jwt.sign(
                     { 
                         id: newUser._id, 
@@ -108,17 +137,13 @@ module.exports.create = function(request,response){
                     { 
                         expiresIn: '24h' 
                     }); 
-    
                 response.json({
-                    
-                        message: "User is Authenicated!",
-                        token: token,
-                    
+                    message: "User is Authenicated!",
+                    token: token,
                 });
             }
         });    
-
-      });
+    });
 }
 
 module.exports.users = function(request,response){
