@@ -24,7 +24,7 @@ module.exports.authenticate = function(request,response){
             console.log(err)
         }else if(!user){
             response.status(404).json({
-                message:"Invalid Email or Password"
+                message:"Email does not exist"
             });
         }else{ 
             
@@ -62,16 +62,7 @@ module.exports.create = function(request,response){
             error: "Yo everything is empty"
         });
     }
-    // User.findOne({email:email},function(err,existingUser){
-    //     if(err){
-    //         // console.log(err);
-    //     }
-    //     if(existingUser !== null){
-    //         return response.status(404).json({
-    //             message: "Email already exist"
-    //         })
-    //     }
-    // })
+ 
     bcrypt.hash(password, saltRounds, function(err, hash) {
         
         if(err) console.log(err);
@@ -187,7 +178,7 @@ module.exports.authToken = function(req, res, next){
         console.log("decoded",decoded)
       if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       
-      User.findById(decoded.id, { password: 0 },function (err, user) {
+      User.findById(decoded.id).select('first_name').exec(function(err, user) {
           console.log(user)
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
@@ -204,9 +195,8 @@ module.exports.tokenDecode = function(user, req, res,next) {
 };
 
 module.exports.user = function(request,response){
-    // console.log(request.params)
 
-    User.findById(request.params.id, function(err,user){
+    User.findById(request.params.id,{password:0,friendList:0,email:0},function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
 
         console.log(user)
@@ -233,7 +223,7 @@ module.exports.edit = function(request,response){
             user.activity = request.body.activity
             user.hobbies = request.body.hobbies
             
-            user.save(function(err,editedUser){
+            user.save(function(err){
                 if(err){
                     console.log(err);
                     response.status(404).json({

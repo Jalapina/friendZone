@@ -24,7 +24,6 @@ export class AuthenticateService {
       return this._http.get('/api/me')
       .subscribe(data => {
         localStorage.setItem('user',JSON.stringify(data['_id']))
-        console.log('res',data)
       }
       )
     }

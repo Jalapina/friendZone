@@ -42,21 +42,24 @@ export class ProfileComponent implements OnInit {
   bio
   blur
   activity
-  user = JSON.parse(localStorage.getItem('user'))
+  userId
 
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
       
   }
 
   ngOnInit() {
-    this.getUser()
+    this.setUserId();
+    setTimeout(()=>{
+      this.getUser()
+    }, 300)
   }
 
   userActive(){
     this.userIsActive = !this.userIsActive
     console.log(this.userIsActive)
     this.userActivation.active = this.userIsActive
-    this.userActivation.user = this.user
+    this.userActivation.user = this.userId
     this.userService.userActivate(this.userActivation)
   }
 
@@ -70,9 +73,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  setUserId(){
+    this.authenticateService.getUserInfo()
+  }
+
   getUser(){
-    const userId = this.user
-    this.userService.getUser(userId).subscribe( data =>{ 
+    this.userId = JSON.parse(localStorage.getItem('user'))
+    this.userService.getUser(this.userId).subscribe( data =>{ 
       console.log(data,"data")
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
@@ -83,18 +90,18 @@ export class ProfileComponent implements OnInit {
         this.placeHolder = false
         this.activity = data['user'].activity
       }
-       
     })
   }
 
   private editUser(){
-    this.userInfo._id = this.user
+    this.userInfo._id = this.userId
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items
+    console.log(this.userInfo,"user")
     this.userService.editUser(this.userInfo)
     setTimeout(()=>{
       this.getUser()
-    }, 3000);
+    }, 1000)
   }
 
   logout(){
