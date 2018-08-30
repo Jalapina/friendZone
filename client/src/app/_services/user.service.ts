@@ -36,8 +36,9 @@ export class UserService {
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
 
-  getUsers(id){
-    return this._http.get('/api/users/users/'+id)
+  getUsers(data){
+    console.log(data)
+    return this._http.get('/api/users/users/'+data.user+'/'+data.term)
   }
 
   editUser(userInfo){

@@ -9,7 +9,7 @@ module.exports = function(app){
     app.post('/api/users/create', users.create)
     app.put('/api/users/edit',users.edit)
     app.put('/api/users/useractivation',users.userActivation)
-    app.get('/api/users/users/:id', users.users)
+    app.get('/api/users/users/:id/:term', users.users)
     app.get('/api/users/:id',users.user)
 
     //Token Authentication 

@@ -140,7 +140,7 @@ module.exports.create = function(request,response){
 module.exports.users = function(request,response){
     
     let friendList = []
-
+    
     FriendShip.find({"follower":request.params.id}).select("followee").exec(function(err,friends){
 
         friends.forEach(element => {
@@ -150,8 +150,7 @@ module.exports.users = function(request,response){
             response.json({error:err})
         }else{
             friendList.push(request.params.id)
-            console.log(friendList)
-            User.find({'_id':{ $nin:friendList},'active':true}).select('first_name blur bio hobbies').exec(function(err,users){
+            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio hobbies').exec(function(err,users){
 
                 if(err){
                     console.log(err)

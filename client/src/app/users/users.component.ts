@@ -1,8 +1,10 @@
 import { Component, ViewChild, ViewChildren, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
 import { FriendshipService } from '../_services/friendship.service'
+import { ActivatedRoute } from '@angular/router'
 import { StackConfig, Stack, Card, ThrowEvent, DragEvent, SwingStackComponent, SwingCardComponent} from 'angular2-swing';
 import { element } from 'protractor';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +14,7 @@ import { element } from 'protractor';
 
 export class UsersComponent implements OnInit {
 
-  // @ViewChild('myswing1') swingStack: SwingStackComponent;
   stackConfig: StackConfig;
-
   isClassVisible: false;
   cards: Array<any>;
   users
@@ -25,17 +25,22 @@ export class UsersComponent implements OnInit {
   hobbies
   item
   friend:any = {}
-  constructor(private _userService:UserService, private _friendshipService:FriendshipService) { }
+  data
+  constructor(private _userService:UserService, private _friendshipService:FriendshipService, private params:ActivatedRoute) { }
 
   user = JSON.parse(localStorage.getItem('user'));
-
+  term = this.params.snapshot.params['term']; 
 
   ngOnInit() {
     this.getUsers()
   }
 
   getUsers(){
-    this._userService.getUsers(this.user).subscribe(result => {
+    this.data = {
+      user:this.user,
+      term:this.term
+    }
+    this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users']
       console.log(this.cards)
       })

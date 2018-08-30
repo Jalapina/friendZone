@@ -55,7 +55,8 @@ let userSchema = mongoose.Schema({
     activity:{
         type:String,
         default: '',
-        trim: true,        
+        trim: true,       
+        lowercase: true,
     },
     active:{
         type: Boolean,
