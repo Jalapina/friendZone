@@ -12,25 +12,23 @@
             
             <div (click)="isClassVisible = !isClassVisible" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
-                <img src="../../assets/icons/arrow.svg" class="icon" alt="">
             </div>
+
             <p class="user-info blur">{{ user.blur }}</p>
-            <p class="user-info">{{ user.bio }}</p>
+            <p class="user-info bio">{{ user.bio }}</p>
 
-        </div>
+            <div class="likes">
 
-        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide" ngDefaultControl>
-                
-            <div (click)="isClassVisible = false;" class="user-name">
-                <p class="name">Likes</p>
+                <p class="like-title">Likes</p>
+
+                <div class="hobbies" *ngFor="let hobbie of user.hobbies">
+                    <p class="hobbie">{{hobbie}}</p>
+                </div>
+
             </div>
 
-            <div *ngFor="let hobbie of user.hobbies">
-                <p class="hobbie">{{hobbie}}</p>
-            </div>
         </div>
-    
-
+       
     </div>
 
 </div>
