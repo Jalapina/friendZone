@@ -38,6 +38,10 @@ let userSchema = mongoose.Schema({
             message: "Email is invalid."
         },
     },
+    birthdate:{
+        type:Data,
+        require: true,
+    },
     password:{
         type: String,
         trim: true,        

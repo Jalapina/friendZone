@@ -17,12 +17,17 @@ export class RegisterComponent implements OnInit {
   formActive: Boolean = false
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"; 
   myform;
-
+  datePicker: Boolean = true
+  // today = new Date();
+  // minAge = 18;
+  // minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
+  
   ngOnInit() {
   }
   
   validate(){
-    if(this.user.first_name && this.user.email && this.user.password && this.user.confirm_password){
+    
+    if(this.user.first_name && this.user.email && this.user.password && this.user.confirm_password && this.user.birthday){
       this.formActive = true
       if(this.user.password === this.user.confirm_password){
       this.isClassVisible = true
@@ -35,7 +40,6 @@ export class RegisterComponent implements OnInit {
   }
 
   validation(){ 
-    console.log(this.user.password.length)
 
     if(this.user.password === this.user.confirm_password && this.user.password.length > 5 && this.user.password.length > 5){
       this.isClassVisible = true
