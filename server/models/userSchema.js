@@ -1,6 +1,6 @@
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
-let validate = require('mongoose-validator'); // Import Mongoose Validator Plugin
+let validate = require('mongoose-validator');
 
 let nameValidator = [
     validate({
@@ -39,7 +39,7 @@ let userSchema = mongoose.Schema({
         },
     },
     birthdate:{
-        type:Data,
+        type: Date,
         require: true,
     },
     password:{
