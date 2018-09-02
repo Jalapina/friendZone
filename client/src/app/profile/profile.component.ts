@@ -26,10 +26,9 @@ export class ProfileComponent implements OnInit {
   categories = [
     new Category(1, 'Music' ),
     new Category(2, 'Bar' ),
-    new Category(4, 'Physical'),
+    new Category(3, 'Physical'),
     new Category(4, 'Food'),
-    new Category(4, 'Breakfast'),
-    new Category(4, 'Cinema'),
+    new Category(5, 'Cinema'),
  ];
   classVisible: false
   placeHolder: boolean = true
