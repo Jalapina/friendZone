@@ -12,6 +12,7 @@
             
             <div (click)="isClassVisible = !isClassVisible" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
+                <P class="age">{{ calculateAge(user.birthday) }}</P>
             </div>
 
             <p class="user-info blur">{{ user.blur }}</p>
@@ -35,7 +36,7 @@
 
 <div class="options">
         
-    <button type="submit" class="pass option" (click)="voteUp(false)" >Pass</button>
+    <button type="submit" class="pass option" (click)="voteUp(false)">Pass</button>
     <button type="submit" class="friendzone option" (click)="voteUp(true)">Friendzone</button>
                
 </div>

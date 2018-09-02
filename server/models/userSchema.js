@@ -38,7 +38,7 @@ let userSchema = mongoose.Schema({
             message: "Email is invalid."
         },
     },
-    birthdate:{
+    birthday:{
         type: Date,
         require: true,
     },

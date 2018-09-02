@@ -35,6 +35,12 @@ export class UsersComponent implements OnInit {
     this.getUsers()
   }
 
+  calculateAge(birthday) {
+    let ageInSec = Date.now() - new Date(birthday).getTime()
+    let age = new Date(ageInSec)
+    return Math.abs(age.getUTCFullYear() - 1970)
+  }
+
   getUsers(){
     this.data = {
       user:this.user,
@@ -42,7 +48,6 @@ export class UsersComponent implements OnInit {
     }
     this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users']
-      console.log(this.cards)
       })
   }
 

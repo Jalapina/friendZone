@@ -56,13 +56,14 @@ module.exports.create = function(request,response){
     const name = request.body.first_name
     const email = request.body.email
     const password = request.body.password
+    const birthday = request.body.birthday
 
     if(!name && !email && !password){
         return response.status(422).json({
             error: "Yo everything is empty"
         });
     }
- 
+
     bcrypt.hash(password, saltRounds, function(err, hash) {
         
         if(err) console.log(err);
@@ -86,6 +87,7 @@ module.exports.create = function(request,response){
             first_name: name,
             email: email,
             password: hash,
+            birthday:birthday,
         });
 
         user.save(function(error,newUser){ 
@@ -150,7 +152,7 @@ module.exports.users = function(request,response){
             response.json({error:err})
         }else{
             friendList.push(request.params.id)
-            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio hobbies').exec(function(err,users){
+            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio hobbies birthday').exec(function(err,users){
 
                 if(err){
                     console.log(err)

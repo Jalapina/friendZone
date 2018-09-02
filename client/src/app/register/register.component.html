@@ -6,7 +6,7 @@
         
         <input type="text" class="form-group validate" (input)="validate()" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
         <input type="email" required [pattern]="emailPattern" class="form-group" placeholder="Email" (input)="validate()" name="email" [(ngModel)]="user.email">
-        <input type="date" class="form-group date placeholder" max="{{minAge | date:'yyyy-MM-dd'}}" placeholder="Birthdate" name="birthdate" (input)="validate()" [ngClass]="{'placeholder': datePicker }" (focus)="datePicker = false;" [(ngModel)]="user.birthday">
+        <input type="date"  [ngClass]="{'ageValidation': ageValidation,'placeholder': datePicker }" class="form-group date placeholder" (input)="ageValidate();" placeholder="Birthdate" name="birthdate" (input)="validate()" (focus)="datePicker = false;" [(ngModel)]="user.birthday">
         <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate(); validation();" placeholder="Password" name="password" [(ngModel)]="user.password">
         <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate(); validation();" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
         <input type="submit" [ngClass]="{'form-active': formActive }" class="form-group form-button" value="Register">
@@ -15,6 +15,5 @@
       
     <button [routerLink]="['/login']" class="form-group button-link">Login</button>
     <p class="error-message" *ngIf="message">{{message}}</p>
-    <p *ngIf="isClassVisible === false">Passwords do not match</p>
     
 </div>

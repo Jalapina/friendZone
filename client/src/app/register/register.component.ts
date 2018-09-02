@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
 import { Router } from '@angular/router'
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -15,12 +16,11 @@ export class RegisterComponent implements OnInit {
   user:any = {}
   message = ""
   formActive: Boolean = false
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"; 
   myform;
   datePicker: Boolean = true
-  // today = new Date();
-  // minAge = 18;
-  // minAge = new Date(this.today.getFullYear() - this.minAge, this.today.getMonth(), this.today.getDate());
+  today = new Date();
+  minAge = 18;
+  ageValidation: Boolean = false
   
   ngOnInit() {
   }
@@ -39,13 +39,32 @@ export class RegisterComponent implements OnInit {
     }    
   }
 
+  ageValidate() {
+    let ageInSec = Date.now() - new Date(this.user.birthday).getTime()
+    let ageDate = new Date(ageInSec)
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970)
+    if(age > 17){
+      this.ageValidation = false
+      
+    }else{
+      this.ageValidation = true
+      this.message = "Must be 18 year's of age."
+    }
+  }
+
   validation(){ 
 
-    if(this.user.password === this.user.confirm_password && this.user.password.length > 5 && this.user.password.length > 5){
-      this.isClassVisible = true
+    if(this.user.password === this.user.confirm_password){
+      if(this.user.password.length > 5 && this.user.password.length > 5){
+        this.isClassVisible = true
+        this.message = ""
+      }else{
+      this.message = "Password is too short"
+      }
     }else{
       this.isClassVisible = false
       this.formActive = false
+      this.message = "Password do not match"
     }
     
   }
@@ -59,7 +78,6 @@ export class RegisterComponent implements OnInit {
           this._router.navigateByUrl('profile')
         },error=>{
           this.message = error.error.message
-          console.log(error.error)
         }
       );
     }
