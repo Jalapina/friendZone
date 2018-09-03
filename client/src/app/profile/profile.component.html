@@ -3,8 +3,14 @@
 <div class="card-content">
 
   <div class="card-image">
-    <img class="activator" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
-    
+      <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)"/>
+      <label for="file" class="imageLabel">Choose an Image</label>
+      <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)"/>
+      <label for="file" class="imageLabel">Choose an Image</label>
+      <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)"/>
+      <label for="file" class="imageLabel">Choose an Image</label>
+      <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)"/>
+      <label for="file" class="imageLabel">Choose an Image</label>
   </div>
 
   <div class="header">

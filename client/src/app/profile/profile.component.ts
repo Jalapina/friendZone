@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   blur
   activity
   userId
+  userImage
 
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
       
@@ -54,9 +55,15 @@ export class ProfileComponent implements OnInit {
     }, 300)
   }
 
+  
+  imageUpload(event) {
+    this.userService.imageUpload(event).subscribe(data =>{
+      
+    })
+  }
+
   userActive(){
     this.userIsActive = !this.userIsActive
-    console.log(this.userIsActive)
     this.userActivation.active = this.userIsActive
     this.userActivation.user = this.userId
     this.userService.userActivate(this.userActivation)
@@ -79,7 +86,6 @@ export class ProfileComponent implements OnInit {
   getUser(){
     this.userId = JSON.parse(localStorage.getItem('user'))
     this.userService.getUser(this.userId).subscribe( data =>{ 
-      console.log(data,"data")
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
       this.userInfo.blur = data['user'].blur
@@ -96,7 +102,6 @@ export class ProfileComponent implements OnInit {
     this.userInfo._id = this.userId
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items
-    console.log(this.userInfo,"user")
     this.userService.editUser(this.userInfo)
     setTimeout(()=>{
       this.getUser()

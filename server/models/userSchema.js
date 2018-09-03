@@ -48,6 +48,10 @@ let userSchema = mongoose.Schema({
         require: true,
         minlength: [5,"Password Must Be Longer Than 5 Characters"],
     },
+    img:{
+        type: String,
+        data: Buffer,
+    },
     blur:{
         type: String,
         default: '',
