@@ -1,7 +1,3 @@
-.card-image
-    max-width: 550px
-    margin: auto
-
 .card-content 
     text-align: center
     padding: 10px
@@ -12,7 +8,8 @@
         box-shadow: 0px 7px 40px 1px #888888
         margin: 15px auto
     .saveButton
-        width: 350px
+        width: 100%
+        max-width: 350px
         height: 40px
         margin-top: 10px
         font-weight: bold
@@ -28,7 +25,9 @@
         margin-top: 10px
         height: 40px
         font-weight: bold
-        width: 350px
+        width: 100%
+        max-width: 350px
+        
         border: 0px
         border-radius: 30px
         background: #ef5350
@@ -130,7 +129,6 @@
         border: 0px
         border-radius: 5px
 .container
-    // background-color: grey
     position: relative
     width: 100%
     top: 20px
@@ -174,30 +172,69 @@
         opacity: 1
         transform: none
 
-.inputImage
+.images-container
+    height: 310px
+    width: 100%
+    margin: auto
+    @media screen and (max-width: 729px)
+        max-width: 360px
+    @media screen and (min-width: 730px)
+        width: auto
+        .image-container
+            margin-top: 60px
+            width: 165px
+            // transition: 500ms
+    
+.image-container
+    background-color: #EAD8CA
     height: 145px
-    width: 175px
-    margin: 5px
-    opacity: 0
-.imageLabel
-    position: absolute
-    margin-left: -176px
-    margin-top: 10px
-    background-color: oldlace
-    height: 75px
-    padding: 15px
-    padding-top: 45px
-    width: 135px
-    border-radius: 15px
-    cursor: pointer
+    // // max-width: 175px
+    // // min-width: 150px
+    position: relative
+    // max-width: 160px    
+    width: 45%
+    // top: 8px
+    vertical-align: top
+    margin: 2px
+    display: inline-block
     box-shadow: 0px 2px 13px #888888
-    font-size: 16px
+    border-radius: 25px
+
+.inputImage
+    height: 100%
+    width: 100%
+    opacity: 0
+    
+.imageLabel
+    background-color: oldlace
+    position: relative
+    bottom: 85px
+    padding: 11px
+    cursor: pointer
+    border-radius: 15px
+    box-shadow: 0px 2px 13px #888888
+    font-size: 15px
     font-family: 'Song Myung', serifc
 
 .inputImage:focus + label,
 .inputImage + label:hover
     background-color: #e8d8b8
 
-.inputfile:focus + label 
-	outline: 1px dotted #000
-	outline: -webkit-focus-ring-color red 5px
+.image
+    position: relative
+    img
+        height: 145px
+        width: 160px
+        position: relative
+
+// .image::after
+//     content: url('../../assets/icons/delete2.svg')
+//     position: relative
+//     display: block
+//     height: 40px
+//     width: 40px
+//     bottom: 15px
+//     border-radius: 40px
+//     left: 140px
+//     background: tomato
+//     cursor: pointer
