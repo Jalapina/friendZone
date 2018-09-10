@@ -5,33 +5,33 @@
   <div class="images-container">
 
       <div class="image-container">
-        <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
+        <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
         <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
         <div class="image" *ngIf="url">
             <img [src]="url" height="200"> 
         </div>
       </div>
       <div class="image-container">
-        <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)" />
-        <label for="file" class="imageLabel" >Choose an Image</label>
-        <!-- <div class="image" *ngIf="url">
-            <img [src]="url" height="200"> 
-        </div> -->
-      </div>
-      <div class="image-container">
-        <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)" />
-        <label for="file" class="imageLabel" >Choose an Image</label>
-        <!-- <div class="image" *ngIf="url">
-            <img [src]="url" height="200"> 
-        </div> -->
-      </div>    
-      <div class="image-container">
-        <input type="file" [ngModel]="userImage" name="file" id="file" class="inputImage" (ngModelChange)="imageUpload($event)" />
-        <label for="file" class="imageLabel" >Choose an Image</label>
-        <!-- <div class="image" *ngIf="url">
-            <img [src]="url" height="200"> 
-        </div> -->
-      </div>
+          <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
+          <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
+          <div class="image" *ngIf="url">
+              <img [src]="url" height="200"> 
+          </div>
+        </div>
+        <div class="image-container">
+          <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
+          <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
+          <div class="image" *ngIf="url">
+              <img [src]="url" height="200"> 
+          </div>
+        </div>
+        <div class="image-container">
+            <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
+            <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
+            <div class="image" *ngIf="url">
+                <img [src]="url" height="200"> 
+            </div>
+          </div>
     
   </div>
 

@@ -1,6 +1,8 @@
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+const fs = require('fs')
 let validate = require('mongoose-validator');
+var id = new mongoose.Types.ObjectId();
 
 let nameValidator = [
     validate({
@@ -48,14 +50,14 @@ let userSchema = mongoose.Schema({
         require: true,
         minlength: [5,"Password Must Be Longer Than 5 Characters"],
     },
-    img:{
+    image:[{
         type: String,
-        data: Buffer,
-    },
-    blur:{
+        _id: id,
+    }],
+    blur:[{
         type: String,
         default: '',
-    },
+    }],
     bio:{
         type:String,
         default: '',

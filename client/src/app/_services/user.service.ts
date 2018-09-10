@@ -36,8 +36,8 @@ export class UserService {
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
 
-  imageUpload(image){
-    return this._http.put('/api/users/imageUpload',image)
+  imageUpload(id,image){
+    return this._http.put('/api/users/'+ id +'/images/',image)
   }
 
   getUsers(data){

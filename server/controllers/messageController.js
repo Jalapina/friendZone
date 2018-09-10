@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-let Message = mongoose.model('Message')
+const Message = mongoose.model('Message')
+const express = require('express')
+const router = express.Router()
 
-module.exports.create = function(request,response){
-    console.log(request.body);
+router.post('/messages/create', function(request,response){
+
     let users = [];
     users.push(request.body.sender,request.body.reciever);
     let sender = mongoose.Types.ObjectId(request.body.sender);
     let reciever = mongoose.Types.ObjectId(request.body.reciever);
     
-    console.log(sender)
-
     let message = new Message({
         sender:sender,
         users:[sender,reciever],
@@ -31,11 +31,9 @@ module.exports.create = function(request,response){
             })
         }
     })
+});
 
-
-}
-
-module.exports.getMessages = function(request,response){
+router.get('/messages/:sender/:reciever', function(request,response){
 
     let users = []
     
@@ -54,5 +52,7 @@ module.exports.getMessages = function(request,response){
             })
         }
     })
+});
 
-}
+module.exports = router;
+

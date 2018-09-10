@@ -1,9 +1,9 @@
 let mongoose = require('mongoose');
+const express = require('express')
+const router = express.Router()
 let User = mongoose.model('User');
-let Message = mongoose.model('Message')
-let FriendShip = mongoose.model('FriendShip');
 
-module.exports.create = function(request,response){
+router.post('/friendships/create', function(request,response){
     
     usersArray = []
     let status = request.body.like
@@ -57,10 +57,11 @@ module.exports.create = function(request,response){
         }
     });
 
-}
+});
 
-module.exports.friends = function(request,response){
+router.get('/friendships/:id', function(request,response){
     friends = []
+    
     User.findById(request.params.id).select('friendList').exec(function(err,user){
 
         let friendList = user.friendList
@@ -70,9 +71,9 @@ module.exports.friends = function(request,response){
                 friends.push(element.userId)
             }
         })
-        console.log(friends)
+
         User.find({'_id':{$in:friends}}).select("first_name").exec(function(err,users){
-            console.log(users)
+
             if(err){
                 response.json({
                     error:err
@@ -84,4 +85,7 @@ module.exports.friends = function(request,response){
             }
         })
     })
-}
+});
+
+module.exports = router;
+

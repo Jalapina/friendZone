@@ -1,13 +1,39 @@
-let mongoose = require('mongoose');
-let User = mongoose.model('User');
-let FriendShip = mongoose.model('FriendShip');
-var jwt = require('jsonwebtoken');
-let bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const express = require('express')
+const multer = require('multer');
+const router = express.Router()
+const User = mongoose.model('User');
+const FriendShip = mongoose.model('FriendShip');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
-var secret = 'asdfasdf';
-let check = require('validator').check
+const secret = 'asdfasdf';
 
-module.exports.authenticate = function(request,response){
+var store = multer.diskStorage({
+    destination:function(request,file,cb){
+        cb(null, './uploads/');
+    },
+    filename:function(request,file,cb){
+        cb(null, new Date().toISOString()+'.'+file.originalname);
+    }
+});
+const fileFilter = (request, file, cb) => {
+    if(file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/jpg" ){
+        cb(null, true);
+    }else{
+        cb(null, false);        
+    }
+}
+
+var upload = multer({
+    storage: store,
+    limits: 1024 * 1024 * 5,
+    fileFilter: fileFilter
+});
+
+
+
+router.post('/users/authenticate', function(request,response){
 
     const email = request.body.email
     const password = request.body.password
@@ -49,9 +75,9 @@ module.exports.authenticate = function(request,response){
         }
 
     })
-}
+});
 
-module.exports.create = function(request,response){
+router.post('/users/create', function(request,response){
 
     const name = request.body.first_name
     const email = request.body.email
@@ -137,9 +163,9 @@ module.exports.create = function(request,response){
             }
         });    
     });
-}
+});
 
-module.exports.users = function(request,response){
+router.get('/users/users/:id/:term', function(request,response){
     
     let friendList = []
     
@@ -163,24 +189,21 @@ module.exports.users = function(request,response){
                 }
             })
         }
-    });
+    }); 
+});
 
-    
-    
-}
-
-module.exports.authToken = function(req, res, next){
+router.get('/me', function(req, res, next){
     
     var token = req.headers['authorization']
 
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     
     jwt.verify(token, secret, function(err, decoded) {
-        console.log("decoded",decoded)
+        // console.log("decoded",decoded)
       if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       
       User.findById(decoded.id).select('first_name').exec(function(err, user) {
-          console.log(user)
+
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
         res.status(200).send(user);
@@ -188,28 +211,26 @@ module.exports.authToken = function(req, res, next){
       });
     });
 
-}
+});
 
 module.exports.tokenDecode = function(user, req, res,next) {
     
     // res.send(user); 
 };
 
-module.exports.user = function(request,response){
+router.get('/users/:id',  function(request,response){
 
     User.findById(request.params.id,{password:0,friendList:0,email:0},function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
 
-        console.log(user)
         response.json({
             message:"Here is the user",
             user:user
         })
     })
-}
+})
 
-module.exports.edit = function(request,response){
-    console.log("Updating user",request.body)
+router.put('/users/edit', function(request,response){
 
     User.findById(request.body._id,function(err,user){
         if(err){
@@ -236,14 +257,37 @@ module.exports.edit = function(request,response){
         }
     })
 
-}
+});
 
-module.exports.userActivation = function(request,response){
-    console.log(request.body)
+router.put('/users/useractivation', function(request,response){
+
     User.findById(request.body.user).exec(function(err,user){
         user.active = request.body.active
         user.save(function(err){
             if(err) response.json({error:err})
         })
     })
-}
+});
+
+router.put('/users/:id/images',upload.single("userImage"), function(request, response) {
+
+        console.log("It worked",request.file);
+ 
+            User.findById(request.params.id,function(err,user){
+                
+                if(err){
+                    console.log(err)
+                }else{
+                    user.image.push(request.file.path)
+                    user.save(function(err,editUser){
+                        response.json({
+                            image:editUser
+                        })
+                    })
+                    
+                }
+            })
+            
+});
+
+module.exports = router;

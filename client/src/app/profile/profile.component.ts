@@ -15,8 +15,6 @@ TagInputModule.withDefaults({
   }
 });
 
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -40,10 +38,11 @@ export class ProfileComponent implements OnInit {
   name
   bio
   blur
+  images
   activity
   userId
   userImage
-  url = ""
+  url = null
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
       
   }
@@ -55,20 +54,34 @@ export class ProfileComponent implements OnInit {
     }, 300)
   }
 
-  
   imageUpload(event) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target["result"];
-      }
+    let image = <File>event.target.files[0]
+    // console.log(image.name)
+    if (!this.validateFile(image.name)) {
+        console.log('Selected file format is not supported');
+        return false;
     }
-    // this.userService.imageUpload(event).subscribe(data =>{
-      
-    // })
+    
+    let fd = new FormData()
+
+    fd.append('userImage',image,image.name);
+
+    this.userService.imageUpload(this.userId,fd).subscribe(res =>{
+      console.log(res)
+      setTimeout(()=>{
+        this.getUser()
+      }, 1000)
+    })
+  }
+
+  validateFile(name: String) {
+    var ext = name.substring(name.lastIndexOf('.') + 1);
+    if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
+      return true;
+    }
+    else {
+        return false;
+    }
   }
 
   userActive(){
@@ -100,6 +113,9 @@ export class ProfileComponent implements OnInit {
       this.userInfo.blur = data['user'].blur
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
+      if(data['user'].image.length > 0){
+        this.url = data['user'].image
+      }
       if(data['user'].activity){
         this.placeHolder = false
         this.activity = data['user'].activity

@@ -221,20 +221,23 @@
     background-color: #e8d8b8
 
 .image
-    position: relative
+    height: 100%
     img
-        height: 145px
-        width: 160px
+        height: 100%
+        width: 100%
         position: relative
+        border-radius: 25px
 
-// .image::after
-//     content: url('../../assets/icons/delete2.svg')
-//     position: relative
-//     display: block
-//     height: 40px
-//     width: 40px
-//     bottom: 15px
-//     border-radius: 40px
-//     left: 140px
-//     background: tomato
-//     cursor: pointer
+.image::after
+    content: url('../../assets/icons/delete2.svg')
+    position: relative
+    display: block
+    height: 39px
+    width: 40px
+    bottom: 160px
+    border-radius: 40px
+    left: 15px
+    z-index: 1
+    float: right
+    background: tomato
+    cursor: pointer

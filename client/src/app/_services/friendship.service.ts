@@ -9,7 +9,7 @@ export class FriendshipService {
   constructor(private _http:HttpClient) { }
 
   create(like:any){
-    return this._http.post('/api/friendships',like).subscribe()
+    return this._http.post('/api/friendships/create',like).subscribe()
   }
 
 }

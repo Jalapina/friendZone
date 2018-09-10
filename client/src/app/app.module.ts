@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor'
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ImageUploadModule } from "angular2-image-upload";
 import { LandingComponent } from './landing/landing.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -53,6 +54,7 @@ import { LandingHeaderComponent } from './_shared/landing-header/landing-header.
     TagInputModule,
     SwingModule,
     CommonModule,
+    ImageUploadModule.forRoot(),    
   ],
   exports:[
     HeaderComponent
