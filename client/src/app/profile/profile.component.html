@@ -4,35 +4,14 @@
 
   <div class="images-container">
 
-      <div class="image-container">
-        <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
-        <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
-        <div class="image" *ngIf="url">
-            <img [src]="url" height="200"> 
+      <div class="image-container" *ngFor="let image of images">
+        <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!image"/>
+        <label for="file" class="imageLabel" *ngIf="!image">Choose an Image</label>
+        <div class="image" *ngIf="image">
+            <img [src]="image" height="200"> 
+            <input class="delete" name="userImage" (ngModel)="userImage" (click)="deleteImage(image)">
         </div>
       </div>
-      <div class="image-container">
-          <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
-          <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
-          <div class="image" *ngIf="url">
-              <img [src]="url" height="200"> 
-          </div>
-        </div>
-        <div class="image-container">
-          <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
-          <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
-          <div class="image" *ngIf="url">
-              <img [src]="url" height="200"> 
-          </div>
-        </div>
-        <div class="image-container">
-            <input type="file" [ngModel]="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!url" />
-            <label for="file" class="imageLabel" *ngIf="!url">Choose an Image</label>
-            <div class="image" *ngIf="url">
-                <img [src]="url" height="200"> 
-            </div>
-          </div>
-    
   </div>
 
   <div class="header">

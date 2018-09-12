@@ -38,11 +38,11 @@ export class ProfileComponent implements OnInit {
   name
   bio
   blur
-  images
   activity
   userId
+  selectedImage
   userImage
-  url = null
+  images = []
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
       
   }
@@ -73,7 +73,9 @@ export class ProfileComponent implements OnInit {
       }, 1000)
     })
   }
-
+  deleteImage(event){
+    console.log(event)
+  }
   validateFile(name: String) {
     var ext = name.substring(name.lastIndexOf('.') + 1);
     if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
@@ -114,7 +116,23 @@ export class ProfileComponent implements OnInit {
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
       if(data['user'].image.length > 0){
-        this.url = data['user'].image
+        this.images = data['user'].image
+        if(this.images.length != 4){
+          do{
+            this.images.push(null)      
+          }
+          while(this.images.length <= 3 )
+        }
+        
+      }else{
+
+        var n:number = 3;
+
+        do{
+          this.images.push(null);
+          n--
+        }while(n>=0);
+
       }
       if(data['user'].activity){
         this.placeHolder = false
