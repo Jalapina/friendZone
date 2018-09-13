@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
     new Category(4, 'Food'),
     new Category(5, 'Cinema'),
  ];
+
   classVisible: false
   placeHolder: boolean = true
   userIsActive:boolean
@@ -63,19 +64,27 @@ export class ProfileComponent implements OnInit {
     }
     
     let fd = new FormData()
-
     fd.append('userImage',image,image.name);
 
     this.userService.imageUpload(this.userId,fd).subscribe(res =>{
-      console.log(res)
       setTimeout(()=>{
         this.getUser()
       }, 1000)
-    })
+    });
+    
   }
+  
   deleteImage(event){
-    console.log(event)
+
+    this.userService.imageDelete(this.userId,event).subscribe(res => {
+      setTimeout(()=>{
+        this.getUser()
+      }, 800)
+    })
+    
+    
   }
+
   validateFile(name: String) {
     var ext = name.substring(name.lastIndexOf('.') + 1);
     if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
@@ -125,14 +134,7 @@ export class ProfileComponent implements OnInit {
         }
         
       }else{
-
-        var n:number = 3;
-
-        do{
-          this.images.push(null);
-          n--
-        }while(n>=0);
-
+        this.images = [null,null,null,null]
       }
       if(data['user'].activity){
         this.placeHolder = false

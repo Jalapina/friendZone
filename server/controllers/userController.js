@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express')
 const multer = require('multer');
+const fs = require('fs');
 const router = express.Router()
 const User = mongoose.model('User');
 const FriendShip = mongoose.model('FriendShip');
@@ -269,10 +270,34 @@ router.put('/users/useractivation', function(request,response){
     })
 });
 
+router.delete('/users/:id/images/uploads/:term', function(request,response){
+
+    User.findById(request.params.id, function(err,user){
+        images = user.image
+        string1 = "uploads/"
+        file = string1.concat(request.params.term)
+        let index = images.indexOf(file);
+        
+        if (index > -1) {
+          images.splice(index, 1);
+        }
+        fs.unlink(file,function(err){ 
+            if(err){
+                console.log(err)
+            }else{
+                user.save(function(err){
+                    response.json({
+                        message:"Images deleted"
+                    })
+                });
+            }
+        });
+
+    })
+});
+
 router.put('/users/:id/images',upload.single("userImage"), function(request, response) {
 
-        console.log("It worked",request.file);
- 
             User.findById(request.params.id,function(err,user){
                 
                 if(err){
@@ -289,5 +314,7 @@ router.put('/users/:id/images',upload.single("userImage"), function(request, res
             })
             
 });
+
+
 
 module.exports = router;

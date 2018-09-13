@@ -40,6 +40,11 @@ export class UserService {
     return this._http.put('/api/users/'+ id +'/images/',image)
   }
 
+  imageDelete(id,imageFile){
+    let term = "hello"
+    return this._http.delete('/api/users/'+id+'/images/'+imageFile)
+  }
+
   getUsers(data){
     console.log(data)
     return this._http.get('/api/users/users/'+data.user+'/'+data.term)
