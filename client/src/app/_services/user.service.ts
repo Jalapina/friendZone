@@ -47,7 +47,7 @@ export class UserService {
 
   getUsers(data){
     console.log(data)
-    return this._http.get('/api/users/users/'+data.user+'/'+data.term)
+    return this._http.get('/api/users/'+data.user+'/'+data.term)
   }
 
   editUser(userInfo){

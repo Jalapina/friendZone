@@ -166,7 +166,7 @@ router.post('/users/create', function(request,response){
     });
 });
 
-router.get('/users/users/:id/:term', function(request,response){
+router.get('/users/:id/:term', function(request,response){
     
     let friendList = []
     
@@ -179,7 +179,7 @@ router.get('/users/users/:id/:term', function(request,response){
             response.json({error:err})
         }else{
             friendList.push(request.params.id)
-            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio hobbies birthday').exec(function(err,users){
+            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
 
                 if(err){
                     console.log(err)

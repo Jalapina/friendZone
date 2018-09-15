@@ -26,6 +26,8 @@ export class UsersComponent implements OnInit {
   item
   friend:any = {}
   data
+  gallary
+
   constructor(private _userService:UserService, private _friendshipService:FriendshipService, private params:ActivatedRoute) { }
 
   user = JSON.parse(localStorage.getItem('user'));
@@ -48,6 +50,8 @@ export class UsersComponent implements OnInit {
     }
     this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users']
+      this.gallary = this.cards[0]['image']
+      console.log(this.gallary)
       })
   }
 
