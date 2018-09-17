@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this._userService.authenticate(this.user)
     .subscribe(
       data=>{
-        console.log("response",data)
+       
         if(data['success'] === false){
           this._router.navigateByUrl('/login');
 

@@ -1,10 +1,10 @@
 <app-header></app-header>
 
-<div class="card-content">
+<div class="card-content" [ngClass]="{'card-content-opacity': opacity }">
 
   <div class="images-container">
 
-      <div class="image-container" *ngFor="let image of images">
+      <div class="image-container disable" *ngFor="let image of images">
         <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!image"/>
         <label for="file" class="imageLabel" *ngIf="!image">Choose an Image</label>
         <div class="image" *ngIf="image">
@@ -14,7 +14,7 @@
       </div>
   </div>
 
-  <div class="header">
+  <div class="header disable">
       <h1 class="left" id="name">{{ name }}</h1>
       <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
       <label for="switch"></label>
@@ -24,11 +24,11 @@
 
     <p class="left">Blur</p>
 
-    <textarea class="blur" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
+    <textarea class="blur disable" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
 
     <p class="left" >What do you want to do?</p>
     
-    <div class="container">
+    <div class="container disable">
       <div class="dropdown-container" (click)="classVisible = !classVisible; checkActivty(); placeHolder = true;" *ngIf="placeHolder">Activities</div>
       <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="!placeHolder">{{activity}}</div>
       <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">
@@ -38,19 +38,23 @@
     
     <p class="left">About</p>
 
-    <textarea class="bio" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you are." ></textarea>
+    <textarea class="bio disable" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell us who you are." ></textarea>
 
     <p class="left">Hobbies</p>
 
-    <tag-input [(ngModel)]="items" [modelAsStrings]="true"  theme='dark' name="item"></tag-input>
+    <tag-input [(ngModel)]="items" class="disable" [modelAsStrings]="true"  theme='dark' name="item"></tag-input>
 
-    <input type="submit" class="saveButton" value="SAVE">
+    <input type="submit" class="saveButton disable" value="Save">
   
   </form>
     
-  <button (click)="logout()" class="logoutButton">LogOut</button>
+  <button (click)="logout()" class="logoutButton disable">LogOut</button>
+  <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button>
 
 </div>
 
-
-  
+<div class="modal" [ngClass]="{'modal-display-block': modal}">
+    <p>Are you sure you want to delete your account?</p>
+    <button (click)="opacity = false; modal = false;" class="cancel">Cancel</button>
+    <button class="yes" (click)="deleteUser()">Yes</button>
+</div>

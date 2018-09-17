@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
   classVisible: false
   placeHolder: boolean = true
-  userIsActive:boolean
+  userIsActive: boolean
   items: string[] = []
   userInfo:any = {}
   bool = "hello"
@@ -44,6 +44,10 @@ export class ProfileComponent implements OnInit {
   selectedImage
   userImage
   images = []
+  opacity: false
+  modal:false
+  message 
+
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
       
   }
@@ -157,5 +161,14 @@ export class ProfileComponent implements OnInit {
     this.authenticateService.logout()
     this.router.navigateByUrl('/login')
   }
-
+  deleteUser(){
+    console.log(this.userId)
+    this.userService.deleteUser(this.userId).subscribe(data =>{
+      if(data['success'] == true){
+        this.router.navigateByUrl('/')
+      }else{
+        this.message = "User could not be deleted, try again later"
+      }
+    })
+  }
 }

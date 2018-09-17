@@ -62,4 +62,8 @@ export class UserService {
     return this._http.get('/api/friendships/'+id)
   }
 
+  deleteUser(id){
+    return this._http.delete('/api/users/'+id+'/delete')
+  }
+
 }

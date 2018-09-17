@@ -315,6 +315,32 @@ router.put('/users/:id/images',upload.single("userImage"), function(request, res
             
 });
 
+router.delete('/users/:id/delete',function(request,response){
 
+    user = request.params.id
+    
+    console.log(user)
+
+    User.findByIdAndRemove(user,function(err,user){
+        
+        if(err){
+            console.log(err);
+        }else{
+            images = user.image
+            images.forEach(file =>{
+                fs.unlink(file,function(err){
+                    if(err){
+                        console.log(err)
+                    }
+                })
+            })
+            response.json({
+                success: true,
+                message: "User deleted",
+            });
+        }
+    });
+
+});
 
 module.exports = router;

@@ -19,7 +19,7 @@
         background: #66bb6a
         &:hover
             color: #fff
-            font-size: 10px
+            // font-size: 10px
             background-color: #00c853
     .logoutButton
         margin-top: 10px
@@ -27,7 +27,6 @@
         font-weight: bold
         width: 100%
         max-width: 350px
-        
         border: 0px
         border-radius: 30px
         background: #ef5350
@@ -35,7 +34,7 @@
         &:hover
             color: #fff
             background: #d50000
-            font-size: 10px
+            // font-size: 10px
     .blur
         background: #f5f5f5
         padding: 5px
@@ -128,6 +127,7 @@
         background: transparent
         border: 0px
         border-radius: 5px
+
 .container
     position: relative
     width: 100%
@@ -183,17 +183,12 @@
         .image-container
             margin-top: 60px
             width: 165px
-            // transition: 500ms
     
 .image-container
     background-color: #EAD8CA
     height: 145px
-    // // max-width: 175px
-    // // min-width: 150px
     position: relative
-    // max-width: 160px    
     width: 45%
-    // top: 8px
     vertical-align: top
     margin: 2px
     display: inline-block
@@ -241,16 +236,38 @@
     left: 5px
     border-radius: 25px
 
-// .image::after
-//     content: url('../../assets/icons/delete2.svg')
-//     position: relative
-//     display: block
-//     height: 39px
-//     width: 40px
-//     bottom: 160px
-//     border-radius: 40px
-//     left: 15px
-//     z-index: 1
-//     float: right
-//     background: tomato
-//     cursor: pointer
+.card-content-opacity
+    opacity: 0.1
+    .disable     
+        pointer-events: none      
+.modal
+    height: 190px
+    background-color: #757575
+    width: 350px
+    position: fixed
+    bottom: 350px
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+    text-align: center
+    display: none
+    >p
+        width: 60%
+        font-size: 20px
+        margin: auto
+        margin-top: 30px
+    >button
+        border: 0px
+        width: 60%
+        margin-top: 20px
+        height: 25px
+    .yes
+        background-color: #ef5350
+    .cancel
+        background-color: #fff
+
+.modal-display-block
+    display: block
+
+.delete-account
+    background: #b71c1c !important
