@@ -4,7 +4,6 @@ import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
 import { UserService } from '../_services/user.service'
 import { Category } from './Category'
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 TagInputModule.withDefaults({
   
@@ -75,7 +74,6 @@ export class ProfileComponent implements OnInit {
         this.getUser()
       }, 1000)
     });
-    
   }
   
   deleteImage(event){
@@ -84,9 +82,7 @@ export class ProfileComponent implements OnInit {
       setTimeout(()=>{
         this.getUser()
       }, 800)
-    })
-    
-    
+    }) 
   }
 
   validateFile(name: String) {
@@ -161,6 +157,7 @@ export class ProfileComponent implements OnInit {
     this.authenticateService.logout()
     this.router.navigateByUrl('/login')
   }
+
   deleteUser(){
     console.log(this.userId)
     this.userService.deleteUser(this.userId).subscribe(data =>{
@@ -171,4 +168,5 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+
 }

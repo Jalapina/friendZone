@@ -1,43 +1,43 @@
-.slide-1, .slide-2, .slide-3
+.slide
     position: absolute 
     display: block
     color: #fff
     font-size: 2.5em
-    text-align: center
-    // top: 100px
-    width: 50%
+    width: 200px
     animation-duration: 20s
     animation-timing-function: ease-in-out
     animation-iteration-count: infinite
+    font-family: 'Source Sans Pro', sans-serif
+    font-family: 'Luckiest Guy', cursive
+    top: 200px
     
-.landing-page-intro
-    min-height: 76%
-    background-image: url("https://www.drweil.com/wp-content/uploads/2016/12/health-wellness_body-mind-spirit_mental-health_can-coffee-keep-your-mind-sharp_2716×1810_87102737-1024x768.jpg")
-    background-repeat: no-repeat, repeat
-    background-size: 100% 600px
-    .slide-1
-        animation-name: slide1
-        top: 150px
-        // margin: auto
-    .slide-2
-        animation-name: slide2
-        top: 230px
+.landing-page
+    height: 90%
+    min-height: 500px
+    background: tomato
+    pointer-events: none
+    text-align: center
+    // background-image: url("https://www.drweil.com/wp-content/uploads/2016/12/health-wellness_body-mind-spirit_mental-health_can-coffee-keep-your-mind-sharp_2716×1810_87102737-1024x768.jpg")
+    // background-repeat: no-repeat
+    // background-size: 100%
 
-    .slide-3
-        animation-name: slide3
-        top: 200px
+.slide-1
+    animation-name: slide1
+.slide-2
+    animation-name: slide2
+.slide-3
+    animation-name: slide3
 
 @keyframes slide1
     0%, 8.3%
         left: -100%
         opacity: 0
     8.3%, 25%
-        left: 25% 
+        left: 25%
         opacity: 1
     33.33%,100%
-        left: 45%
+        left: -100%
         opacity: 0
-
 @keyframes slide2
     0%, 33.33%
         left: -100%
@@ -46,9 +46,8 @@
         left: 25%
         opacity: 1
     66.66%, 100% 
-        left: 45%
+        left: -100%
         opacity: 0
-
 @keyframes slide3
     0%, 66.66% 
         left: -100%
@@ -57,26 +56,21 @@
         left: 25%
         opacity: 1
     100%
-        left: 45%
+        left: -100%
         opacity: 0
-
-.signUp
-  position: absolute
-  height: 80px
-  width: 100%
-  text-align: center
-//   bottom: 0
-  
-
 
 .foward
     background-color: #4CAF50
     color: white
     border: none
-    width: 400px
+    width: 100%
     cursor: pointer
-    height: 50px
-    font-size: 16px
+    height: 40px
+    font-size: 13px
     &:hover
         background-color: #33663a
-
+.options
+    background-color: #ffffff
+    position: fixed
+    width: 100%
+    bottom: 0
