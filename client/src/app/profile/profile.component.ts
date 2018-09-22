@@ -47,9 +47,7 @@ export class ProfileComponent implements OnInit {
   modal:false
   message 
 
-  constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { 
-      
-  }
+  constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { }
 
   ngOnInit() {
     this.setUserId();
@@ -74,6 +72,7 @@ export class ProfileComponent implements OnInit {
         this.getUser()
       }, 1000)
     });
+    
   }
   
   deleteImage(event){
@@ -82,7 +81,8 @@ export class ProfileComponent implements OnInit {
       setTimeout(()=>{
         this.getUser()
       }, 800)
-    }) 
+    });
+
   }
 
   validateFile(name: String) {

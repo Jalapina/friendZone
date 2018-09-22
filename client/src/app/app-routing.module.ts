@@ -41,13 +41,13 @@ const routes: Routes = [
     path: 'profile',
     pathMatch: 'full',
     component: ProfileComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'preview',
     pathMatch: 'full',
     component: ProfilePreviewComponent,
-    // canActivate: [AuthGuard],    
+    canActivate: [AuthGuard],    
   },
   {
     path: 'chat/:id',
@@ -59,6 +59,7 @@ const routes: Routes = [
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
+    
   },
   {
     path: 'register',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
+import { AuthenticateService as Auth } from '../_services/authenticate.service'
 import { Router } from '@angular/router'
 import { error } from 'selenium-webdriver';
 
@@ -10,14 +11,14 @@ import { error } from 'selenium-webdriver';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _userService:UserService, private _router:Router) { }
+  constructor(private _userService:UserService, private _router:Router, private auth:Auth) { }
   
   user:any = {}
   message = ""
   formActive:Boolean = false
   
   ngOnInit() {
-    
+    this.auth.logout()
   }
   validate(){
     if(this.user.email && this.user.password){

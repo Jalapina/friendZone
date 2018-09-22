@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
+import { AuthenticateService as Auth } from '../_services/authenticate.service'
 import { Router } from '@angular/router'
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -10,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private _userService:UserService, private _router:Router) { }
+  constructor(private _userService:UserService, private _router:Router, private auth:Auth) { }
   
   isClassVisible:Boolean
   user:any = {}
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
   ageValidation: Boolean = false
   
   ngOnInit() {
+    this.auth.logout()    
   }
   
   validate(){

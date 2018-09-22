@@ -65,5 +65,5 @@ export class UserService {
   deleteUser(id){
     return this._http.delete('/api/users/'+id+'/delete')
   }
-
+  
 }
