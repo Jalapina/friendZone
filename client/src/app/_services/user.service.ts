@@ -32,7 +32,6 @@ export class UserService {
   }
 
   userActivate(userActivation){
-    console.log(userActivation)
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
 
@@ -41,12 +40,10 @@ export class UserService {
   }
 
   imageDelete(id,imageFile){
-    let term = "hello"
     return this._http.delete('/api/users/'+id+'/images/'+imageFile)
   }
 
   getUsers(data){
-    console.log(data)
     return this._http.get('/api/users/'+data.user+'/'+data.term)
   }
 

@@ -19,14 +19,8 @@ export class UsersComponent implements OnInit {
   cards: Array<any>;
   users
   recentCard: string = '';
-  name
-  bio
-  blur
-  hobbies
-  item
   friend:any = {}
   data
-  gallary
 
   constructor(private _userService:UserService, private _friendshipService:FriendshipService, private params:ActivatedRoute) { }
 
@@ -50,8 +44,7 @@ export class UsersComponent implements OnInit {
     }
     this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users']
-      this.gallary = this.cards[0]['image']
-      console.log(this.gallary)
+      console.log(this.cards)
       })
   }
 
@@ -60,16 +53,12 @@ export class UsersComponent implements OnInit {
     let removedCard = this.cards.pop();
 
     if (like) {
-      console.log("like")
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard)
-      console.log(like,this.recentCard);
       
     } else {
-      console.log("No")      
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard)  
-      console.log(like,this.recentCard);
     }
 
   }
