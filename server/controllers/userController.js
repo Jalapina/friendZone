@@ -170,26 +170,29 @@ router.get('/users/:id/:term', function(request,response){
     
     let friendList = []
     
-    FriendShip.find({"follower":request.params.id}).select("followee").exec(function(err,friends){
-
-        friends.forEach(element => {
-            friendList.push(element.followee)
+    User.findById(request.params.id).select("friendlist").exec(function(err,user){
+        // console.log(user)
+        user.friendlist.forEach(element => {
+            friendList.push(element.userId)
         });
-        if(err){
-            response.json({error:err})
-        }else{
-            friendList.push(request.params.id)
-            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
 
-                if(err){
-                    console.log(err)
-                }else{
-                    response.json({
-                        users:users
-                    })
-                }
-            })
-        }
+            if(err){
+                response.json({error:err})
+            }else{
+                
+                friendList.push(request.params.id)
+                // console.log(friendList)
+                User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
+    
+                    if(err){
+                        console.log(err);
+                    }else{
+                        response.json({
+                            users:users
+                        });
+                    }
+                });
+            }
     }); 
 });
 

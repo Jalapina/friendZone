@@ -5,7 +5,7 @@
   <div >
     <ul *ngFor="let friend of friendList">
       <li class="friend" [routerLink]="['/chat',friend._id]">
-        <div class="photo"></div>
+        <div class="photo"> <img class="image" [src]="friend.image[0]" alt="" height="60px" width="60px"> </div>
         <div class="username">
           <p class="name">{{friend.first_name}}</p>
         </div>

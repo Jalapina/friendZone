@@ -76,14 +76,14 @@ let userSchema = mongoose.Schema({
         type:String,
         trim: true,        
     }],
-	friendList:[{
+	friendlist:[{
         userId:{
             type: Schema.Types.ObjectId,
             ref:"User"
         },
         status:{
             type:Boolean,
-        }
+        },
     }],
 },{
     timestamps: true,   

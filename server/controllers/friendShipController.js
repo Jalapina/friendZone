@@ -6,6 +6,7 @@ let User = mongoose.model('User');
 router.post('/friendships/create', function(request,response){
     
     usersArray = []
+
     let status = request.body.like
     let sender = request.body.userId
     let reciever = request.body.id
@@ -27,25 +28,25 @@ router.post('/friendships/create', function(request,response){
                 err:err
             });
         }else{
-            array = user.friendList
+            array = user.friendlist
             array.forEach(element => {
                 if(element.userId == reciever){
                     response.json({message:"Already friends"})
                 }
             });
-            user.friendList.push(friendRequest)
+            user.friendlist.push(friendRequest)
 
             User.findById(reciever,function(err,user2){
                 if(err){
                     response.json({error:err});
                 }else{
-                    friendList = user2.friendList
+                    friendList = user2.friendlist
                     friendList.forEach(element => {
                         if(element.userId == sender){
                             response.json({message:"Already friends"})
                         }
                     });
-                    user2.friendList.push(friendReciever);
+                    user2.friendlist.push(friendReciever);
                     user2.save();
                 }
             });
@@ -61,29 +62,32 @@ router.post('/friendships/create', function(request,response){
 
 router.get('/friendships/:id', function(request,response){
     friends = []
+    image = []
     
-    User.findById(request.params.id).select('friendList').exec(function(err,user){
+    User.findById(request.params.id).select('friendlist').exec(function(err,user){
 
-        let friendList = user.friendList
+        let friendList = user.friendlist
 
-        friendList.forEach(element=>{
-            if(element.status == true){
-                friends.push(element.userId)
-            }
-        })
+            friendList.forEach(element=>{
+                if(element.status == true){
+                    friends.push(element.userId)
+                }
+            });
+    
+            User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
 
-        User.find({'_id':{$in:friends}}).select("first_name").exec(function(err,users){
-
-            if(err){
-                response.json({
-                    error:err
-                })
-            }else{
-                response.json({
-                    users:users
-                })
-            }
-        })
+                console.log(users)
+    
+                if(err){
+                    response.json({
+                        error:err
+                    })
+                }else{
+                    response.json({
+                        users:users
+                    })
+                }
+            });
     })
 });
 
