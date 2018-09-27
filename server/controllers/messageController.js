@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Message = mongoose.model('Message')
-const express = require('express')
-const router = express.Router()
+const Message = mongoose.model('Message');
+const express = require('express');
+const router = express.Router();
 
 router.post('/messages/create', function(request,response){
 
@@ -39,19 +39,18 @@ router.get('/messages/:sender/:reciever', function(request,response){
     
     users.push(request.params.reciever,request.params.sender);
 
-    Message.find({'users':{$all:users}}).populate("users","first_name").exec(function(err,chat){
+    Message.find({'users':{$all:users}}).populate("users sender","first_name").exec(function(err,chat){
         
         if(err){
-            console.log(err)
             response.json({
                 error:err
-            })
+            });
         }else{
             response.json({
                 chat:chat
-            })
+            });
         }
-    })
+    });
 });
 
 module.exports = router;

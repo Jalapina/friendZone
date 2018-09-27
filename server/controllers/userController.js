@@ -10,14 +10,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const secret = 'asdfasdf';
 
-var store = multer.diskStorage({
+const store = multer.diskStorage({
     destination:function(request,file,cb){
         cb(null, './uploads/');
     },
     filename:function(request,file,cb){
         cb(null, new Date().toISOString()+'.'+file.originalname);
-    }
+    },
 });
+
 const fileFilter = (request, file, cb) => {
     if(file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/jpg" ){
         cb(null, true);
@@ -26,7 +27,7 @@ const fileFilter = (request, file, cb) => {
     }
 }
 
-var upload = multer({
+const upload = multer({
     storage: store,
     limits: 1024 * 1024 * 5,
     fileFilter: fileFilter
@@ -58,8 +59,9 @@ router.post('/users/authenticate', function(request,response){
             const hash = user.password
 
             bcrypt.compare(password, hash, function(err, res) {
+                
                 if(err) console.log(err);
-                console.log(res)
+
                 if(res === false){
                     response.status(404).json({
                         message:"Invalid Email or Password"
@@ -72,9 +74,7 @@ router.post('/users/authenticate', function(request,response){
                     });
                 }
             });
-            
         }
-
     })
 });
 
@@ -120,31 +120,35 @@ router.post('/users/create', function(request,response){
         user.save(function(error,newUser){ 
 
             if(error){
+
                 if(error.errors !== undefined){
+
                     if(error.errors.email){
                         return response.status(422).json({
                             message:error.errors.email.properties.message
-                        })
+                        });
                     }else if(error.errors.first_name){
                         return response.status(422).json({
                             message:error.errors.first_name.properties.message
-                        })
+                        });
                     }else if(error.errors.password){
                         return response.status(422).json({
                             message:error.errors.password.properties.message
-                        })
+                        });
                     }else {
                         return response.status(422).json({
                             message: error
-                        })
+                        });
                     }
+
                 }else if(error){
+
                     if (error.code == 11000) {
                         return response.status(404).json({
                             message: "Email already exist"
-                        })
-                    } else {
-                        response.json({ success: false, message: err }); // Display any other error
+                        });
+                    }else{
+                        response.json({ success: false, message: err });
                     }
                 }
             }else{
@@ -176,23 +180,22 @@ router.get('/users/:id/:term', function(request,response){
             friendList.push(element.userId)
         });
 
-            if(err){
-                response.json({error:err})
-            }else{
-                
-                friendList.push(request.params.id)
-                // console.log(friendList)
-                User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
-    
-                    if(err){
-                        console.log(err);
-                    }else{
-                        response.json({
-                            users:users
-                        });
-                    }
-                });
-            }
+        if(err){
+            response.json({error:err})
+        }else{
+            friendList.push(request.params.id)
+            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
+
+                if(err){
+                    console.log(err);
+                }else{
+                    response.json({
+                        users:users
+                    });
+                }
+
+            });
+        }
     }); 
 });
 
@@ -213,6 +216,7 @@ router.get('/me', function(req, res, next){
         res.status(200).send(user);
         // next(user); // add this line
       });
+    
     });
 
 });
@@ -230,9 +234,10 @@ router.get('/users/:id',  function(request,response){
         response.json({
             message:"Here is the user",
             user:user
-        })
-    })
-})
+        });
+    });
+
+});
 
 router.put('/users/edit', function(request,response){
 
@@ -255,11 +260,11 @@ router.put('/users/edit', function(request,response){
                     response.status(404).json({
                         error:err,
                         message:"Error"
-                    })
+                    });
                 }
-            })
+            });
         }
-    })
+    });
 
 });
 
@@ -269,8 +274,9 @@ router.put('/users/useractivation', function(request,response){
         user.active = request.body.active
         user.save(function(err){
             if(err) response.json({error:err})
-        })
-    })
+        });
+    });
+
 });
 
 router.delete('/users/:id/images/uploads/:term', function(request,response){
@@ -291,39 +297,37 @@ router.delete('/users/:id/images/uploads/:term', function(request,response){
                 user.save(function(err){
                     response.json({
                         message:"Images deleted"
-                    })
+                    });
                 });
             }
         });
+    });
 
-    })
 });
 
 router.put('/users/:id/images',upload.single("userImage"), function(request, response) {
 
-            User.findById(request.params.id,function(err,user){
-                
-                if(err){
-                    console.log(err)
-                }else{
-                    user.image.push(request.file.path)
-                    user.save(function(err,editUser){
-                        response.json({
-                            image:editUser
-                        })
-                    })
-                    
-                }
+    User.findById(request.params.id,function(err,user){
+        
+        if(err){
+            console.log(err)
+        }else{
+            user.image.push(request.file.path)
+            user.save(function(err,editUser){
+                response.json({
+                    image:editUser
+                })
             })
             
+        }
+    });
+
 });
 
 router.delete('/users/:id/delete',function(request,response){
 
     user = request.params.id
     
-    console.log(user)
-
     User.findByIdAndRemove(user,function(err,user){
         
         if(err){
@@ -335,8 +339,8 @@ router.delete('/users/:id/delete',function(request,response){
                     if(err){
                         console.log(err)
                     }
-                })
-            })
+                });
+            });
             response.json({
                 success: true,
                 message: "User deleted",

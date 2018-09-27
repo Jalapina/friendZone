@@ -60,7 +60,6 @@ export class ProfileComponent implements OnInit {
     let image = <File>event.target.files[0]
     // console.log(image.name)
     if (!this.validateFile(image.name)) {
-        console.log('Selected file format is not supported');
         return false;
     }
     
@@ -159,7 +158,6 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteUser(){
-    console.log(this.userId)
     this.userService.deleteUser(this.userId).subscribe(data =>{
       if(data['success'] == true){
         this.router.navigateByUrl('/')

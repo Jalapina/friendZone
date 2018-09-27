@@ -12,4 +12,8 @@ export class FriendshipService {
     return this._http.post('/api/friendships/create',like).subscribe()
   }
 
+  getFriends(id){
+    return this._http.get('/api/friendships/'+id)
+  }
+  
 }

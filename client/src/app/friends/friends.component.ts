@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service'
+import { FriendshipService } from '../_services/friendship.service'
 
 @Component({
   selector: 'app-friends',
@@ -8,16 +8,16 @@ import { UserService } from '../_services/user.service'
 })
 export class FriendsComponent implements OnInit {
 
-  constructor(private userService:UserService) { }
+  constructor(private friendshipService:FriendshipService) { }
   user = JSON.parse(localStorage.getItem('user'));
   friendList = []
 
   ngOnInit() {
-    this.friends()
+    this.getFriends()
   }
 
-  friends(){
-    this.userService.getFriends(this.user).subscribe(data=>{
+  getFriends(){
+    this.friendshipService.getFriends(this.user).subscribe(data=>{
       this.friendList = data['users'].reverse()
     })
   }

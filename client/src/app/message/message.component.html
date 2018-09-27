@@ -4,13 +4,17 @@
     <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
     
         <ul class="bubble-container" *ngFor="let message of chat" >
-            <li class="speech-bubble right-bubble" *ngIf="user == message.sender" >
-                <p class="name">{{sender}}</p>
-                <p class="message">{{message.message.text}}</p>
+
+            <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
+                <p class="name">{{message.sender.first_name}}</p>
+                <p class="message">{{message.message.text}}
+                </p>
+
                 <!-- <span class="time-right">{{message.createdAt | date: format : timezone}}</span> -->
             </li>
-            <li class="speech-bubble left-bubble" *ngIf="user != message.sender">
-                <p class="name">{{reciever}}</p>                    
+
+            <li class="speech-bubble left-bubble" *ngIf="user != message.sender._id">
+                <p class="name">{{message.sender.first_name}}</p>                    
                 <p class="message">{{message.message.text}}</p>
                 <!-- <span class="time-left">{{message.createdAt | date: format : timezone}}</span> -->
             </li>

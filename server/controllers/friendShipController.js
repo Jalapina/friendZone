@@ -1,7 +1,7 @@
-let mongoose = require('mongoose');
-const express = require('express')
-const router = express.Router()
-let User = mongoose.model('User');
+const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const User = mongoose.model('User');
 
 router.post('/friendships/create', function(request,response){
     
@@ -34,7 +34,8 @@ router.post('/friendships/create', function(request,response){
                     response.json({message:"Already friends"})
                 }
             });
-            user.friendlist.push(friendRequest)
+
+            user.friendlist.push(friendRequest);
 
             User.findById(reciever,function(err,user2){
                 if(err){
@@ -48,7 +49,7 @@ router.post('/friendships/create', function(request,response){
                     });
                     user2.friendlist.push(friendReciever);
                     user2.save();
-                }
+                };
             });
             user.save(function(err){
                 if(err){
@@ -61,6 +62,7 @@ router.post('/friendships/create', function(request,response){
 });
 
 router.get('/friendships/:id', function(request,response){
+
     friends = []
     image = []
     
@@ -68,28 +70,40 @@ router.get('/friendships/:id', function(request,response){
 
         let friendList = user.friendlist
 
-            friendList.forEach(element=>{
-                if(element.status == true){
-                    friends.push(element.userId)
-                }
-            });
-    
-            User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
+        friendList.forEach(element=>{
+            if(element.status == true){
+                friends.push(element.userId);
+            }
+        });
 
-                console.log(users)
-    
-                if(err){
-                    response.json({
-                        error:err
-                    })
-                }else{
-                    response.json({
-                        users:users
-                    })
-                }
-            });
-    })
+        User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
+
+            if(err){
+                response.json({
+                    error:err
+                });
+            }else{
+                response.json({
+                    users:users
+                });
+            }
+        });
+    });
+});
+
+router.put('/friendships/:id/:friend',function(request,response){
+
+    const user = request.params.id
+    const friendId = request.params.friend
+
+    User.findById(user,function(err,user){
+        user.friendlist.forEach(element =>{
+            if(element.userId == friendId){
+                console.log("Friend ",friendId," has been deleted.");
+            }
+        });
+    });
+
 });
 
 module.exports = router;
-

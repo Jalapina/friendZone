@@ -32,20 +32,24 @@ export class UsersComponent implements OnInit {
   }
 
   calculateAge(birthday) {
-    let ageInSec = Date.now() - new Date(birthday).getTime()
-    let age = new Date(ageInSec)
-    return Math.abs(age.getUTCFullYear() - 1970)
+
+    let ageInSec = Date.now() - new Date(birthday).getTime();
+    let age = new Date(ageInSec);
+    return Math.abs(age.getUTCFullYear() - 1970);
+    
   }
 
   getUsers(){
+
     this.data = {
       user:this.user,
       term:this.term
     }
+
     this._userService.getUsers(this.data).subscribe(result => {
-      this.cards = result['users']
-      console.log(this.cards)
-      })
+      this.cards = result['users'];
+    });
+
   }
 
   voteUp(like: boolean) {
@@ -58,17 +62,18 @@ export class UsersComponent implements OnInit {
       
     } else {
       this.recentCard = removedCard._id;
-      this.create(like,this.recentCard)  
+      this.create(like,this.recentCard);
     }
 
   }
 
   create(like:any,id){
+
     this.friend.like = like
     this.friend.userId = this.user
     this.friend.id = id
 
-    this._friendshipService.create(this.friend)
+    this._friendshipService.create(this.friend);
     
   }
 

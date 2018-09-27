@@ -1,8 +1,7 @@
-let mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-const fs = require('fs')
-let validate = require('mongoose-validator');
-var id = new mongoose.Types.ObjectId();
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const fs = require('fs');
+const validate = require('mongoose-validator');
 
 let nameValidator = [
     validate({
@@ -52,7 +51,6 @@ let userSchema = mongoose.Schema({
     },
     image:[{
         type: String,
-        _id: id,
     }],
     blur:[{
         type: String,
