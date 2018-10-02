@@ -12,6 +12,8 @@ export class FriendsComponent implements OnInit {
   constructor(private friendshipService:FriendshipService) { }
   user = JSON.parse(localStorage.getItem('user'));
   friendList = []
+  friendsWithMessages
+  friendsWithOutMessages
 
   ngOnInit() {
     this.getFriends()
@@ -19,8 +21,9 @@ export class FriendsComponent implements OnInit {
 
   getFriends(){
     this.friendshipService.getFriends(this.user).subscribe(data=>{
-      this.friendList = data['users'].reverse()
-      console.log(this.friendList)
+      this.friendsWithMessages = data['friendsWithMessages']
+      this.friendsWithOutMessages = data['friendsWithOutMessages']    
+      console.log(data['friendsWithMessages'])
     })
   }
 

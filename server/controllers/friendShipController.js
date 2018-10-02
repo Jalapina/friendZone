@@ -68,29 +68,64 @@ router.get('/friendships/:id', function(request,response){
 
     friends = []
     image = []
+    friendsWithMessages = []
+    friendsWithOutMessages = []
+
     
     User.findById(request.params.id).select('friendlist').exec(function(err,user){
 
         let friendList = user.friendlist
 
-        friendList.forEach(element=>{
-            if(element.status == true){
-                friends.push(element.userId);
+        // console.log(friendList)
+
+        friendList.forEach(friend=>{
+            if(friend.status == true){
+                friends.push(friend.userId);
             }
         });
 
-        User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
+        friends.forEach(friend=>{
 
-            if(err){
-                response.json({
-                    error:err
-                });
-            }else{
-                response.json({
-                    users:users
-                });
-            }
+            Message.findOne(({'users':{$all:[request.params.id,friend]}})).populate("users","first_name image").select("message users").exec(function(err,msg){
+                if(err) console.log(err);
+                else{
+                    if(msg == null){
+                        User.find(friend).select("first_name image").exec(function(err,friendWithName){
+                            if(err) console.log(err);
+                            else{
+                                friendsWithOutMessages.push(friendWithName)
+                            }
+                        })
+                    }else{
+                        // msg.users.forEach(function(userName,index){
+                        //     if(friend != userName._id){
+                        //         console.log(userName.first_name)
+                        //     }
+                        // })
+                        friendsWithMessages.push(msg)
+                    }
+                }
+            })
         });
+        setTimeout(function(){
+            response.json({
+                friendsWithMessages:friendsWithMessages,
+                friendsWithOutMessages: friendsWithOutMessages,
+            });
+        },1000)
+
+        // User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
+
+        //     if(err){
+        //         response.json({
+        //             error:err
+        //         });
+        //     }else{
+        //         response.json({
+        //             users:users
+        //         });
+        //     }
+        // });
     });
 });
 
@@ -138,8 +173,7 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
                             user2.save(function(err){
                                 if(err) console.log(err)
                                 else{
-                                    Message.remove({'users':{$all:users}}).exec(function(err,messages){
-                                        console.log(messages)
+                                    Message.remove({'users':{$all:users}}).exec(function(err){
                                         if(err) console.log(err)
                                         else{
                                             response.json({
@@ -151,7 +185,6 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
                             });
                         }
                     });
-
                 }
             });
 
