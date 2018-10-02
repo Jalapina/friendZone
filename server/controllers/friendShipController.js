@@ -98,6 +98,9 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
 
     const userParams = request.params.user
     const friendId = request.params.friend
+    let users = []
+    
+    users.push(userParams,friendId)
 
     User.findById(userParams,function(err,user){
 
@@ -108,7 +111,7 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
             if(element.userId == friendId){
                 
                 user.friendlist.splice(index,1)
-                console.log("friendlist delete",user.friendlist)
+
                 user.save(function(err){
                     if(err) console.log(err)
                 })
@@ -116,7 +119,7 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
 
         });
         User.findById(friendId,function(err,user2){
-            console.log(user2)
+
             const friendList2 = user2.friendlist
 
             if(err){
@@ -128,17 +131,22 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
                 if(friends.userId == userParams){
 
                     user2.friendlist.splice(idx,1)
-                    console.log("friendList delete 2",user2.friendlist)
-            
+
                     user2.save(function(err){
                         if(err) console.log(err);
                         else{
                             user2.save(function(err){
                                 if(err) console.log(err)
                                 else{
-                                    response.json({
-                                        success:true
-                                    })
+                                    Message.remove({'users':{$all:users}}).exec(function(err,messages){
+                                        console.log(messages)
+                                        if(err) console.log(err)
+                                        else{
+                                            response.json({
+                                                success:true
+                                            })
+                                        }
+                                    });                                      
                                 }
                             });
                         }
