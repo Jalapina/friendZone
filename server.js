@@ -30,7 +30,4 @@ app.all('*',(req,res,next) =>{
     res.sendfile(path.resolve('./client/dist/index.html'))
 });
 
-app.listen(8000, function(){
-    console.log('Running on port 8000')
-});
-
+app.listen(8000, function(){});

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendshipService } from '../_services/friendship.service'
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-friends',
@@ -19,6 +20,13 @@ export class FriendsComponent implements OnInit {
   getFriends(){
     this.friendshipService.getFriends(this.user).subscribe(data=>{
       this.friendList = data['users'].reverse()
+      console.log(this.friendList)
+    })
+  }
+
+  unFriend(friend){
+    this.friendshipService.unFriend(this.user,friend).subscribe(data=>{
+      this.getFriends()
     })
   }
 

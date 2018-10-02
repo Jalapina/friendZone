@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const User = mongoose.model('User');
+const Message = mongoose.model('Message')
 
 router.post('/friendships/create', function(request,response){
     
@@ -28,10 +29,12 @@ router.post('/friendships/create', function(request,response){
                 err:err
             });
         }else{
-            array = user.friendlist
-            array.forEach(element => {
-                if(element.userId == reciever){
-                    response.json({message:"Already friends"})
+            friends = user.friendlist
+            friends.forEach(friend => {
+                if(friend.userId == reciever){
+                    response.json(
+                        {message:"Already friends"}
+                    )
                 }
             });
 
@@ -91,17 +94,60 @@ router.get('/friendships/:id', function(request,response){
     });
 });
 
-router.put('/friendships/:id/:friend',function(request,response){
+router.delete('/friendships/:user/:friend/delete',function(request,response){
 
-    const user = request.params.id
+    const userParams = request.params.user
     const friendId = request.params.friend
 
-    User.findById(user,function(err,user){
-        user.friendlist.forEach(element =>{
+    User.findById(userParams,function(err,user){
+
+        const friendList = user.friendlist
+        
+        friendList.forEach(function(element,index){
+
             if(element.userId == friendId){
-                console.log("Friend ",friendId," has been deleted.");
+                
+                user.friendlist.splice(index,1)
+                console.log("friendlist delete",user.friendlist)
+                user.save(function(err){
+                    if(err) console.log(err)
+                })
             }
+
         });
+        User.findById(friendId,function(err,user2){
+            console.log(user2)
+            const friendList2 = user2.friendlist
+
+            if(err){
+                console.log(err);
+            }
+
+            friendList2.forEach(function(friends,idx){
+
+                if(friends.userId == userParams){
+
+                    user2.friendlist.splice(idx,1)
+                    console.log("friendList delete 2",user2.friendlist)
+            
+                    user2.save(function(err){
+                        if(err) console.log(err);
+                        else{
+                            user2.save(function(err){
+                                if(err) console.log(err)
+                                else{
+                                    response.json({
+                                        success:true
+                                    })
+                                }
+                            });
+                        }
+                    });
+
+                }
+            });
+
+        });           
     });
 
 });
