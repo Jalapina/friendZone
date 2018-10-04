@@ -76,8 +76,6 @@ router.get('/friendships/:id', function(request,response){
 
         let friendList = user.friendlist
 
-        // console.log(friendList)
-
         friendList.forEach(friend=>{
             if(friend.status == true){
                 friends.push(friend.userId);
@@ -86,7 +84,7 @@ router.get('/friendships/:id', function(request,response){
 
         friends.forEach(friend=>{
 
-            Message.findOne(({'users':{$all:[request.params.id,friend]}})).populate("users","first_name image").select("message users").exec(function(err,msg){
+            Message.findOne(({'users':{$all:[request.params.id,friend]}})).sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){
@@ -97,35 +95,46 @@ router.get('/friendships/:id', function(request,response){
                             }
                         })
                     }else{
-                        // msg.users.forEach(function(userName,index){
-                        //     if(friend != userName._id){
-                        //         console.log(userName.first_name)
-                        //     }
-                        // })
-                        friendsWithMessages.push(msg)
+
+                        let users =  msg.users
+                        users.forEach(function(userInMessageArray,index){
+                            if(request.params.id == userInMessageArray._id){
+                                // console.log(userInMessageArray.first_name,index)
+                                msg.users.splice(index,1)
+                
+                            }
+                        });
+
+                        friendsWithMessages.push(msg);
+
                     }
                 }
-            })
+            });
         });
+
         setTimeout(function(){
+
+            length = friendsWithMessages.length
+
+            for(var x = 0; x < length; x++){
+
+                let temp = friendsWithMessages[x];
+
+                for (var j = x - 1; j >= 0 && friendsWithMessages[j].createdAt.getTime() < temp.createdAt.getTime(); j--) {
+                    friendsWithMessages[j + 1] = friendsWithMessages[j];
+                }
+
+                friendsWithMessages[j + 1] = temp
+
+            }
+
             response.json({
                 friendsWithMessages:friendsWithMessages,
                 friendsWithOutMessages: friendsWithOutMessages,
             });
-        },1000)
 
-        // User.find({'_id':{$in:friends}}).select("first_name image").exec(function(err,users){
+        },200);
 
-        //     if(err){
-        //         response.json({
-        //             error:err
-        //         });
-        //     }else{
-        //         response.json({
-        //             users:users
-        //         });
-        //     }
-        // });
     });
 });
 
@@ -133,9 +142,9 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
 
     const userParams = request.params.user
     const friendId = request.params.friend
-    let users = []
+    let users = [];
     
-    users.push(userParams,friendId)
+    users.push(userParams,friendId);
 
     User.findById(userParams,function(err,user){
 
@@ -149,7 +158,7 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
 
                 user.save(function(err){
                     if(err) console.log(err)
-                })
+                });
             }
 
         });
@@ -165,20 +174,20 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
 
                 if(friends.userId == userParams){
 
-                    user2.friendlist.splice(idx,1)
+                    user2.friendlist.splice(idx,1);
 
                     user2.save(function(err){
                         if(err) console.log(err);
                         else{
                             user2.save(function(err){
-                                if(err) console.log(err)
+                                if(err) console.log(err);
                                 else{
                                     Message.remove({'users':{$all:users}}).exec(function(err){
                                         if(err) console.log(err)
                                         else{
                                             response.json({
                                                 success:true
-                                            })
+                                            });
                                         }
                                     });                                      
                                 }
