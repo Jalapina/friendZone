@@ -11,15 +11,18 @@ router.post('/friendships/create', function(request,response){
     let status = request.body.like
     let sender = request.body.userId
     let reciever = request.body.id
+    let createdAt = Date.now()
     
     friendReciever = {
         userId: sender,
         status: status,
+        createdAt: createdAt,
     }
 
     friendRequest = {
         userId: reciever,
         status: status,
+        createdAt: createdAt,        
     }
 
     User.findById(sender,function(err,user){
@@ -72,36 +75,28 @@ router.get('/friendships/:id', function(request,response){
     friendsWithOutMessages = []
 
     
-    User.findById(request.params.id).select('friendlist').exec(function(err,user){
+    User.findById(request.params.id).select('friendlist').populate('friendlist.userId','first_name image').exec(function(err,user){
 
         let friendList = user.friendlist
-
+        
         friendList.forEach(friend=>{
             if(friend.status == true){
-                friends.push(friend.userId);
+                friends.push(friend);
             }
         });
 
         friends.forEach(friend=>{
-
-            Message.findOne(({'users':{$all:[request.params.id,friend]}})).sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
+            Message.findOne(({'users':{$all:[request.params.id,friend.userId._id]}})).sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){
-                        User.find(friend).select("first_name image").exec(function(err,friendWithName){
-                            if(err) console.log(err);
-                            else{
-                                friendsWithOutMessages.push(friendWithName)
-                            }
-                        })
+                        friendsWithOutMessages.push(friend)
                     }else{
 
                         let users =  msg.users
                         users.forEach(function(userInMessageArray,index){
                             if(request.params.id == userInMessageArray._id){
-                                // console.log(userInMessageArray.first_name,index)
                                 msg.users.splice(index,1)
-                
                             }
                         });
 
@@ -113,27 +108,34 @@ router.get('/friendships/:id', function(request,response){
         });
 
         setTimeout(function(){
-
-            length = friendsWithMessages.length
-
-            for(var x = 0; x < length; x++){
-
-                let temp = friendsWithMessages[x];
-
-                for (var j = x - 1; j >= 0 && friendsWithMessages[j].createdAt.getTime() < temp.createdAt.getTime(); j--) {
-                    friendsWithMessages[j + 1] = friendsWithMessages[j];
-                }
-
-                friendsWithMessages[j + 1] = temp
-
-            }
+            // console.log(friendsWithOutMessages)
+            insertionSortForMessages(friendsWithMessages)
+            insertionSortForMessages(friendsWithOutMessages)
 
             response.json({
                 friendsWithMessages:friendsWithMessages,
                 friendsWithOutMessages: friendsWithOutMessages,
             });
 
-        },200);
+        },300);
+
+        function insertionSortForMessages(array){
+
+            length = array.length
+            
+            for(var x = 0; x < length; x++){
+
+                let temp = array[x];
+
+                for (var j = x - 1; j >= 0 && array[j].createdAt.getTime() < temp.createdAt.getTime(); j--) {
+                    array[j + 1] = array[j];
+                }
+
+                array[j + 1] = temp
+
+            }
+
+        }
 
     });
 });

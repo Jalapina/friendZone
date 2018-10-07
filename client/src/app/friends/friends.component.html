@@ -1,13 +1,13 @@
 <app-header></app-header>
+
 <div class="container">
 
   <p class="head">The Friend Zone</p>
 
   <div class="unmessaged-friends">
     <ul class="ul-container" *ngFor="let friend of friendsWithOutMessages">
-      <li class="unmessaged-friend" [routerLink]="['/chat',friend[0]._id]" *ngIf="friend[0].image.length > 0"><img class="image" [src]="friend[0].image[0]" alt="User Image" height="55px" width="55px"></li>
-      <li class="unmessaged-friend" [routerLink]="['/chat',friend[0]._id]" *ngIf="friend[0].image.length == 0"><img  class="image" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="" height="55px" width="55px"></li>
-      
+      <li class="unmessaged-friend" [routerLink]="['/chat',friend.userId._id]" *ngIf="friend.userId.image.length > 0"><img class="image" [src]="friend.userId.image[0]" alt="User Image" height="55px" width="55px"></li>
+      <li class="unmessaged-friend" [routerLink]="['/chat',friend.userId._id]" *ngIf="friend.userId.image.length == 0"><img  class="image" src="" alt="" height="55px" width="55px"></li>
     </ul>
   </div>
 
@@ -18,28 +18,9 @@
       </li>
       <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message.text}}</p>
       <p class="name">{{friend.users[0].first_name}}</p>
-      <div class="unfriend" (click)="unFriend(friend.users[1]._id)">UnFriend</div>
+      <div class="unfriend" (click)="unFriend(friend.users[0]._id)">UnFriend</div>
       
     </ul>
   </div>
-
-  <!-- <div >
-    <ul *ngFor="let friend of friendList">
-
-      <li class="friend">
-        
-        <div class="photo" [routerLink]="['/chat',friend._id]"><img class="image" [src]="friend.image[0]" alt="" height="60px" width="60px"></div>
-        <div class="photo" [routerLink]="['/chat',friend._id]" *ngIf="friend.image.length == 0"><img class="image" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="" height="60px" width="60px"></div>
-        
-        <div class="username" [routerLink]="['/chat',friend._id]">
-          <p class="name">{{friend.first_name}}</p>
-        </div>
-
-        <div class="unfriend" (click)="unFriend(friend._id)">UnFriend</div>
-
-      </li>
-
-    </ul>
-  </div> -->
 
 </div>

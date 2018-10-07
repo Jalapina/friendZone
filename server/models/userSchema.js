@@ -82,6 +82,9 @@ let userSchema = mongoose.Schema({
         status:{
             type:Boolean,
         },
+        createdAt:{
+            type:Date
+        }
     }],
 },{
     timestamps: true,   
