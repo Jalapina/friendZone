@@ -22,7 +22,9 @@
         
     </div>
 
-    <div class="pending chatBox" *ngIf="chat === undefined"></div>
+    <div class="pending chatBox" *ngIf="chat === undefined">
+        <p (click)="unFriend()" class="unfriend">UnFriend</p>
+    </div>
     
 </div>
 <form class="message-form" (submit)="sendMessage()">

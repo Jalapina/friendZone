@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { MessageService } from '../_services/message.service'
-// import {  }
+import { FriendshipService } from '../_services/friendship.service'
+import { Router } from '@angular/router'
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -9,7 +11,7 @@ import { MessageService } from '../_services/message.service'
 })
 export class MessageComponent implements OnInit {
 
-  constructor( private messageService:MessageService, private _params:ActivatedRoute) { }
+  constructor( private messageService:MessageService, private _router:Router, private _params:ActivatedRoute, private friendshipService:FriendshipService) { }
 
   friend = this._params.snapshot.params['id']; 
   user = JSON.parse(localStorage.getItem('user'));
@@ -22,14 +24,12 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.getMessages()
-    console.log(this.user)
   }
 
   getMessages(){
     
     this.messageService.getMessages(this.user,this.friend).subscribe(messages=>{
       if(messages['chat'].length > 0){
-        console.log(messages['chat'])
         this.reciever = messages['chat'][0].users[0].first_name
         this.sender = messages['chat'][0].users[1].first_name
         this.chat = messages['chat']
@@ -48,6 +48,12 @@ export class MessageComponent implements OnInit {
       this.message.message = ''
     });
 
+  }
+
+  unFriend(){
+    this.friendshipService.unFriend(this.user,this.friend).subscribe(data=>{
+      this._router.navigateByUrl('/friends');      
+    })
   }
 
 }
