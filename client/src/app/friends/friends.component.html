@@ -6,20 +6,22 @@
 
   <div class="unmessaged-friends">
     <ul class="ul-container" *ngFor="let friend of friendsWithOutMessages">
-      <li class="unmessaged-friend" [routerLink]="['/chat',friend.userId._id]" *ngIf="friend.userId.image.length > 0"><img class="image" [src]="friend.userId.image[0]" alt="User Image" height="55px" width="55px"></li>
-      <li class="unmessaged-friend" [routerLink]="['/chat',friend.userId._id]" *ngIf="friend.userId.image.length == 0"><img  class="image" src="" alt="" height="55px" width="55px"></li>
+      <li class="unmessaged-friend" [routerLink]="['/chat',friend.userId._id]" > 
+        <img class="image" *ngIf="friend.userId.image.length > 0" [src]="friend.userId.image[0]" height="55px" width="55px">
+        <img class="image" *ngIf="friend.userId.image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
+      </li>
     </ul>
   </div>
 
   <div class="messages-friends">
     <ul class="ul-container2" *ngFor="let friend of friendsWithMessages">
       <li class="messaged-friend">
-        <img class="image" [src]="friend.users[0].image[0]" alt="User Image" height="55px" width="55px">
+        <img class="image" *ngIf="friend.users[0].image.length > 0" [src]="friend.users[0].image[0]" alt="User Image" height="55px" width="55px">
+        <img class="image" *ngIf="friend.users[0].image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
+        <p class="name">{{friend.users[0].first_name}}</p>
+        <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message.text}}</p>
+        <div class="unfriend" (click)="unFriend(friend.users[0]._id)">UnFriend</div>
       </li>
-      <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message.text}}</p>
-      <p class="name">{{friend.users[0].first_name}}</p>
-      <div class="unfriend" (click)="unFriend(friend.users[0]._id)">UnFriend</div>
-      
     </ul>
   </div>
 

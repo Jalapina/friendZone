@@ -37,7 +37,7 @@ router.post('/friendships/create', function(request,response){
                 if(friend.userId == reciever){
                     response.json(
                         {message:"Already friends"}
-                    )
+                    );
                 }
             });
 
