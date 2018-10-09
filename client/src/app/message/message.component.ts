@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { MessageService } from '../_services/message.service'
 import { FriendshipService } from '../_services/friendship.service'
+import { UserService } from '../_services/user.service'
 import { Router } from '@angular/router'
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router'
 })
 export class MessageComponent implements OnInit {
 
-  constructor( private messageService:MessageService, private _router:Router, private _params:ActivatedRoute, private friendshipService:FriendshipService) { }
+  constructor( private messageService:MessageService, private userService:UserService , private _router:Router, private _params:ActivatedRoute, private friendshipService:FriendshipService) { }
 
   friend = this._params.snapshot.params['id']; 
   user = JSON.parse(localStorage.getItem('user'));
@@ -28,14 +29,22 @@ export class MessageComponent implements OnInit {
 
   getMessages(){
     
-    this.messageService.getMessages(this.user,this.friend).subscribe(messages=>{
-      if(messages['chat'].length > 0){
-        this.reciever = messages['chat'][0].users[0].first_name
-        this.sender = messages['chat'][0].users[1].first_name
-        this.chat = messages['chat']
+    this.messageService.getMessages(this.user,this.friend).subscribe(data=>{
+      if(data['chat']){
+        this.reciever = data['chat'][0].users[0].first_name
+        this.sender = data['chat'][0].users[1].first_name
+        this.chat = data['chat']
+      }else{
+        this.firstName = data['user'].first_name
       }
     });
     
+  }
+
+  getUserName(){
+    this.userService.getUserName(this.friend).subscribe(data=>{
+      console.log(data)
+    });
   }
 
   sendMessage(){

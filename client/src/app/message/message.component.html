@@ -23,6 +23,7 @@
     </div>
 
     <div class="pending chatBox" *ngIf="chat === undefined">
+        <p class="first-name">{{firstName}}</p>
         <p (click)="unFriend()" class="unfriend">UnFriend</p>
     </div>
     
