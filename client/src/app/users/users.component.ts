@@ -48,6 +48,8 @@ export class UsersComponent implements OnInit {
 
     this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users'];
+      // this.cards.reverse()
+      console.log(this.cards)
     });
 
   }

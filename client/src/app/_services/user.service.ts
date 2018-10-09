@@ -52,7 +52,11 @@ export class UserService {
   }
 
   getUser(id){
-    return this._http.get('/api/users/'+ id)
+    return this._http.get('/api/users/'+id)
+  }
+
+  getUserName(id){
+    return this._http.get('/api/users/'+id+'/name')
   }
 
   deleteUser(id){
