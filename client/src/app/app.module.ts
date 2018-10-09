@@ -24,7 +24,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
 import { SwingModule } from 'angular2-swing';
-import { SlideshowModule } from 'ng-simple-slideshow';
 import { ProfilePreviewComponent } from './profile-preview/profile-preview.component';
 import { HeaderComponent } from './_shared/header/header.component';
 import { LandingHeaderComponent } from './_shared/landing-header/landing-header.component';
@@ -56,7 +55,6 @@ import { LandingHeaderComponent } from './_shared/landing-header/landing-header.
     SwingModule,
     CommonModule,
     ImageUploadModule.forRoot(),  
-    SlideshowModule,  
   ],
   exports:[
     HeaderComponent

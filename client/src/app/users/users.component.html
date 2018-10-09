@@ -4,8 +4,8 @@
   
     <div class="card" #mycards1 swing-card *ngFor="let user of cards" >
       
-        <div class="profile-image">
-            <slideshow [imageUrls]="user.image" [showArrows]="false"></slideshow>
+        <div class="profile-image" >
+            <img *ngFor="let image of user.image" class="gallary" [src]="image" alt="">
         </div>
 
         <div class="profile-bio">

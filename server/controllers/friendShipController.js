@@ -33,35 +33,36 @@ router.post('/friendships/create', function(request,response){
             });
         }else{
             friends = user.friendlist
+            console.log(friends)
             friends.forEach(friend => {
                 if(friend.userId == reciever){
-                    response.json(
+                    return response.json(
                         {message:"Already friends"}
                     );
                 }
-            });
+        });
 
-            user.friendlist.push(friendRequest);
+        user.friendlist.push(friendRequest);
 
-            User.findById(reciever,function(err,user2){
-                if(err){
-                    response.json({error:err});
-                }else{
-                    friendList = user2.friendlist
-                    friendList.forEach(element => {
-                        if(element.userId == sender){
-                            response.json({message:"Already friends"})
-                        }
-                    });
-                    user2.friendlist.push(friendReciever);
-                    user2.save();
-                };
-            });
-            user.save(function(err){
-                if(err){
-                    response.json({error:err});
-                }
-            });
+        User.findById(reciever,function(err,user2){
+            if(err){
+                response.json({error:err});
+            }else{
+                friendList = user2.friendlist
+                friendList.forEach(element => {
+                    if(element.userId == sender){
+                        response.json({message:"Already friends"})
+                    }   
+                });
+                user2.friendlist.push(friendReciever);
+                user2.save();
+            };
+        });
+        user.save(function(err){
+            if(err){
+                response.json({error:err});
+            }
+        });
         }
     });
 
