@@ -7,7 +7,7 @@
 
             <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
                 <p class="name">{{message.sender.first_name}}</p>
-                <p class="message">{{message.message.text}}
+                <p class="message">{{message.message}}
                 </p>
 
                 <!-- <span class="time-right">{{message.createdAt | date: format : timezone}}</span> -->
@@ -15,7 +15,7 @@
 
             <li class="speech-bubble left-bubble" *ngIf="user != message.sender._id">
                 <p class="name">{{message.sender.first_name}}</p>                    
-                <p class="message">{{message.message.text}}</p>
+                <p class="message">{{message.message}}</p>
                 <!-- <span class="time-left">{{message.createdAt | date: format : timezone}}</span> -->
             </li>
         </ul>

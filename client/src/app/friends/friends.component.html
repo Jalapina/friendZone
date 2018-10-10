@@ -19,7 +19,7 @@
         <img class="image" *ngIf="friend.users[0].image.length > 0" [src]="friend.users[0].image[0]" alt="User Image" height="55px" width="55px">
         <img class="image" *ngIf="friend.users[0].image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
         <p class="name">{{friend.users[0].first_name}}</p>
-        <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message.text}}</p>
+        <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message}}</p>
         <div class="unfriend" (click)="unFriend(friend.users[0]._id)">UnFriend</div>
       </li>
     </ul>

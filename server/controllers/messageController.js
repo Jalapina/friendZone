@@ -9,15 +9,14 @@ router.post('/messages/create', function(request,response){
     let users = [];
 
     users.push(request.body.sender,request.body.reciever);
+
     let sender = mongoose.Types.ObjectId(request.body.sender);
     let reciever = mongoose.Types.ObjectId(request.body.reciever);
     
     let message = new Message({
         sender:sender,
         users:[sender,reciever],
-        message:{
-            text:request.body.message
-        },
+        message:request.body.message,
     });
 
     message.save(function(err,result){
@@ -27,7 +26,6 @@ router.post('/messages/create', function(request,response){
                 error:err
             })
         }else{
-            console.log(result)
             response.json({
                 message:"message sent."
             })
@@ -51,16 +49,18 @@ router.get('/messages/:sender/:reciever', function(request,response){
             User.findById(request.params.reciever).select('first_name').exec(function(err,user){
                 
                 if(err) return response.json({err:err,message:"NO USER"})
-                console.log(user)
+
                 response.json({
                     user:user
                 });
+
             });
         }else{
-            console.log(chat)
+
             response.json({
                 chat:chat
             });
+            
         }
     });
 });
