@@ -1,10 +1,21 @@
 .categories
-    padding: 10px
     border-radius: 15px
     width: 334px
-    margin: 10px auto
+    margin: 5px auto
     background: #757575
+    height: 85%
+    padding: 10px
+    overflow: scroll
+    -webkit-box-shadow: 0px 7px 40px 1px #888888
     box-shadow: 0px 7px 40px 1px #888888
+    -ms-overflow-style: none !important
+    overflow: -moz-scrollbars-none !important
+
+.categories::-webkit-scrollbar
+    display: none !important
+    -ms-overflow-style: none !important
+    overflow: -moz-scrollbars-none !important
+
 img
     height: 170px
     width: 334px
@@ -12,6 +23,7 @@ img
 .category
     height: 170px
     margin-top: 10px
+    margin: auto
     width: 336px
     cursor: pointer
     position: relative
