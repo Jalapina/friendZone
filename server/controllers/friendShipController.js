@@ -10,12 +10,13 @@ router.post('/friendships/create', function(request,response){
     let status = request.body.like
     let user = request.body.userId
     let reciever = request.body.id
-    
+    let activity = request.body.activity
 
     let newFriendShip = new FriendShip({
         status: status,
+        activity: activity,
         user: user,
-        users: [user,reciever]
+        users: [user,reciever],
     });
 
     newFriendShip.save(function(err,friendShip){

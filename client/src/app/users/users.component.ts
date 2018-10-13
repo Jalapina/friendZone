@@ -29,6 +29,8 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers()
+    console.log(this.term)
+    
   }
 
   calculateAge(birthday) {
@@ -48,8 +50,6 @@ export class UsersComponent implements OnInit {
 
     this._userService.getUsers(this.data).subscribe(result => {
       this.cards = result['users'];
-      // this.cards.reverse()
-      console.log(this.cards)
     });
 
   }
@@ -74,6 +74,7 @@ export class UsersComponent implements OnInit {
     this.friend.like = like
     this.friend.userId = this.user
     this.friend.id = id
+    this.friend.activity = this.term
 
     this._friendshipService.create(this.friend);
     

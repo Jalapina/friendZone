@@ -4,8 +4,12 @@ const Schema = mongoose.Schema;
 
 const friendShipSchema = mongoose.Schema({
     status:{
-        type:Boolean
+        type:Boolean,
     },
+    activity:{
+        type: String,
+    }
+    ,
     user:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
