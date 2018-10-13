@@ -38,7 +38,6 @@ export class MessageComponent implements OnInit {
         this.firstName = data['user'].first_name
       }
     });
-    
   }
 
   getUserName(){

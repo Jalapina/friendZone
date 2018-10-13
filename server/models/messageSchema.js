@@ -8,10 +8,11 @@ const messageSchema = mongoose.Schema({
         required:true,
     },
     users:[{
-        type:mongoose.Schema.Types.ObjectId, ref:'User', required:true
+        type:mongoose.Schema.Types.ObjectId, 
+        ref:'User',
+        required:true,
     }],
     sender: { type:mongoose.Schema.Types.ObjectId, ref:'User' },
-    // reciever: { type:mongoose.Schema.Types.ObjectId, ref:'User' },
     read: { type:Date }
 },
 {

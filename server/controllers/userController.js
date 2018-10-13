@@ -171,32 +171,55 @@ router.post('/users/create', function(request,response){
 });
 
 router.get('/users/:id/:term', function(request,response){
-    
+
     let friendList = []
-    
-    User.findById(request.params.id).select("friendlist").exec(function(err,user){
-        // console.log(user)
-        user.friendlist.forEach(element => {
-            friendList.push(element.userId)
+    friendList.push(request.params.id)
+
+    FriendShip.find({'users':request.params.id},function(err,friends){
+        friends.forEach(friend=>{
+            friend.users.forEach(function(id,index){
+                if(id != request.params.id){
+                    friendList.push(id)
+                }
+            });
         });
+    User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
 
         if(err){
-            response.json({error:err})
+            console.log(err);
         }else{
-            friendList.push(request.params.id)
-            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
 
-                if(err){
-                    console.log(err);
-                }else{
-                    response.json({
-                        users:users
-                    });
-                }
-
+            shuffleFriendList(users)
+            response.json({
+                users:users
             });
+
         }
-    }); 
+    });
+
+function shuffleFriendList(array){
+    let counter = array.length
+
+    if(counter > 0){
+        while(counter > 0){
+
+            let index = Math.floor(Math.random() * counter);
+
+            counter--
+            
+            let temp = array[counter];
+            array[counter] = array[index];
+            array[index] = temp;
+
+
+        }
+
+        return array;
+    }
+}
+            
+    });
+
 });
 
 router.get('/me', function(req, res, next){
@@ -261,6 +284,15 @@ router.put('/users/edit', function(request,response){
                         error:err,
                         message:"Error"
                     });
+                }else{
+                    FriendShip.remove({"users":request.body._id,"status":false},function(err){
+                        if(err) console.log(err);
+                        else{
+                            response.json({
+                                success:true                                
+                            })
+                        }
+                    })
                 }
             });
         }

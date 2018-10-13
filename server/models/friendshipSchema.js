@@ -3,29 +3,19 @@ const User = require('./userSchema');
 const Schema = mongoose.Schema;
 
 const friendShipSchema = mongoose.Schema({
-    // status:{
-    //     type:Boolean
-    // },
-    // friend:[ {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // } ],
-    // follower:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     status:{
-    //         type: Boolean,
-    //         default: false,
-    //     }
-    // },
-    // followee:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     status:{
-    //         type: Boolean,
-    //         default: false,
-    //     },
-    // },
+    status:{
+        type:Boolean
+    },
+    user:[ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required:true,  
+    } ],
+    users:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required:true,  
+    }]
 },{
     timestamps: true,    
 });
