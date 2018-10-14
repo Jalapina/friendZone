@@ -15,6 +15,7 @@ export class MessageComponent implements OnInit {
   constructor( private messageService:MessageService, private userService:UserService , private _router:Router, private _params:ActivatedRoute, private friendshipService:FriendshipService) { }
 
   friend = this._params.snapshot.params['id']; 
+  activity = this._params.snapshot.params['term']; 
   user = JSON.parse(localStorage.getItem('user'));
   usersId = [this.friend,this.user]
   message:any = {}
@@ -37,12 +38,6 @@ export class MessageComponent implements OnInit {
       }else{
         this.firstName = data['user'].first_name
       }
-    });
-  }
-
-  getUserName(){
-    this.userService.getUserName(this.friend).subscribe(data=>{
-      console.log(data)
     });
   }
 

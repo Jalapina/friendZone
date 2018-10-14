@@ -6,7 +6,7 @@
 
   <div class="unmessaged-friends">
     <ul class="ul-container" *ngFor="let friend of friendsWithOutMessages">
-      <li class="unmessaged-friend" [routerLink]="['/chat',friend.users[0]._id]" > 
+      <li class="unmessaged-friend" [routerLink]="['/chat',friend.users[0]._id,friend.activity]" > 
         <img class="image" *ngIf="friend.users[0].image.length > 0" [src]="friend.users[0].image[0]" height="55px" width="55px">
         <img class="image" *ngIf="friend.users[0].image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
       </li>
@@ -19,7 +19,7 @@
         <img class="image" *ngIf="friend.users[0].image.length > 0" [src]="friend.users[0].image[0]" alt="User Image" height="55px" width="55px">
         <img class="image" *ngIf="friend.users[0].image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
         <p class="name">{{friend.users[0].first_name}}</p>
-        <p [routerLink]="['/chat',friend.users[0]._id]" class="message-preview">{{friend.message}}</p>
+        <p [routerLink]="['/chat',friend.users[0]._id,friend.activity]" class="message-preview">{{friend.message}}</p>
         <div class="unfriend" (click)="unFriend(friend.users[0]._id)">UnFriend</div>
       </li>
     </ul>

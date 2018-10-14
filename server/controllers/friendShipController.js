@@ -40,7 +40,7 @@ router.get('/friendships/:id', function(request,response){
                 usersIds = id._id
             });        
 
-            Message.findOne(({'users':{$all:usersIds}})).sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
+            Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){
@@ -56,6 +56,8 @@ router.get('/friendships/:id', function(request,response){
                     }else{
 
                         let users =  msg.users
+                        msg.activity = friend.activity
+                        
                         users.forEach(function(userInMessageArray,index){
                             if(request.params.id == userInMessageArray._id){
                                 msg.users.splice(index,1)
@@ -123,7 +125,6 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
                 else{
 
                     Message.remove({'users':{$all:users}}).exec(function(err){
-
                     if(err) console.log(err)
                     else{
                         response.json({

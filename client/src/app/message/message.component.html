@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="container">
-    
+    <p class="activity">{{activity}}</p>            
+        
     <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
-    
         <ul class="bubble-container" *ngFor="let message of chat" >
 
             <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
