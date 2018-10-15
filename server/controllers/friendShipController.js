@@ -116,8 +116,8 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
     FriendShip.findOne({'users':users},function(err,friendship){
 
         if(err) console.log(err);
+
         else{
-            
             friendship.status = false
 
             friendship.save(function(err){

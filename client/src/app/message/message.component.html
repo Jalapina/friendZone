@@ -14,7 +14,7 @@
             </li>
 
             <li class="speech-bubble left-bubble" *ngIf="user != message.sender._id">
-                <p class="name">{{message.sender.first_name}}</p>                    
+                <p class="name" [routerLink]="['/preview',message.sender._id]">{{message.sender.first_name}}</p>                    
                 <p class="message">{{message.message}}</p>
                 <!-- <span class="time-left">{{message.createdAt | date: format : timezone}}</span> -->
             </li>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="pending chatBox" *ngIf="chat === undefined">
-        <p class="first-name">{{firstName}}</p>
+        <p class="first-name" [routerLink]="['/preview',friendId]">{{firstName}}</p>
         <p (click)="unFriend()" class="unfriend">UnFriend</p>
     </div>
     

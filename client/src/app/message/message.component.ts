@@ -22,6 +22,7 @@ export class MessageComponent implements OnInit {
   chat
   firstName
   sender
+  friendId
   reciever
 
   ngOnInit() {
@@ -37,6 +38,7 @@ export class MessageComponent implements OnInit {
         this.chat = data['chat']
       }else{
         this.firstName = data['user'].first_name
+        this.friendId = data['user']._id
       }
     });
   }
