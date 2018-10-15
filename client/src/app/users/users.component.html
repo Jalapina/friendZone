@@ -15,7 +15,8 @@
                 <P class="age">{{ calculateAge(user.birthday) }}</P>
             </div>
 
-            <p class="user-info blur">{{ user.blur }}</p>
+            <p *ngIf="!user.blur" class="user-info blur">{{ user.blur }}</p>
+            <p *ngIf="user.blur" class="user-info blur-focus blur">{{ user.blur }}</p>            
             <p class="user-info bio">{{ user.bio }}</p>
 
             <div *ngIf="user.hobbies.length >= 1"  class="likes">

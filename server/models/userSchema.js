@@ -51,10 +51,10 @@ let userSchema = mongoose.Schema({
     image:[{
         type: String,
     }],
-    blur:[{
+    blur:{
         type: String,
         default: '',
-    }],
+    },
     bio:{
         type:String,
         default: '',

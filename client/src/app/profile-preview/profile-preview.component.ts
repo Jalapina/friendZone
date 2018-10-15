@@ -14,6 +14,7 @@ export class ProfilePreviewComponent implements OnInit {
 
   userId = this.params.snapshot.params['id']; 
   user
+  focus: Boolean = false
 
   ngOnInit() {
     this.getUser()
@@ -22,6 +23,9 @@ export class ProfilePreviewComponent implements OnInit {
   getUser(){
     this.userService.getUser(this.userId).subscribe(data=>{
       this.user = data['user']
+      if(this.user.blur){
+        this.focus = true
+      }
       console.log(this.user)
     })
   }

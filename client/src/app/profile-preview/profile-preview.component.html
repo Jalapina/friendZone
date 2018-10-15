@@ -9,13 +9,13 @@
     <div (click)="isClassVisible = !isClassVisible" class="user-name">
             <p class="name">{{ user.first_name }}</p>
 
-            <p class="activity" *ngIf="user.active == true">{{ user.activity }}</p>
-            <p class="activity" *ngIf="user.active == false">Not Active</p>            
+            <p class="active activity" *ngIf="user.active == true">Active for: {{ user.activity }}</p>
+            <p class="not-activity activity" *ngIf="user.active == false">Not Active</p>            
 
             <P class="age">{{ calculateAge(user.birthday) }}</P>
     </div>
 
-    <p class="user-info blur">
+    <p [ngClass]="{'blur-focus':focus}" class="user-info blur-focus blur">
         {{ user.blur }}
     </p>
     <p class="user-info bio">
