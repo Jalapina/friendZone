@@ -1,37 +1,35 @@
 <app-header></app-header>
 
-<div class="main">
   
-    <div class="card">
+<div class="card">
 
-        <div class="profile-image">
-            <img class="activator" height="300px" width="100%" src="http://materializecss.com/images/office.jpg" alt="Profile Image">
-        </div>
-
-        <div class="profile-bio">
-            
-            <div (click)="isClassVisible = !isClassVisible;" class="profile-name">
-                <p>David</p>
-                <i class="material-icons">more_vert</i>
-            </div>
-            <p>I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!</p>
-
-        </div>
-
-        <div [ngClass]="{'card-show': isClassVisible }" class="card-hide">
-            
-            <div (click)="isClassVisible = !isClassVisible;" class="label">
-                <p>David</p>
-                <i class="material-icons">close</i>
-            </div>
-        
-            <p>
-                I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down! I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!
-                I'm trying to get a quick guitar session going around 4 p.m Friendzone me if you're down!
-            </p>
-
-            <div [ngModel]="itemsAsObjects" ></div>
-
-        </div>
-
+    <div class="profile-image">
+        <img *ngFor="let image of user.image" class="gallary" [src]="image" alt="">
     </div>
+    <div (click)="isClassVisible = !isClassVisible" class="user-name">
+            <p class="name">{{ user.first_name }}</p>
+
+            <p class="activity" *ngIf="user.active == true">{{ user.activity }}</p>
+            <p class="activity" *ngIf="user.active == false">Not Active</p>            
+
+            <P class="age">{{ calculateAge(user.birthday) }}</P>
+    </div>
+
+    <p class="user-info blur">
+        {{ user.blur }}
+    </p>
+    <p class="user-info bio">
+        {{ user.bio }}
+    </p>
+
+    <div *ngIf="user.hobbies.length > 0"  class="likes">
+
+        <p class="like-title">Likes:</p>
+        
+        <div class="hobbies" *ngFor="let hobbie of user.hobbies">
+            <p class="hobbie">{{hobbie}}</p>
+        </div>
+            
+    </div>
+        
+</div>

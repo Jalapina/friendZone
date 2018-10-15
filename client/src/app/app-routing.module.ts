@@ -44,10 +44,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'preview',
+    path: 'preview/:id',
     pathMatch: 'full',
     component: ProfilePreviewComponent,
-    canActivate: [AuthGuard],    
+    canActivate: [AuthGuard],
   },
   {
     path: 'chat/:id/:term',

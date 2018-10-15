@@ -13,7 +13,6 @@ let nameValidator = [
         validator: 'matches',
         arguments: /^[a-zA-Z\-]+$/i,
         message: 'Name should contain characters only'
-      
     })
   ];
 
@@ -73,18 +72,6 @@ let userSchema = mongoose.Schema({
     hobbies:[{
         type:String,
         trim: true,        
-    }],
-	friendlist:[{
-        userId:{
-            type: Schema.Types.ObjectId,
-            ref:"User"
-        },
-        status:{
-            type:Boolean,
-        },
-        createdAt:{
-            type:Date
-        }
     }],
 },{
     timestamps: true,   

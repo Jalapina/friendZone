@@ -197,26 +197,26 @@ router.get('/users/:id/:term', function(request,response){
         }
     });
 
-function shuffleFriendList(array){
-    let counter = array.length
+    function shuffleFriendList(array){
+        let counter = array.length
 
-    if(counter > 0){
-        while(counter > 0){
+        if(counter > 0){
+            while(counter > 0){
 
-            let index = Math.floor(Math.random() * counter);
+                let index = Math.floor(Math.random() * counter);
 
-            counter--
-            
-            let temp = array[counter];
-            array[counter] = array[index];
-            array[index] = temp;
+                counter--
+                
+                let temp = array[counter];
+                array[counter] = array[index];
+                array[index] = temp;
 
 
+            }
+
+            return array;
         }
-
-        return array;
     }
-}
             
     });
 
@@ -251,11 +251,10 @@ module.exports.tokenDecode = function(user, req, res,next) {
 
 router.get('/users/:id',  function(request,response){
 
-    User.findById(request.params.id,{password:0,friendList:0,email:0},function(err,user){
+    User.findById(request.params.id,{password:0,email:0,createdAt:0,updatedAt:0},function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
 
         response.json({
-            message:"Here is the user",
             user:user
         });
     });
