@@ -355,6 +355,26 @@ router.put('/users/:id/images',upload.single("userImage"), function(request, res
 
 });
 
+router.put('/users/:id/setlocation',function(request,response){
+    console.log(request.body,request.params.id)
+    User.findById(request.params.id,function(err,user){
+        if(err) console.log(err);
+        else{
+            user.latitude = request.body.latitude
+            user.longitude = request.body.longitude
+
+            user.save(function(err){
+                if(err) console.log(err);
+                else(
+                    response.json({
+                        success:true,
+                    })
+                )
+            })
+        }
+    })
+})
+
 router.delete('/users/:id/delete',function(request,response){
 
     user = request.params.id

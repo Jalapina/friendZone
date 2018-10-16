@@ -62,5 +62,9 @@ export class UserService {
   deleteUser(id){
     return this._http.delete('/api/users/'+id+'/delete')
   }
+
+  userLocation(coordinates,user){
+    return this._http.put('/api/users/'+user+'/setlocation',coordinates).subscribe()
+  }
   
 }

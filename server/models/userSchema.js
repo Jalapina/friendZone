@@ -44,9 +44,17 @@ let userSchema = mongoose.Schema({
     },
     password:{
         type: String,
-        trim: true,        
+        trim: true,      
         require: true,
         minlength: [5,"Password Must Be Longer Than 5 Characters"],
+    },
+    latitude:{
+        type:String,  
+        trim: true,              
+    },
+    longitude:{
+        type:String,
+        trim: true,              
     },
     image:[{
         type: String,
