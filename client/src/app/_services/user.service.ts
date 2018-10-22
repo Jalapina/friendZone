@@ -25,7 +25,6 @@ export class UserService {
     return this._http.post('/api/users/create',user)
     .map((data) => {
       const token = data['token'];
-      
       localStorage.setItem('token', token); 
     });
 
@@ -35,16 +34,16 @@ export class UserService {
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
 
-  imageUpload(id,image){
-    return this._http.put('/api/users/'+ id +'/images/',image)
+  imageUpload(imageFile){
+    return this._http.put('/api/users/images/',imageFile)
   }
 
-  imageDelete(id,imageFile){
-    return this._http.delete('/api/users/'+id+'/images/'+imageFile)
+  imageDelete(imageFile){
+    return this._http.delete('/api/users/images/'+imageFile)
   }
 
-  getUsers(data){
-    return this._http.get('/api/users/'+data.user+'/'+data.term)
+  getUsers(term){
+    return this._http.get('/api/users/'+term+'/activity')
   }
 
   editUser(userInfo){
@@ -60,11 +59,11 @@ export class UserService {
   }
 
   deleteUser(id){
-    return this._http.delete('/api/users/'+id+'/delete')
+    return this._http.delete('/api/users/delete')
   }
 
-  userLocation(coordinates,user){
-    return this._http.put('/api/users/'+user+'/setlocation',coordinates).subscribe()
+  userLocation(coordinates){
+    return this._http.put('/api/users/setlocation',coordinates).subscribe()
   }
   
 }

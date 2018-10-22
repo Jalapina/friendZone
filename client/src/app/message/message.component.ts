@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
 
   friend = this._params.snapshot.params['id']; 
   activity = this._params.snapshot.params['term']; 
-  user = JSON.parse(localStorage.getItem('user'));
+  user
   usersId = [this.friend,this.user]
   message:any = {}
   chat
@@ -32,6 +32,7 @@ export class MessageComponent implements OnInit {
   getMessages(){
     
     this.messageService.getMessages(this.user,this.friend).subscribe(data=>{
+      console.log(data)
       if(data['chat']){
         this.reciever = data['chat'][0].users[0].first_name
         this.sender = data['chat'][0].users[1].first_name

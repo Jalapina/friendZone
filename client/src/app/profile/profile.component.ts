@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
 
   imageUpload(event) {
     let image = <File>event.target.files[0]
-    // console.log(image.name)
+
     if (!this.validateFile(image.name)) {
         return false;
     }
@@ -66,20 +66,20 @@ export class ProfileComponent implements OnInit {
     let fd = new FormData()
     fd.append('userImage',image,image.name);
 
-    this.userService.imageUpload(this.userId,fd).subscribe(res =>{
+    this.userService.imageUpload(fd).subscribe(res =>{
       setTimeout(()=>{
         this.getUser()
-      }, 1000)
+      }, 100)
     });
     
   }
   
-  deleteImage(event){
+  deleteImage(image){
 
-    this.userService.imageDelete(this.userId,event).subscribe(res => {
+    this.userService.imageDelete(image).subscribe(res => {
       setTimeout(()=>{
         this.getUser()
-      }, 800)
+      }, 100)
     });
 
   }
@@ -97,7 +97,6 @@ export class ProfileComponent implements OnInit {
   userActive(){
     this.userIsActive = !this.userIsActive
     this.userActivation.active = this.userIsActive
-    this.userActivation.user = this.userId
     this.userService.userActivate(this.userActivation)
   }
 
@@ -112,11 +111,12 @@ export class ProfileComponent implements OnInit {
   }
 
   setUserId(){
-    this.authenticateService.getUserInfo()
+    this.authenticateService.getUserInfo().subscribe(data=>{
+      this.userId = data["id"]
+    })
   }
 
   getUser(){
-    this.userId = JSON.parse(localStorage.getItem('user'))
     this.userService.getUser(this.userId).subscribe( data =>{ 
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
@@ -143,13 +143,9 @@ export class ProfileComponent implements OnInit {
   }
 
   private editUser(){
-    this.userInfo._id = this.userId
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items
     this.userService.editUser(this.userInfo)
-    setTimeout(()=>{
-      this.getUser()
-    }, 1000)
   }
 
   logout(){

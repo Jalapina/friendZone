@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   userInfo(){
-    this._authenticateService.getUserInfo()
+    this._authenticateService.isLoggedIn()
   }
 
   getLocation(){
@@ -35,8 +35,7 @@ export class HomeComponent implements OnInit {
         setTimeout(()=>{
           this.coordinates.latitude = position.coords.latitude
           this.coordinates.longitude = position.coords.longitude
-          this.user = JSON.parse(localStorage.getItem('user'))   
-          this._userService.userLocation(this.coordinates,this.user)  
+          this._userService.userLocation(this.coordinates)  
         },0)
       });      
     }else{

@@ -8,7 +8,7 @@ const FriendShip = mongoose.model('FriendShip');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const secret = 'asdfasdf';
+const secret = 'idontmake11time1996for107you2012';
 
 const store = multer.diskStorage({
     destination:function(request,file,cb){
@@ -170,15 +170,53 @@ router.post('/users/create', function(request,response){
     });
 });
 
-router.get('/users/:id/:term', function(request,response){
+
+
+router.use(function(request, response, next){
+    
+    var token = request.headers['authorization']
+
+    if (!token) return response.status(401).send({ auth: false, message: 'No token provided.' });
+    
+    jwt.verify(token, secret, function(err, decoded) {
+      if (err) return response.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        if (err) return response.status(500).send("There was a problem finding the user.");
+
+        request.decoded = decoded
+
+        next();
+    
+    });
+
+});
+
+router.get('/me',function(request,response) {
+    response.send(request.decoded); 
+});
+
+router.get('/users/:id',  function(request,response){
+
+    User.findById(request.params.id,{password:0,email:0,createdAt:0,updatedAt:0},function(err,user){
+        if(err) return response.json({err:err,message:"NO USER"})
+
+        response.json({
+            user:user
+        });
+    });
+
+});
+router.get('/users/:term/activity', function(request,response){
 
     let friendList = []
-    friendList.push(request.params.id)
+        let user = request.decoded.id
+        friendList.push(user)
+    
+        FriendShip.find({'users':user},function(err,friends){
 
-    FriendShip.find({'users':request.params.id},function(err,friends){
         friends.forEach(friend=>{
             friend.users.forEach(function(id,index){
-                if(id != request.params.id){
+                    if(id != user){
                     friendList.push(id)
                 }
             });
@@ -221,49 +259,9 @@ router.get('/users/:id/:term', function(request,response){
     });
 
 });
-
-router.get('/me', function(req, res, next){
-    
-    var token = req.headers['authorization']
-
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-    
-    jwt.verify(token, secret, function(err, decoded) {
-        // console.log("decoded",decoded)
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-      
-      User.findById(decoded.id).select('first_name').exec(function(err, user) {
-
-        if (err) return res.status(500).send("There was a problem finding the user.");
-        if (!user) return res.status(404).send("No user found.");
-        res.status(200).send(user);
-        // next(user); // add this line
-      });
-    
-    });
-
-});
-
-module.exports.tokenDecode = function(user, req, res,next) {
-    
-    // res.send(user); 
-};
-
-router.get('/users/:id',  function(request,response){
-
-    User.findById(request.params.id,{password:0,email:0,createdAt:0,updatedAt:0},function(err,user){
-        if(err) return response.json({err:err,message:"NO USER"})
-
-        response.json({
-            user:user
-        });
-    });
-
-});
-
 router.put('/users/edit', function(request,response){
 
-    User.findById(request.body._id,function(err,user){
+    User.findById(request.decoded.id,function(err,user){
         if(err){
             console.log(err)
             response.status(404).json({
@@ -284,7 +282,7 @@ router.put('/users/edit', function(request,response){
                         message:"Error"
                     });
                 }else{
-                    FriendShip.remove({"users":request.body._id,"status":false},function(err){
+                    FriendShip.remove({"users":request.decoded.id,"status":false},function(err){
                         if(err) console.log(err);
                         else{
                             response.json({
@@ -298,10 +296,9 @@ router.put('/users/edit', function(request,response){
     });
 
 });
-
 router.put('/users/useractivation', function(request,response){
 
-    User.findById(request.body.user).exec(function(err,user){
+    User.findById(request.decoded.id).exec(function(err,user){
         user.active = request.body.active
         user.save(function(err){
             if(err) response.json({error:err})
@@ -310,9 +307,9 @@ router.put('/users/useractivation', function(request,response){
 
 });
 
-router.delete('/users/:id/images/uploads/:term', function(request,response){
+router.delete('/users/images/uploads/:term', function(request,response){
 
-    User.findById(request.params.id, function(err,user){
+    User.findById(request.decoded.id, function(err,user){
         images = user.image
         string1 = "uploads/"
         file = string1.concat(request.params.term)
@@ -336,9 +333,9 @@ router.delete('/users/:id/images/uploads/:term', function(request,response){
 
 });
 
-router.put('/users/:id/images',upload.single("userImage"), function(request, response) {
+router.put('/users/images',upload.single("userImage"), function(request, response) {
 
-    User.findById(request.params.id,function(err,user){
+    User.findById(request.decoded.id,function(err,user){
         
         if(err){
             console.log(err)
@@ -355,14 +352,13 @@ router.put('/users/:id/images',upload.single("userImage"), function(request, res
 
 });
 
-router.put('/users/:id/setlocation',function(request,response){
-    console.log(request.body,request.params.id)
-    User.findById(request.params.id,function(err,user){
+router.put('/users/setlocation',function(request,response){
+
+    User.findById(request.decoded.id,function(err,user){
         if(err) console.log(err);
         else{
             user.latitude = request.body.latitude
             user.longitude = request.body.longitude
-
             user.save(function(err){
                 if(err) console.log(err);
                 else(
@@ -375,9 +371,9 @@ router.put('/users/:id/setlocation',function(request,response){
     })
 })
 
-router.delete('/users/:id/delete',function(request,response){
+router.delete('/users/delete',function(request,response){
 
-    user = request.params.id
+    user = request.decoded.id
     
     User.findByIdAndRemove(user,function(err,user){
         

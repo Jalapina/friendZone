@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private _userService:UserService, private _friendshipService:FriendshipService, private params:ActivatedRoute) { }
 
-  user = JSON.parse(localStorage.getItem('user'));
+  user 
   term = this.params.snapshot.params['term']; 
 
   ngOnInit() {
@@ -41,12 +41,7 @@ export class UsersComponent implements OnInit {
 
   getUsers(){
 
-    this.data = {
-      user:this.user,
-      term:this.term
-    }
-
-    this._userService.getUsers(this.data).subscribe(result => {
+    this._userService.getUsers(this.term).subscribe(result => {
       this.cards = result['users'];
     });
 

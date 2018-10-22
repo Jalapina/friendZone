@@ -36,8 +36,10 @@ router.post('/messages/create', function(request,response){
 router.get('/messages/:sender/:reciever', function(request,response){
 
     let users = []
-    
-    users.push(request.params.reciever,request.params.sender);
+    let user = request.decoded.id;
+    let friend =  request.params.reciever
+
+    users.push(friend,user);
 
     Message.find({'users':{$all:users}}).populate("users sender","first_name").exec(function(err,chat){
         
@@ -46,21 +48,18 @@ router.get('/messages/:sender/:reciever', function(request,response){
                 error:err
             });
         }else if(chat.length == 0){
-            User.findById(request.params.reciever).select('first_name').exec(function(err,user){
+            User.findById(friend).select('first_name').exec(function(err,user){
                 
                 if(err) return response.json({err:err,message:"NO USER"})
-
                 response.json({
                     user:user
                 });
 
             });
         }else{
-
             response.json({
                 chat:chat
             });
-            
         }
     });
 });

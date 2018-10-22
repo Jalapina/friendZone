@@ -8,7 +8,7 @@ const FriendShip = mongoose.model('FriendShip')
 router.post('/friendships/create', function(request,response){
     
     let status = request.body.like
-    let user = request.body.userId
+    let user = request.decoded.id
     let reciever = request.body.id
     let activity = request.body.activity
 
@@ -33,7 +33,7 @@ router.get('/friendships/:id', function(request,response){
     friendsWithMessages = []
     friendsWithOutMessages = []
 
-    FriendShip.find({'users':request.params.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
+    FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
         
         friends.forEach(friend=>{
             friend.users.forEach(id=>{
@@ -46,7 +46,7 @@ router.get('/friendships/:id', function(request,response){
                     if(msg == null){
 
                         friend.users.forEach(function(user,index){
-                            if(request.params.id == user._id){
+                            if(request.decoded.id == user._id){
                                 friend.users.splice(index,1)
                             }
                         });
@@ -59,7 +59,7 @@ router.get('/friendships/:id', function(request,response){
                         msg.activity = friend.activity
                         
                         users.forEach(function(userInMessageArray,index){
-                            if(request.params.id == userInMessageArray._id){
+                            if(request.decoded.id == userInMessageArray._id){
                                 msg.users.splice(index,1)
                             }
                         });
@@ -107,7 +107,7 @@ router.get('/friendships/:id', function(request,response){
 
 router.delete('/friendships/:user/:friend/delete',function(request,response){
 
-    const userParams = request.params.user
+    const userParams = request.decoded.id
     const friendId = request.params.friend
     let users = [];
     

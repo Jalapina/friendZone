@@ -10,8 +10,8 @@ import { setTimeout } from 'timers';
 export class FriendsComponent implements OnInit {
 
   constructor(private friendshipService:FriendshipService) { }
-  user = JSON.parse(localStorage.getItem('user'));
   friendList = []
+  user
   friendsWithMessages
   friendsWithOutMessages
 

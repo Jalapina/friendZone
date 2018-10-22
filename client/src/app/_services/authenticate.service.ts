@@ -20,12 +20,7 @@ export class AuthenticateService {
 
   getUserInfo(){
     if(this.isLoggedIn()){
-      
       return this._http.get('/api/me')
-      .subscribe(data => {
-        localStorage.setItem('user',JSON.stringify(data['_id']))
-      }
-      )
     }
   }
 
