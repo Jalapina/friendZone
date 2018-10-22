@@ -57,7 +57,7 @@ export class MessageComponent implements OnInit {
   }
 
   unFriend(){
-    this.friendshipService.unFriend(this.user,this.friend).subscribe(data=>{
+    this.friendshipService.unFriend(this.friend).subscribe(data=>{
       this._router.navigateByUrl('/friends');      
     })
   }

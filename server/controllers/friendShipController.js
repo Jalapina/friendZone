@@ -25,7 +25,7 @@ router.post('/friendships/create', function(request,response){
 
 });
 
-router.get('/friendships/:id', function(request,response){
+router.get('/friendships', function(request,response){
 
     friends = []
     image = []
@@ -105,13 +105,13 @@ router.get('/friendships/:id', function(request,response){
 
 });
 
-router.delete('/friendships/:user/:friend/delete',function(request,response){
+router.delete('/friendships/:friend/delete',function(request,response){
 
-    const userParams = request.decoded.id
+    const user = request.decoded.id
     const friendId = request.params.friend
     let users = [];
     
-    users.push(userParams,friendId);
+    users.push(user,friendId);
 
     FriendShip.findOne({'users':users},function(err,friendship){
 
@@ -123,7 +123,6 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
             friendship.save(function(err){
                 if(err) console.log(err);
                 else{
-
                     Message.remove({'users':{$all:users}}).exec(function(err){
                     if(err) console.log(err)
                     else{
@@ -132,7 +131,6 @@ router.delete('/friendships/:user/:friend/delete',function(request,response){
                         });
                     }
                     }); 
-
                 }
             });            
         }

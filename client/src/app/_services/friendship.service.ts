@@ -12,12 +12,12 @@ export class FriendshipService {
     return this._http.post('/api/friendships/create',like).subscribe()
   }
 
-  getFriends(id){
-    return this._http.get('/api/friendships/'+id)
+  getFriends(){
+    return this._http.get('/api/friendships/')
   }
 
-  unFriend(user,friend){
-    return this._http.delete('/api/friendships/'+user+'/'+friend+'/delete')
+  unFriend(friend){
+    return this._http.delete('/api/friendships/'+friend+'/delete')
   }
   
 }
