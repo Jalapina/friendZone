@@ -6,8 +6,8 @@ export class MessageService {
 
   constructor(private _http: HttpClient) { }
 
-  getMessages(sender,reciever){
-    return this._http.get('/api/messages/'+sender+'/'+reciever)
+  getMessages(reciever){
+    return this._http.get('/api/messages/'+reciever)
   }
 
   sendMessage(message:any){

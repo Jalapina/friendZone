@@ -30,9 +30,7 @@ export class MessageComponent implements OnInit {
   }
 
   getMessages(){
-    
-    this.messageService.getMessages(this.user,this.friend).subscribe(data=>{
-      console.log(data)
+    this.messageService.getMessages(this.friend).subscribe(data=>{
       if(data['chat']){
         this.reciever = data['chat'][0].users[0].first_name
         this.sender = data['chat'][0].users[1].first_name
@@ -45,8 +43,6 @@ export class MessageComponent implements OnInit {
   }
 
   sendMessage(){
-
-    this.message.sender = this.user
     this.message.reciever = this.friend
     this.messageService.sendMessage(this.message)
     .subscribe(data=>{

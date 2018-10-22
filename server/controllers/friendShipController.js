@@ -112,9 +112,9 @@ router.delete('/friendships/:friend/delete',function(request,response){
     let users = [];
     
     users.push(user,friendId);
-
+    console.log(users)
     FriendShip.findOne({'users':users},function(err,friendship){
-
+        console.log(friendship)
         if(err) console.log(err);
 
         else{

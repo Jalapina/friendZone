@@ -211,6 +211,12 @@ router.get('/users/:term/activity', function(request,response){
     let friendList = []
         let user = request.decoded.id
         friendList.push(user)
+        User.findById(user,function(err,user){
+            if(err){console.log(err)}
+            else{
+                let userCord = [user.longitude,user.latitude]
+            }
+        });
     
         FriendShip.find({'users':user},function(err,friends){
 

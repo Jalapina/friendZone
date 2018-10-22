@@ -20,14 +20,14 @@ export class FriendsComponent implements OnInit {
   }
 
   getFriends(){
-    this.friendshipService.getFriends(this.user).subscribe(data=>{
+    this.friendshipService.getFriends().subscribe(data=>{
       this.friendsWithMessages = data['friendsWithMessages']
       this.friendsWithOutMessages = data['friendsWithOutMessages']
     })
   }
 
   unFriend(friend){
-    this.friendshipService.unFriend(this.user,friend).subscribe(data=>{
+    this.friendshipService.unFriend(friend).subscribe(data=>{
       this.getFriends()
     })
   }

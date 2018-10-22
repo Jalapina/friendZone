@@ -15,7 +15,7 @@ export class FriendshipService {
   getFriends(){
     return this._http.get('/api/friendships/')
   }
-
+ 
   unFriend(friend){
     return this._http.delete('/api/friendships/'+friend+'/delete')
   }

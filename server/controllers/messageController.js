@@ -8,9 +8,9 @@ router.post('/messages/create', function(request,response){
 
     let users = [];
 
-    users.push(request.body.sender,request.body.reciever);
+    users.push(request.decoded.id,request.body.reciever);
 
-    let sender = mongoose.Types.ObjectId(request.body.sender);
+    let sender = mongoose.Types.ObjectId(request.decoded.id);
     let reciever = mongoose.Types.ObjectId(request.body.reciever);
     
     let message = new Message({
@@ -33,20 +33,20 @@ router.post('/messages/create', function(request,response){
     })
 });
 
-router.get('/messages/:sender/:reciever', function(request,response){
+router.get('/messages/:reciever', function(request,response){
 
     let users = []
     let user = request.decoded.id;
     let friend =  request.params.reciever
-
+    console.log(user)
     users.push(friend,user);
-
+    console.log(users)
     Message.find({'users':{$all:users}}).populate("users sender","first_name").exec(function(err,chat){
-        
+        console.log(chat)
         if(err){
             response.json({
                 error:err
-            });
+        });
         }else if(chat.length == 0){
             User.findById(friend).select('first_name').exec(function(err,user){
                 
