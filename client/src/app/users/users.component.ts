@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router'
 import { StackConfig, Stack, Card, ThrowEvent, DragEvent, SwingStackComponent, SwingCardComponent} from 'angular2-swing';
 import { element } from 'protractor';
 import { userInfo } from 'os';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class UsersComponent implements OnInit {
 
   user 
   term = this.params.snapshot.params['term']; 
+  userCord
 
   ngOnInit() {
     this.getUsers()
@@ -43,6 +45,13 @@ export class UsersComponent implements OnInit {
 
     this._userService.getUsers(this.term).subscribe(result => {
       this.cards = result['users'];
+      this.userCord = result['userCordinates']
+      this.cards.forEach(user=>{
+        let distance = this.getDistance(user.latitude,user.longitude)
+        let age = this.calculateAge(user.birthday)
+        user.birthday = age
+        user.distance = distance
+      })
     });
 
   }
@@ -61,6 +70,26 @@ export class UsersComponent implements OnInit {
     }
 
   }
+
+  rad(x){
+    return x * Math.PI / 180;
+  };
+
+  getDistance(latitude, longitude){
+    
+    var R = 6378137; // Earth’s mean radius in meter
+    var dLat = this.rad(this.userCord.latitude - latitude);
+    var dLong = this.rad(this.userCord.longitude - longitude);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
+      Math.cos(this.rad(this.userCord.latitude) * Math.cos(this.rad(latitude))) *
+      Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    var mile = d * 0.00062137
+
+    return Math.floor(mile)
+    
+  };
 
   create(like:any,id){
 

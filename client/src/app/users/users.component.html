@@ -12,7 +12,8 @@
             
             <div (click)="isClassVisible = !isClassVisible" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
-                <P class="age">{{ calculateAge(user.birthday) }}</P>
+                <P class="distance">{{user.distance}} Mile/s away</P>                
+                <P class="age">{{ user.birthday }}</P>
             </div>
 
             <p *ngIf="!user.blur" class="user-info blur">{{ user.blur }}</p>

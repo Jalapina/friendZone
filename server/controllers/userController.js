@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express')
 const multer = require('multer');
 const fs = require('fs');
-const router = express.Router()
+const router = express.Router();
 const User = mongoose.model('User');
 const FriendShip = mongoose.model('FriendShip');
 const jwt = require('jsonwebtoken');
@@ -55,7 +55,6 @@ router.post('/users/authenticate', function(request,response){
                 message:"Email does not exist"
             });
         }else{ 
-            
             const hash = user.password
 
             bcrypt.compare(password, hash, function(err, res) {
@@ -209,60 +208,68 @@ router.get('/users/:id',  function(request,response){
 router.get('/users/:term/activity', function(request,response){
 
     let friendList = []
-        let user = request.decoded.id
-        friendList.push(user)
-        User.findById(user,function(err,user){
-            if(err){console.log(err)}
-            else{
-                let userCord = [user.longitude,user.latitude]
-            }
-        });
-    
+    let user = request.decoded.id
+    let userCord 
+    friendList.push(user)
+
+    User.findById(user,function(err,user){
+        if(err){console.log(err)}
+        
+        userCord = {
+            latitude:user.latitude,
+            longitude:user.longitude
+        }
+        
         FriendShip.find({'users':user},function(err,friends){
-
-        friends.forEach(friend=>{
-            friend.users.forEach(function(id,index){
-                    if(id != user){
-                    friendList.push(id)
-                }
-            });
-        });
-    User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur bio image hobbies birthday').exec(function(err,users){
-
-        if(err){
-            console.log(err);
-        }else{
-
-            shuffleFriendList(users)
-            response.json({
-                users:users
-            });
-
-        }
-    });
-
-    function shuffleFriendList(array){
-        let counter = array.length
-
-        if(counter > 0){
-            while(counter > 0){
-
-                let index = Math.floor(Math.random() * counter);
-
-                counter--
-                
-                let temp = array[counter];
-                array[counter] = array[index];
-                array[index] = temp;
-
-
-            }
-
-            return array;
-        }
-    }
             
+                    friends.forEach(friend=>{
+                        friend.users.forEach(function(id,index){
+                                if(id != user){
+                                friendList.push(id)
+                            }
+                        });
+                    });
+            
+                    User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur latitude longitude bio image hobbies birthday').exec(function(err,users){
+            
+                        if(err){
+                            console.log(err);
+                        }else{
+            
+                            shuffleFriendList(users)
+                            response.json({
+                                users:users,
+                                userCordinates:userCord
+                            });
+            
+                        }
+                    });
+            
+                    function shuffleFriendList(array){
+                        let counter = array.length
+            
+                        if(counter > 0){
+                            while(counter > 0){
+            
+                                let index = Math.floor(Math.random() * counter);
+            
+                                counter--
+                                
+                                let temp = array[counter];
+                                array[counter] = array[index];
+                                array[index] = temp;
+            
+            
+                            }
+            
+                            return array;
+                        }
+                    }
+                            
+                });
     });
+
+    
 
 });
 router.put('/users/edit', function(request,response){
