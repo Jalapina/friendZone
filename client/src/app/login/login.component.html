@@ -6,8 +6,8 @@
     <input class="form-group form-input" type="password" placeholder="Password" (input)="validate()" name="password" [(ngModel)]="user.password">
     <input class="form-group form-button" [ngClass]="{'form-active': formActive }" type="submit" value="Login">
     <button [routerLink]="['/register']"  class="form-group button-link">Register</button>
+    <p class="forgot-password" [routerLink]="['/password_reset']" >Forgot Password?</p>
     <p class="error-message" *ngIf="message">{{message}}</p>
-    
   </form>
   
 </div>

@@ -8,6 +8,8 @@ const FriendShip = mongoose.model('FriendShip');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const nodemailer = require('nodemailer');
+const xoauth2 = require('xoauth2')
 const secret = 'idontmake11time1996for107you2012';
 
 const store = multer.diskStorage({
@@ -39,7 +41,7 @@ router.post('/users/authenticate', function(request,response){
 
     const email = request.body.email
     const password = request.body.password
-
+    console.log(request.body)
     if(!password){
         response.json({
             message:"No password provided."
@@ -75,7 +77,7 @@ router.post('/users/authenticate', function(request,response){
             });
         }
     })
-});
+}); 
 
 router.post('/users/create', function(request,response){
 
@@ -169,7 +171,58 @@ router.post('/users/create', function(request,response){
     });
 });
 
+router.post('/passwordresetrequest', function(request,response){
 
+    User.find({"email":request.body.email},function(err,user){
+        console.log(user)
+        if(err) console.log(err);
+        else if(user.length < 1){
+            response.json({
+                message:"User does not exist"
+            });
+        }else{
+
+            user.resetToken = jwt.sign({ id: user._id}, secret,{ expiresIn: '24h' });
+            
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
+                auth: {
+                  type: 'OAuth2',
+                  user: 'davidpina14@gmail.com',
+                  clientId: '915853818827-60rrr75hahp9p3ssth8logb819u2ocno.apps.googleusercontent.com',
+                  clientSecret: 'rC7kHod8t14G4R5tURaFPk7e',
+                  refreshToken: '1/yiFzvia1bR11nWhNCGKJQO67jJlrlDEOD35W7ecJRNQ',
+                }
+              });
+
+            let mailOptions = {
+                from: '"friendZone Team" <no-reply@gmail.com>', // sender address
+                to: user[0].email, // list of receivers
+                subject: 'FriendZone Password Reset Request', // Subject line
+                text: 'Hello world?', // plain text body
+                html: '<h1>Click link to reset your password</h1><br><a href="http://localhost:8000/password_reset/token/' + user.resetToken + '">http://localhost/8000/password_reset/token</a>'
+            };
+        
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                response.json({
+                    success:true
+                });
+        
+            });
+        }
+        
+    });
+
+});
+
+router.post('/passwordReset/token/:id', function(request,response){
+
+});
 
 router.use(function(request, response, next){
     
@@ -409,5 +462,7 @@ router.delete('/users/delete',function(request,response){
     });
 
 });
+
+
 
 module.exports = router;

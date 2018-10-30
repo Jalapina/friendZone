@@ -77,6 +77,10 @@ let userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    resetToken:{
+        type: String,
+        require:false,
+    },
     hobbies:[{
         type:String,
         trim: true,        

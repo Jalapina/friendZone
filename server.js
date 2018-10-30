@@ -1,5 +1,5 @@
 const express = require("express");
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
@@ -9,8 +9,9 @@ const userRoutes = require("./server/controllers/userController")
 const messageRoutes = require("./server/controllers/messageController")
 const friendShipRoutes = require("./server/controllers/friendShipController")
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/client/dist'));
 app.use('/uploads',express.static('uploads'));

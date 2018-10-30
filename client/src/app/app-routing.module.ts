@@ -12,6 +12,9 @@ import {MessageComponent} from './message/message.component'
 import {ProfileComponent} from './profile/profile.component'
 import {FriendsComponent} from './friends/friends.component'
 import {ProfilePreviewComponent} from './profile-preview/profile-preview.component'
+import {PasswordResetComponent} from './password-reset/password-reset.component'
+import {PasswordResetConfirmationComponent} from './password-reset-confirmation/password-reset-confirmation.component'
+
 
 const routes: Routes = [
   {
@@ -65,6 +68,16 @@ const routes: Routes = [
     path: 'register',
     pathMatch: 'full',
     component: RegisterComponent,
+  },
+  {
+    path: 'password_reset',
+    pathMatch: 'full',
+    component: PasswordResetComponent,
+  },
+  {
+    path: 'password_reset/token/:id',
+    pathMatch: 'full',
+    component: PasswordResetConfirmationComponent
   },
   { path: '**', redirectTo: '' }
 ];

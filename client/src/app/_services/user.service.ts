@@ -30,6 +30,10 @@ export class UserService {
 
   }
 
+  passwordResetRequest(email){
+    return this._http.post('/api/passwordresetrequest', email)
+  }
+
   userActivate(userActivation){
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
@@ -64,6 +68,10 @@ export class UserService {
 
   userLocation(coordinates){
     return this._http.put('/api/users/setlocation',coordinates).subscribe()
+  }
+
+  resetPassword(passwords){
+    return this._http.post('/api/resetpassword',passwords)
   }
   
 }
