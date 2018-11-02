@@ -70,8 +70,12 @@ export class UserService {
     return this._http.put('/api/users/setlocation',coordinates).subscribe()
   }
 
-  resetPassword(passwords){
-    return this._http.post('/api/resetpassword',passwords)
+  resetPassword(data){
+    return this._http.post('/api/passwordreset',data)
   }
-  
+
+  getUserWithToken(token){
+    console.log('/api/passwordReset/token/'+token)
+    return this._http.get('/api/passwordReset/token/'+token)
+  }
 }

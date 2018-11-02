@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'
+import { ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router'
+
+
 @Component({
   selector: 'app-password-reset-confirmation',
   templateUrl: './password-reset-confirmation.component.html',
@@ -7,13 +11,28 @@ import { UserService } from '../_services/user.service'
 })
 export class PasswordResetConfirmationComponent implements OnInit {
 
-  constructor(private userService:UserService ) { }
+  constructor(private userService:UserService, private params:ActivatedRoute, private route:Router ) { }
+
+  token = this.params.snapshot.params['id'];   
   
   match: Boolean = false
   passwords:any = {}
   message
   success
+  user: any={
+    first_name: '',
+    image: [],
+  }
   ngOnInit() {
+    this.getUserWithToken()
+  }
+
+  getUserWithToken(){
+    console.log(this.token)
+    this.userService.getUserWithToken(this.token).subscribe(data=>{
+      this.user = data["user"]
+      console.log(this.user)
+    });
   }
 
   passwordMatch(){
@@ -30,14 +49,15 @@ export class PasswordResetConfirmationComponent implements OnInit {
       this.message = "Password do not match"
       this.match = false
     }
-
   }
 
   resetPassword(){
-    this.success = true
-    // this.userService.resetPassword(this.passwords).subscribe(data=>{
-    //   console.log(data)
-    // })
+    this.passwords._id = this.user._id
+    this.userService.resetPassword(this.passwords).subscribe(data=>{
+      this.success = true
+      setTimeout(()=>{
+        this.route.navigateByUrl('/login');
+      }, 3000)
+    });
   }
-
 }

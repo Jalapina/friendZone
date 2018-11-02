@@ -77,7 +77,7 @@ let userSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    resetToken:{
+    resettoken:{
         type: String,
         require:false,
     },

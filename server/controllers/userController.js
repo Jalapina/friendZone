@@ -173,8 +173,11 @@ router.post('/users/create', function(request,response){
 
 router.post('/passwordresetrequest', function(request,response){
 
-    User.find({"email":request.body.email},function(err,user){
-        console.log(user)
+    User.find({email:request.body.email},function(err,user){
+
+        _user = user[0]
+        console.log(_user)
+        console.log(_user)
         if(err) console.log(err);
         else if(user.length < 1){
             response.json({
@@ -182,45 +185,84 @@ router.post('/passwordresetrequest', function(request,response){
             });
         }else{
 
-            user.resetToken = jwt.sign({ id: user._id}, secret,{ expiresIn: '24h' });
+            _user.resettoken = jwt.sign({ id: _user._id}, secret,{ expiresIn: '24h' });
             
-            const transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-                auth: {
-                  type: 'OAuth2',
-                  user: 'davidpina14@gmail.com',
-                  clientId: '915853818827-60rrr75hahp9p3ssth8logb819u2ocno.apps.googleusercontent.com',
-                  clientSecret: 'rC7kHod8t14G4R5tURaFPk7e',
-                  refreshToken: '1/yiFzvia1bR11nWhNCGKJQO67jJlrlDEOD35W7ecJRNQ',
-                }
-              });
-
-            let mailOptions = {
-                from: '"friendZone Team" <no-reply@gmail.com>', // sender address
-                to: user[0].email, // list of receivers
-                subject: 'FriendZone Password Reset Request', // Subject line
-                text: 'Hello world?', // plain text body
-                html: '<h1>Click link to reset your password</h1><br><a href="http://localhost:8000/password_reset/token/' + user.resetToken + '">http://localhost/8000/password_reset/token</a>'
-            };
-        
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                response.json({
-                    success:true
+            _user.save(function(err){
+                const transporter = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true,
+                    auth: {
+                      type: 'OAuth2',
+                      user: 'davidpina14@gmail.com',
+                      clientId: '915853818827-60rrr75hahp9p3ssth8logb819u2ocno.apps.googleusercontent.com',
+                      clientSecret: 'rC7kHod8t14G4R5tURaFPk7e',
+                      refreshToken: '1/yiFzvia1bR11nWhNCGKJQO67jJlrlDEOD35W7ecJRNQ',
+                    }
+                  });
+    
+                let mailOptions = {
+                    from: '"friendZone Team" <no-reply@gmail.com>', // sender address
+                    to: user[0].email, // list of receivers
+                    subject: 'FriendZone Password Reset Request', // Subject line
+                    text: 'Hello world?', // plain text body
+                    html: '<h1>Click link to reset your password</h1><br><a href="http://localhost:8000/password_reset/token/' + _user.resettoken + '">http://localhost/8000/password_reset/token</a>'
+                };
+            
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }else{
+                        response.json({
+                            success:true
+                        });
+                    }
                 });
-        
             });
         }
-        
     });
-
 });
 
-router.post('/passwordReset/token/:id', function(request,response){
+router.get('/passwordReset/token/:id', function(request,response){
+    console.log(request.params.id)
+    User.findOne({"resettoken":request.params.id}).select("first_name image").exec(function(err,user){
+        console.log(user)
+        if(err){
+            console.log(err)
+        }else{
+            response.json({
+                user:user
+            });
+        }
+    });
+});
+
+router.post('/passwordreset',function(request,response){
+    console.log(request.body)
+    User.findById(request.body._id, function(err,user){
+        if(err) console.log(err);
+        else{
+            if(request.body.password == ""  && request.body.confirm_password == null){
+                response.json({
+                    message: "Password/s field is empty",
+                    success: false
+                })
+            }else{
+            bcrypt.hash(request.body.password, saltRounds, function(err, hash) {
+                user.password = hash
+                user.resettoken = false
+                user.save(function(err){
+                    if(err) console.log(err);
+                    else{
+                        response.json({
+                            success: true,
+                        });
+                    }
+                });
+            });        
+            }
+        }
+    });
 
 });
 
