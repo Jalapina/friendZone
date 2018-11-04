@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2')
+const inLineCss = require('nodemailer-juice');
 const secret = 'idontmake11time1996for107you2012';
 
 const store = multer.diskStorage({
@@ -200,13 +201,15 @@ router.post('/passwordresetrequest', function(request,response){
                       refreshToken: '1/yiFzvia1bR11nWhNCGKJQO67jJlrlDEOD35W7ecJRNQ',
                     }
                   });
-    
+                
+                transporter.use('compile', inLineCss());
+
                 let mailOptions = {
                     from: '"friendZone Team" <no-reply@gmail.com>', // sender address
                     to: user[0].email, // list of receivers
                     subject: 'FriendZone Password Reset Request', // Subject line
                     text: 'Hello world?', // plain text body
-                    html: '<h1>Click link to reset your password</h1><br><a href="http://localhost:8000/password_reset/token/' + _user.resettoken + '">http://localhost/8000/password_reset/token</a>'
+                    html: '<style> h1{ cursor: default; } .container{background: #e0e0e0;width: 100%; height: 440px;text-align: left;} .inner{ margin: auto;width: 300px; padding:10px; background: #ffcc80; height: 93%;} .message{font-size: 20px; font-weight: bold; margin-bottom: 40px; padding: 5px; cursor: default;} .link{text-decoration: none; border: 1px solid #fff; color: #fff; border-radius: 25px; padding: 15px; background: brown; } .name{text-transform:UPPERCASE}</style><div class="container"> <div class="inner"><h1>Password Reset Link</h1><p class="message">If you requested a password reset for <span class="name">'+_user.first_name+'</span>, click the link. If it was not you... ummm</p><a class="link" href="http://localhost:8000/password_reset/token/'+ _user.resettoken+'">Reset Password</a></div></div>'
                 };
             
                 transporter.sendMail(mailOptions, (error, info) => {
