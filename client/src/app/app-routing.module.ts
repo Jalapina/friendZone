@@ -14,7 +14,7 @@ import {FriendsComponent} from './friends/friends.component'
 import {ProfilePreviewComponent} from './profile-preview/profile-preview.component'
 import {PasswordResetComponent} from './password-reset/password-reset.component'
 import {PasswordResetConfirmationComponent} from './password-reset-confirmation/password-reset-confirmation.component'
-
+import {NotFoundComponent} from './not-found/not-found.component'
 
 const routes: Routes = [
   {
@@ -79,7 +79,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: PasswordResetConfirmationComponent
   },
-  { path: '**', redirectTo: '' }
+  {
+    path: '404',
+    pathMatch: 'full',
+    component: NotFoundComponent,
+  },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
