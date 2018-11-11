@@ -23,6 +23,7 @@ import { AuthenticateService } from './_services/authenticate.service'
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component'
 import { TagInputModule } from 'ngx-chips';
+import { NgxLoadingModule,ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SwingModule } from 'angular2-swing';
 import { ProfilePreviewComponent } from './profile-preview/profile-preview.component';
 import { HeaderComponent } from './_shared/header/header.component';
@@ -56,6 +57,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.doubleBounce,
+      backdropBorderRadius: '3px',
+      primaryColour: '#ffffff', 
+      secondaryColour: '#ffffff', 
+      tertiaryColour: '#ffffff',
+    }),
     BrowserAnimationsModule,
     TagInputModule,
     SwingModule,

@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   user:any = {}
   message = ""
   formActive:Boolean = false
-  
+  loading = false;
+
   ngOnInit() {
     this.auth.logout()
   }
@@ -28,17 +29,20 @@ export class LoginComponent implements OnInit {
     }    
   }
   authenticate(){
+    this.loading = true;
     this._userService.authenticate(this.user)
     .subscribe(
       data=>{
-       
+        this.loading = true;
         if(data['success'] === false){
           this._router.navigateByUrl('/login');
 
         }else{
+          this.loading = true;
           this._router.navigateByUrl('home');
         }
     },error=>{
+      this.loading = false;
       this.message = error.error.message
     }
   )

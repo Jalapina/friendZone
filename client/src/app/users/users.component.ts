@@ -17,11 +17,13 @@ export class UsersComponent implements OnInit {
 
   stackConfig: StackConfig;
   isClassVisible: false;
-  cards: Array<any>;
+  cards = []
   users
   recentCard: string = '';
   friend:any = {}
+  loading = false
   data
+  message
 
   constructor(private _userService:UserService, private _friendshipService:FriendshipService, private params:ActivatedRoute) { }
 
@@ -42,16 +44,26 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(){
-
-    this._userService.getUsers(this.term).subscribe(result => {
-      this.cards = result['users'];
-      this.userCord = result['userCordinates']
-      this.cards.forEach(user=>{
-        let distance = this.getDistance(user.latitude,user.longitude)
-        let age = this.calculateAge(user.birthday)
-        user.birthday = age
-        user.distance = distance
-      })
+    this.loading = true
+    this._userService.getUsers(this.term)
+    .subscribe(result => {
+      if(result['users'] > 0){
+        this.loading = false
+        this.cards = result['users'];
+        this.userCord = result['userCordinates']
+        this.cards.forEach(user=>{
+          let distance = this.getDistance(user.latitude,user.longitude)
+          let age = this.calculateAge(user.birthday)
+          user.birthday = age
+          user.distance = distance
+      });
+      
+      }else{
+        this.loading = true
+        this.message = "Theirs nobody here at the moment. Whomp Whomp."
+      }
+      
+        
     });
 
   }
