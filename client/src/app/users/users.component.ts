@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
     this.loading = true
     this._userService.getUsers(this.term)
     .subscribe(result => {
-      if(result['users'] > 0){
+      if(result['users'].length > 0){
         this.loading = false
         this.cards = result['users'];
         this.userCord = result['userCordinates']

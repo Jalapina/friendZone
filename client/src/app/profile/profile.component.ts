@@ -50,10 +50,7 @@ export class ProfileComponent implements OnInit {
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { }
 
   ngOnInit() {
-    this.setUserId();
-    setTimeout(()=>{
-      this.getUser()
-    }, 300)
+    this.setUserId()
   }
 
   imageUpload(event) {
@@ -113,11 +110,12 @@ export class ProfileComponent implements OnInit {
   setUserId(){
     this.authenticateService.getUserInfo().subscribe(data=>{
       this.userId = data["id"]
-    })
+      this.getUser()
+    });
   }
 
   getUser(){
-    this.userService.getUser(this.userId).subscribe( data =>{ 
+    this.userService.getUser(this.userId).subscribe(data =>{ 
       this.name = data['user'].first_name
       this.items = data['user'].hobbies
       this.userInfo.blur = data['user'].blur
