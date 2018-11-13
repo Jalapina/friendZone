@@ -1,7 +1,6 @@
 <app-header></app-header>
 
-
-<div *ngIf="cards.length > 0 " class="main" swing-stack #myswing1  (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" >   
+<div *ngIf="cards.length > 0" class="main" swing-stack #myswing1  (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" >   
   
     <div class="card" #mycards1 swing-card *ngFor="let user of cards" >
       
@@ -35,21 +34,16 @@
        
     </div>
 
-    
-
 </div>
 
-<div class="loading">
-        <ngx-loading  *ngIf="cards.length === 0" [show]="loading" [config]="{backdropBackgroundColour: tomato}" [template]="customLoadingTemplate"></ngx-loading>
-        <p class="message" *ngIf="message">{{message}}</p>     
+<div *ngIf="cards.length === 0" class="loading">
+    <ngx-loading  *ngIf="cards.length === 0" [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
+    <p class="message" *ngIf="message">{{message}}</p>     
 </div>
 
-<div *ngIf="cards.length > 0 " class="options">
+<div *ngIf="cards.length > 0" class="options">
         
     <button type="submit" class="pass option" (click)="voteUp(false)">Pass</button>
     <button type="submit" class="friendzone option" (click)="voteUp(true)">Friendzone</button>
                
 </div>
-
-
-
