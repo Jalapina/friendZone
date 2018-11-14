@@ -60,12 +60,10 @@ export class UsersComponent implements OnInit {
       
       }else{
         this.loading = true
-        this.message = "Theirs nobody here!! I am LOOKING! Hodl UP!"
+        this.message = "Theirs nobody here!!"
       }
       
-        
     });
-
   }
 
   voteUp(like: boolean) {
@@ -89,15 +87,15 @@ export class UsersComponent implements OnInit {
 
   getDistance(latitude, longitude){
     
-    var R = 6378137; // Earth’s mean radius in meter
-    var dLat = this.rad(this.userCord.latitude - latitude);
-    var dLong = this.rad(this.userCord.longitude - longitude);
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
+    let R = 6378137; // Earth’s mean radius in meter
+    let dLat = this.rad(this.userCord.latitude - latitude);
+    let dLong = this.rad(this.userCord.longitude - longitude);
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + 
       Math.cos(this.rad(this.userCord.latitude) * Math.cos(this.rad(latitude))) *
       Math.sin(dLong / 2) * Math.sin(dLong / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-    var mile = d * 0.00062137
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
+    let mile = d * 0.00062137
 
     return Math.floor(mile)
     

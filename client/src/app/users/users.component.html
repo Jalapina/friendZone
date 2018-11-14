@@ -12,7 +12,7 @@
             
             <div (click)="isClassVisible = !isClassVisible" class="user-name">
                 <p class="name">{{ user.first_name }}</p>
-                <P class="distance">{{user.distance}} Mile/s away</P>                
+                <P class="distance" *ngIf="user.distance">{{user.distance}} Mile/s away</P>                
                 <P class="age">{{ user.birthday }}</P>
             </div>
 

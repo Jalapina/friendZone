@@ -22,7 +22,8 @@ export class RegisterComponent implements OnInit {
   today = new Date();
   minAge = 18;
   ageValidation: Boolean = false
-  
+  loading = false
+
   ngOnInit() {
     this.auth.logout()    
   }
@@ -72,7 +73,7 @@ export class RegisterComponent implements OnInit {
   }
 
   create(){
-
+      this.loading = true
       this.formActive = true
       this._userService.create(this.user)
       .subscribe(

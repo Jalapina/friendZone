@@ -15,5 +15,6 @@
       
     <button [routerLink]="['/login']" class="form-group button-link">Login</button>
     <p class="error-message" *ngIf="message">{{message}}</p>
+    <ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
     
 </div>
