@@ -149,11 +149,24 @@
     height: 90.5%
 
 .message
-    width: 190px
+    width: 115px
     margin: auto
     position: absolute
-    bottom: 35%
+    bottom: 30%
     left: 0px
     font-weight: bold
     font-family: 'Song Myung', serifc
     right: 0px
+    text-align: center
+    -ms-transform: rotate(20deg)
+    -webkit-transform: rotate(20deg)
+    transform: rotate(20deg)
+    animation: text-spin 4s infinite
+
+@keyframes text-spin
+    0%
+        transform: rotateY(0deg)
+    100%
+        transform: rotateY(360deg)
+    
+

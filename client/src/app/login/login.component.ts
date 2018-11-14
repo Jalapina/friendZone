@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   user:any = {}
   message = ""
   formActive:Boolean = false
-  loading = false;
+  loading = false
 
   ngOnInit() {
     this.auth.logout()

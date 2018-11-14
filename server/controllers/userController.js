@@ -69,7 +69,7 @@ router.post('/users/authenticate', function(request,response){
                         message:"Invalid Email or Password"
                     });
                 }else{
-                    const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret,{ expiresIn: '24h' });
+                    const token = jwt.sign({ id: user._id, first_name: user.first_name,}, secret);
                     response.json({
                         message:"User is Authenicated!",
                         token: token,
@@ -160,9 +160,7 @@ router.post('/users/create', function(request,response){
                         first_name: newUser.first_name,
                     },
                     secret,
-                    { 
-                        expiresIn: '24h' 
-                    }); 
+                    ); 
                 response.json({
                     message: "User is Authenicated!",
                     token: token,
@@ -186,7 +184,7 @@ router.post('/passwordresetrequest', function(request,response){
             });
         }else{
 
-            _user.resettoken = jwt.sign({ id: _user._id}, secret,{ expiresIn: '24h' });
+            _user.resettoken = jwt.sign({ id: _user._id}, secret);
             
             _user.save(function(err){
                 const transporter = nodemailer.createTransport({

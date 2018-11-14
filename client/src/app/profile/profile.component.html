@@ -3,26 +3,28 @@
 <div class="card-content" [ngClass]="{'card-content-opacity': opacity }">
 
   <div class="images-container">
-
-      <div class="image-container disable" *ngFor="let image of images">
-        <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!image"/>
-        <label for="file" class="imageLabel" *ngIf="!image">Choose an Image</label>
-        <div class="image" *ngIf="image">
-            <img [src]="image" height="200"> 
-            <input class="delete" name="userImage" (ngModel)="userImage" (click)="deleteImage(image)">
-        </div>
+    <div class="image-container disable" *ngFor="let image of images">
+      <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!image"/>
+      <label for="file" class="imageLabel" *ngIf="!image">Choose an Image</label>
+      <ngx-loading [show]="loadingImages" [config]="{ backdropBorderRadius: '25px' }" [template]="customLoadingTemplate"></ngx-loading>
+      <div class="image" *ngIf="image">
+          <img [src]="image" height="200">
+          <input class="delete" name="userImage" (ngModel)="userImage" (click)="deleteImage(image)">
       </div>
+    </div>
   </div>
-
+  <div *ngIf="loading" class="loading">
+      <ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
+  </div>
   <div class="header disable">
       <h1 class="left" id="name" [routerLink]="['/preview', userId]">{{ name }}</h1>
       <span class="tool-tip">See Profile Preview</span>
       <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
       <label for="switch"></label>
   </div>
-
+  
   <form (submit)="editUser()">
-
+    
     <p class="left">Blur</p>
 
     <textarea class="blur disable" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
@@ -30,6 +32,7 @@
     <p class="left" >What do you want to do?</p>
     
     <div class="container disable">
+      
       <div class="dropdown-container" (click)="classVisible = !classVisible; checkActivty(); placeHolder = true;" *ngIf="placeHolder">Activities</div>
       <div class="dropdown-container" (click)="classVisible = !classVisible; placeHolder = !placeHolder;" *ngIf="!placeHolder">{{activity}}</div>
       <div class="dropdown-head" [ngClass]="{'options-active': classVisible }">

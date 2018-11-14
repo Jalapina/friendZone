@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
       
       }else{
         this.loading = true
-        this.message = "Theirs nobody here at the moment. Whomp Whomp."
+        this.message = "Theirs nobody here!! I am LOOKING! Hodl UP!"
       }
       
         

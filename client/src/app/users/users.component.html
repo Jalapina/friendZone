@@ -37,8 +37,8 @@
 </div>
 
 <div *ngIf="cards.length === 0" class="loading">
-    <ngx-loading  *ngIf="cards.length === 0" [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
     <p class="message" *ngIf="message">{{message}}</p>     
+    <ngx-loading  *ngIf="cards.length === 0" [show]="loading" [config]="{backdropBackgroundColour:'rgba(0, 0, 0, -0.7)'}" [template]="customLoadingTemplate"></ngx-loading>
 </div>
 
 <div *ngIf="cards.length > 0" class="options">

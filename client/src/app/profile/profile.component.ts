@@ -42,21 +42,26 @@ export class ProfileComponent implements OnInit {
   userId
   selectedImage
   userImage
-  images = []
+  images =  [null,null,null,null]
   opacity: false
   modal:false
   message 
+  loading = false;  
+  loadingImages = false;
 
-  constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) { }
+  constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {
+    this.loading = true
     this.setUserId()
   }
 
   imageUpload(event) {
     let image = <File>event.target.files[0]
-
+    this.loadingImages = true
+    
     if (!this.validateFile(image.name)) {
+        this.loadingImages = false      
         return false;
     }
     
@@ -66,17 +71,17 @@ export class ProfileComponent implements OnInit {
     this.userService.imageUpload(fd).subscribe(res =>{
       setTimeout(()=>{
         this.getUser()
-      }, 100)
+      }, 0)
     });
     
   }
   
   deleteImage(image){
-
+    this.loadingImages = true
     this.userService.imageDelete(image).subscribe(res => {
       setTimeout(()=>{
         this.getUser()
-      }, 100)
+      },0)
     });
 
   }
@@ -121,6 +126,8 @@ export class ProfileComponent implements OnInit {
       this.userInfo.blur = data['user'].blur
       this.userInfo.bio = data['user'].bio
       this.userIsActive = data['user'].active
+      this.loadingImages = false
+      this.loading = false
       if(data['user'].image.length > 0){
         this.images = data['user'].image
         if(this.images.length != 4){
@@ -129,9 +136,6 @@ export class ProfileComponent implements OnInit {
           }
           while(this.images.length <= 3 )
         }
-        
-      }else{
-        this.images = [null,null,null,null]
       }
       if(data['user'].activity){
         this.placeHolder = false
@@ -141,9 +145,13 @@ export class ProfileComponent implements OnInit {
   }
 
   private editUser(){
+    this.loading = true
+
     this.userInfo.activity = this.activity
     this.userInfo.hobbies = this.items
-    this.userService.editUser(this.userInfo)
+    this.userService.editUser(this.userInfo).subscribe(data=>{
+      this.loading = false
+    })
   }
 
   logout(){

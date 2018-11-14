@@ -59,10 +59,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.doubleBounce,
-      backdropBorderRadius: '3px',
-      primaryColour: '#ffffff', 
-      secondaryColour: '#ffffff', 
-      tertiaryColour: '#ffffff',
+      primaryColour: '#ffcc80', 
+      secondaryColour: '#5d4037',
     }),
     BrowserAnimationsModule,
     TagInputModule,

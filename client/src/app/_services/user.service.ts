@@ -51,7 +51,7 @@ export class UserService {
   }
 
   editUser(userInfo){
-    return this._http.put('/api/users/edit',userInfo).subscribe()
+    return this._http.put('/api/users/edit',userInfo)
   }
 
   getUser(id){
