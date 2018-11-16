@@ -9,6 +9,7 @@ export class FriendshipService {
   constructor(private _http:HttpClient) { }
 
   create(like:any){
+    console.log("Creating new friend")
     return this._http.post('/api/friendships/create',like).subscribe()
   }
 

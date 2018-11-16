@@ -38,9 +38,8 @@ router.get('/messages/:reciever', function(request,response){
     let users = []
     let user = request.decoded.id;
     let friend =  request.params.reciever
-    console.log(user)
-    users.push(friend,user);
-    console.log(users)
+    users.push(friend,user)
+
     Message.find({'users':{$all:users}}).populate("users sender","first_name").exec(function(err,chat){
         console.log(chat)
         if(err){
@@ -58,7 +57,8 @@ router.get('/messages/:reciever', function(request,response){
             });
         }else{
             response.json({
-                chat:chat
+                chat:chat,
+                user:user
             });
         }
     });

@@ -69,11 +69,10 @@ export class UsersComponent implements OnInit {
   voteUp(like: boolean) {
 
     let removedCard = this.cards.pop();
-
+    console.log(removedCard)
     if (like) {
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard)
-      
     } else {
       this.recentCard = removedCard._id;
       this.create(like,this.recentCard);

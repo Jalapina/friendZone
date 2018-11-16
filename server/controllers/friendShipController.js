@@ -11,6 +11,7 @@ router.post('/friendships/create', function(request,response){
     let user = request.decoded.id
     let reciever = request.body.id
     let activity = request.body.activity
+    let users = [user,reciever]
 
     let newFriendShip = new FriendShip({
         status: status,
@@ -18,10 +19,18 @@ router.post('/friendships/create', function(request,response){
         user: user,
         users: [user,reciever],
     });
-
-    newFriendShip.save(function(err,friendShip){
+    FriendShip.findOne({"users":users},function(err,friendship){
         if(err) console.log(err);
-    });
+        else if(friendship == null){
+            newFriendShip.save(function(err,friendShip){
+                if(err) console.log(err);
+                console.log(friendShip);
+            });
+        }else{
+            console.log("already friends")
+        }
+    })
+    
 
 });
 
@@ -34,7 +43,7 @@ router.get('/friendships', function(request,response){
     friendsWithOutMessages = []
 
     FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
-        
+
         friends.forEach(friend=>{
             friend.users.forEach(id=>{
                 usersIds = id._id
@@ -112,11 +121,13 @@ router.delete('/friendships/:friend/delete',function(request,response){
     let users = [];
     
     users.push(user,friendId);
-    console.log(users)
+
     FriendShip.findOne({'users':users},function(err,friendship){
         console.log(friendship)
         if(err) console.log(err);
-
+        else if(friendship == null){
+            console.log("no friendship")
+        }
         else{
             friendship.status = false
 
