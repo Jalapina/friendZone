@@ -19,18 +19,17 @@ router.post('/friendships/create', function(request,response){
         user: user,
         users: [user,reciever],
     });
+
     FriendShip.findOne({"users":users},function(err,friendship){
+
         if(err) console.log(err);
         else if(friendship == null){
             newFriendShip.save(function(err,friendShip){
                 if(err) console.log(err);
                 console.log(friendShip);
             });
-        }else{
-            console.log("already friends")
         }
-    })
-    
+    });
 
 });
 
