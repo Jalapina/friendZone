@@ -19,6 +19,7 @@
   <div class="header disable">
       <h1 class="left" id="name" [routerLink]="['/preview', userId]">{{ name }}</h1>
       <span class="tool-tip">See Profile Preview</span>
+      <img class="settings" [routerLink]="['/settings']" src="../../assets/icons/settings.svg" alt="Settings">
       <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
       <label for="switch"></label>
   </div>
@@ -53,7 +54,7 @@
   </form>
     
   <button (click)="logout()" class="logoutButton disable">LogOut</button>
-  <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button>
+  <button class="logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button>
 
 </div>
 

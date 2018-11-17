@@ -15,7 +15,7 @@ import {ProfilePreviewComponent} from './profile-preview/profile-preview.compone
 import {PasswordResetComponent} from './password-reset/password-reset.component'
 import {PasswordResetConfirmationComponent} from './password-reset-confirmation/password-reset-confirmation.component'
 import {NotFoundComponent} from './not-found/not-found.component'
-
+import {SettingsComponent} from './settings/settings.component'
 const routes: Routes = [
   {
     path: '',
@@ -78,6 +78,11 @@ const routes: Routes = [
     path: 'password_reset/token/:id',
     pathMatch: 'full',
     component: PasswordResetConfirmationComponent
+  },
+  {
+    path: 'settings',
+    pathMatch: 'full',
+    component: SettingsComponent,
   },
   {
     path: '404',
