@@ -48,7 +48,8 @@ export class ProfileComponent implements OnInit {
   message 
   loading = false;  
   loadingImages = false;
-
+  setting = false;
+  
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {

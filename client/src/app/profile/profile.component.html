@@ -19,7 +19,7 @@
   <div class="header disable">
       <h1 class="left" id="name" [routerLink]="['/preview', userId]">{{ name }}</h1>
       <span class="tool-tip">See Profile Preview</span>
-      <img class="settings" [routerLink]="['/settings']" src="../../assets/icons/settings.svg" alt="Settings">
+      <img class="settings" (click)="setting = true;" src="../../assets/icons/settings.svg" alt="Settings">
       <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
       <label for="switch"></label>
   </div>
@@ -52,10 +52,30 @@
     <input type="submit" class="saveButton disable" value="Save">
   
   </form>
-    
+<!--     
   <button (click)="logout()" class="logoutButton disable">LogOut</button>
-  <button class="logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button>
+  <button class="logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button> -->
 
+</div>
+
+<div [ngClass]="{'settings-container-view': setting}" class="settings-container">
+  <div (click)="setting = false;" class="logo-title">
+    <p  class="title">Friend<span class="zoe">Zoe</span></p>
+  </div>
+  <div class="contact-info">
+    <h1>CONTACT ME</h1>
+    <p>davidpina14@gmail.com</p>
+    <a class="linkedin" href="https://www.linkedin.com/in/david-pina-8a46128a/">linkedin</a>
+    <p class="something-to-say">
+      FriendZone as it was origanlly called, but not so much anymore due to the domain name being taken... was a simple idea of getting people together with no motive of lust. You can expect a IOS version next year. Any questioin regarding the website or offers please direct them to my email. Thank you.
+    </p>
+  </div>
+  <div class="version">
+    <p>Version: 1.0.0</p>
+    <button (click)="logout()" class="logoutButton disable">LogOut</button>
+    <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = true; setting = false;">DELETE ACCOUNT</button>
+
+  </div>
 </div>
 
 <div class="modal" [ngClass]="{'modal-display-block': modal}">

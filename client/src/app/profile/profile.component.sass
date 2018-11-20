@@ -193,7 +193,7 @@
             width: 165px
     
 .image-container
-    background-color: #EAD8CA
+    background-color: #404040
     height: 145px
     position: relative
     width: 45%
@@ -209,7 +209,7 @@
     opacity: 0
     
 .imageLabel
-    background-color: oldlace
+    background-color: #bdbdbd
     position: relative
     bottom: 85px
     padding: 11px
@@ -221,7 +221,7 @@
 
 .inputImage:focus + label,
 .inputImage + label:hover
-    background-color: #e8d8b8
+    background-color: #ffcc80
 
 .image
     height: 100%
@@ -250,7 +250,8 @@
         pointer-events: none      
 .modal
     height: 190px
-    background-color: #757575
+    background-color: #404040
+    color: #fff
     width: 350px
     position: fixed
     bottom: 350px
@@ -259,6 +260,7 @@
     transform: translate(-50%, -50%)
     text-align: center
     display: none
+    cursor: default
     >p
         width: 60%
         font-size: 20px
@@ -278,6 +280,7 @@
 
 .modal-display-block
     display: block
+    z-index: 1
 
 .delete-account
     background: #b71c1c !important
@@ -307,3 +310,65 @@
     @media screen and (max-width: 760px)
         float: left
         margin: 6px 0px 0px 5px
+
+.settings-container
+    position: absolute
+    top: 0px
+    background-color: #fff
+    z-index: 1
+    height: 100%
+    display: none
+    width: 100%
+
+.settings-container-view
+    display: block
+    
+.logo-title
+    background-color: #404040
+    height: 70px
+    text-align: center
+
+.title
+    font-size: 45px
+    font-family: 'Modak', cursive
+    color: #fff
+    cursor: pointer
+
+.contact-info
+    margin: 10px;
+    margin-top: 95px
+    text-align: center
+
+.linkedin
+    text-decoration: none
+    color: #0076b7
+
+.container
+    font-family: 'Song Myung', serifc
+
+.version
+    background-color: #404040
+    position: absolute
+    bottom: 0px
+    left: 0px
+    right: 0px
+    color: #fff
+    text-align: center
+    font-size: 30px
+    padding: 15px
+    
+.logoutButton
+    margin: 5px
+    height: 40px
+    font-weight: bold
+    width: 100%
+    max-width: 350px
+    border: 0px
+    cursor: pointer
+
+.something-to-say
+    padding: 15px
+    font-size: 17px
+    font-weight: bold
+    margin: auto
+    max-width: 610px
