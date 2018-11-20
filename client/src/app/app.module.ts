@@ -31,7 +31,6 @@ import { LandingHeaderComponent } from './_shared/landing-header/landing-header.
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordResetConfirmationComponent } from './password-reset-confirmation/password-reset-confirmation.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +49,6 @@ import { SettingsComponent } from './settings/settings.component';
     PasswordResetComponent,
     PasswordResetConfirmationComponent,
     NotFoundComponent,
-    SettingsComponent,
   ],
   imports: [
     BrowserModule,
