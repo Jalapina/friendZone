@@ -4,7 +4,7 @@
 <div class="card">
 
     <div class="profile-image">
-        <img *ngFor="let image of user.image" class="gallary" [src]="image" alt="">
+        <slideshow [imageUrls]="user.image"></slideshow>
     </div>
     <div (click)="isClassVisible = !isClassVisible" class="user-name">
             <p class="name">{{ user.first_name }}</p>

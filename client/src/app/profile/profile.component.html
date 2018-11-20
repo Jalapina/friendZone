@@ -52,10 +52,8 @@
     <input type="submit" class="saveButton disable" value="Save">
   
   </form>
-<!--     
   <button (click)="logout()" class="logoutButton disable">LogOut</button>
-  <button class="logoutButton disable" (click)="opacity = !opacity; modal = true;">DELETE ACCOUNT</button> -->
-
+  
 </div>
 
 <div [ngClass]="{'settings-container-view': setting}" class="settings-container">
@@ -72,9 +70,7 @@
   </div>
   <div class="version">
     <p>Version: 1.0.0</p>
-    <button (click)="logout()" class="logoutButton disable">LogOut</button>
     <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = true; setting = false;">DELETE ACCOUNT</button>
-
   </div>
 </div>
 
