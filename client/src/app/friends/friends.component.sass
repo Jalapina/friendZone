@@ -2,7 +2,6 @@
     max-width: 750px
     margin: auto
     height: 90.5%
-    overflow: scroll
     @media screen and (min-width: 750px)
         box-shadow: 0px 7px 40px 1px #888888
         transition: 3s
@@ -87,6 +86,10 @@
     height: 60px
     overflow-y: scroll
     border-bottom: 1px solid black
+.unmessaged-friends::-webkit-scrollbar
+    display: none !important
+    -ms-overflow-style: none !important
+    overflow: -moz-scrollbars-none !important
 
 .unmessaged-friend
     background-color: cadetblue

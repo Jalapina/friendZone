@@ -13,20 +13,20 @@ export class ProfilePreviewComponent implements OnInit {
   constructor(private userService:UserService, private params:ActivatedRoute) { }
 
   userId = this.params.snapshot.params['id']; 
-  user
-  focus: Boolean = false
+  loadingImages = false
+  user:any = {
+    hobbies: ''
+  }
 
   ngOnInit() {
     this.getUser()
   }
 
   getUser(){
+    this.loadingImages = true
     this.userService.getUser(this.userId).subscribe(data=>{
       this.user = data['user']
-      if(this.user.blur){
-        this.focus = true
-      }
-      console.log(this.user)
+      this.loadingImages = false
     })
   }
 

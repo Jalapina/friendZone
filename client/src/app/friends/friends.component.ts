@@ -22,7 +22,6 @@ export class FriendsComponent implements OnInit {
 
   getFriends(){
     this.friendshipService.getFriends().subscribe(data=>{
-      console.log(data)
       this.friendsWithMessages = data['friendsWithMessages']
       this.friendsWithOutMessages = data['friendsWithOutMessages']
     })
