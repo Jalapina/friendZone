@@ -40,6 +40,8 @@
     .blur
         background: #f5f5f5
         padding: 5px
+        font-family: 'Song Myung', serifc
+        
     .bio
         margin-top: 10px 
         resize: none
@@ -50,7 +52,8 @@
         padding: 5px
         background: #f5f5f5
         width: 95%
-
+        font-family: 'Song Myung', serifc
+        
     textarea
         min-height: 100px
         width: 95%
@@ -107,9 +110,12 @@
         font-family: 'Song Myung', serifc
         font-size: 20px
         right: 80px
-        content: "Active"
         position: absolute
         top: 5px
+        @media screen and (max-width: 320px)
+            font-size: 15px
+            top: -20px
+            right: 15px
     label::after 
         content: ""
         width: 25px
@@ -307,7 +313,7 @@
     height: 30px;
     cursor: pointer
     float: left
-    margin: 6px 0px 0px 5px
+    margin: 6px 0px 0px 2px
 
 .settings-container
     position: absolute

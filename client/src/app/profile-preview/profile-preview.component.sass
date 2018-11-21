@@ -10,7 +10,6 @@
 .profile-image
     height: 260px
     width: 100%
-    // overflow-x: scroll
     img
         width: 100%
         height: 250px
@@ -22,7 +21,7 @@
 .name::-webkit-scrollbar
     width: 0 !important
 .user-name
-    height: 37px
+    height: 25px
     padding-top: 10px
 .name
     float: left
@@ -31,20 +30,21 @@
     font-family: 'Song Myung', serifc
     text-transform: uppercase
     position: relative
-    left: 10px
+    padding-left: 10px
     bottom: 5px
     max-width: 150px
     overflow: hidden
-    height: 40px
 .icon
     float: right   
-    padding: 2px  
+    padding: 2px
+
 .age
     margin-right: 5px
     font-size: 30px
     float: right
     margin-top: -8px
     cursor: default
+
 .hobbies
     background-color: lavender
     display: inline-block
@@ -52,18 +52,21 @@
     border-radius: 20px
     margin: 6px
     text-transform: capitalize
+
 .blur
     min-height: 100px
     width: 95%
     padding: 6px
     margin: auto
     cursor: default
+    font-family: 'Song Myung', serifc
     
 .bio
     min-height: 130px
     width: 95%
     margin: auto
     cursor: default
+    font-family: 'Song Myung', serifc
     
 .blur::before
     content: "Blur:"
@@ -77,19 +80,22 @@
 .like-title
     margin: 5px
     font-size: 20px   
+    font-family: 'Song Myung', serifc
+    
 .likes
     width: 95% 
     margin: 10px auto
-.activity
-    font-size: 15px
+.active-status
     display: inline-block
-    text-transform: uppercase
-    margin-left: 15px
-    text-align: center
-    cursor: default
+    font-weight: bold
+    font-size: 13px
+    text-transform: capitalize;
+.user-not-activity
+    background-color: #f58381
+.user-is-active
+    background-color: #6cdc9f
+.activity
+    padding: 5px
+    border-radius: 15px
+
     
-.not-activity
-    margin-top: -5px
-    width: 75px
-.active
-    margin-top: 4px
