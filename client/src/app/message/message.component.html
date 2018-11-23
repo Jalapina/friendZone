@@ -1,7 +1,9 @@
 <app-header></app-header>
 <div class="container">
-    <p class="activity" [routerLink]="['/users',activity]">{{activity}}</p>            
-        
+    <div class="user-activity">
+        <p class="activity" [routerLink]="['/users',activity]">{{activity}}</p>     
+    </div>           
+    
     <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
         <ul class="bubble-container" *ngFor="let message of chat" >
 

@@ -31,7 +31,6 @@ export class MessageComponent implements OnInit {
 
   getMessages(){
     this.messageService.getMessages(this.friend).subscribe(data=>{
-      console.log(data)
       if(data['chat']){
         this.user = data['user']
         this.reciever = data['chat'][0].users[0].first_name
@@ -45,7 +44,6 @@ export class MessageComponent implements OnInit {
   }
 
   sendMessage(){
-    console.log(this.friend)
     this.message.reciever = this.friend
     this.messageService.sendMessage(this.message)
     .subscribe(data=>{
