@@ -1,26 +1,27 @@
 .slide
     position: absolute 
-    display: block
     color: #fff
     font-size: 2.5em
-    width: 200px
-    animation-duration: 20s
+    width: 300px
+    animation-duration: 7s
     animation-timing-function: ease-in-out
     animation-iteration-count: infinite
     font-family: 'Source Sans Pro', sans-serif
     font-family: 'Luckiest Guy', cursive
     top: 200px
     pointer-events: none
-    
+    margin: auto
+    left: 0px 
+    right: 0px
+    overflow: hidden
+
 .landing-page
     height: 90%
     min-height: 500px
     background: tomato
     text-align: center
-    // background-image: url("https://www.drweil.com/wp-content/uploads/2016/12/health-wellness_body-mind-spirit_mental-health_can-coffee-keep-your-mind-sharp_2716×1810_87102737-1024x768.jpg")
-    // background-repeat: no-repeat
-    // background-size: 100%
-
+    overflow-x: hidden
+    
 .slide-1
     animation-name: slide1
 .slide-2
@@ -29,38 +30,38 @@
     animation-name: slide3
 
 @keyframes slide1
-    0%, 8.3%
+    0%, 13%
         left: -100%
         opacity: 0
-    8.3%, 25%
-        left: 25%
+    13%, 18%
+        left: 0%
         opacity: 1
-    33.33%,100%
-        left: -100%
+    61.33%,100%
+        left: -50%
         opacity: 0
 @keyframes slide2
     0%, 33.33%
         left: -100%
         opacity: 0
-    41.63%, 58.29%
-        left: 25%
+    41.63%, 60%
+        left: 0%
         opacity: 1
     66.66%, 100% 
-        left: -100%
+        left: -50%
         opacity: 0
 @keyframes slide3
     0%, 66.66% 
         left: -100%
         opacity: 0
     74.96%, 91.62%
-        left: 25%
+        left: 0%
         opacity: 1
     100%
-        left: -100%
+        left: -50%
         opacity: 0
 
 .foward
-    background-color: #4CAF50
+    background-color: #404040
     color: white
     border: none
     width: 100%
@@ -68,7 +69,8 @@
     height: 40px
     font-size: 13px
     &:hover
-        background-color: #33663a
+        background-color: #fff
+        color: #404040
 .options
     background-color: #ffffff
     position: absolute

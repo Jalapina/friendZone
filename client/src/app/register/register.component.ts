@@ -80,6 +80,7 @@ export class RegisterComponent implements OnInit {
         data =>{
           this._router.navigateByUrl('profile')
         },error=>{
+          this.loading = false
           this.message = error.error.message
         }
       );
