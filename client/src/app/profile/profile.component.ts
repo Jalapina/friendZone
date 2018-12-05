@@ -21,11 +21,12 @@ TagInputModule.withDefaults({
 })
 export class ProfileComponent implements OnInit {
   categories = [
-    new Category(1, 'Music' ),
-    new Category(2, 'Bar' ),
-    new Category(3, 'Physical'),
-    new Category(4, 'Food'),
-    new Category(5, 'Cinema'),
+    new Category(1, 'Food' ),
+    new Category(2, 'Exercise'),
+    new Category(3, 'Cinema'),
+    new Category(4, 'Bar'),
+    new Category(5, 'Music'),
+    new Category(5, 'Dancing'),    
  ];
 
   classVisible: false
@@ -49,7 +50,12 @@ export class ProfileComponent implements OnInit {
   loading = false;  
   loadingImages = false;
   setting = false;
-  
+  count = {
+    countTo: 150,
+    from: 0,
+    duration: 1
+  }
+
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {

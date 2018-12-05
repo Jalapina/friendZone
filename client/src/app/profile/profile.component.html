@@ -28,7 +28,7 @@
     
     <p class="left">Blur</p>
 
-    <textarea class="blur disable" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" >{{ blur }}</textarea>
+    <textarea class="blur disable" [CountTo]="count.countTo" [from]="count.from" [duration]="count.duration" placeholder="Give people a quick summary of what you're trying to do." [(ngModel)]="userInfo.blur" name="blur" [formControl]="textControl">{{ blur }}</textarea>
 
     <p class="left" >What do you want to do?</p>
     

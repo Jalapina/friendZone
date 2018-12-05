@@ -41,7 +41,7 @@ router.get('/messages/:reciever', function(request,response){
     users.push(friend,user)
 
     Message.find({'users':{$all:users}}).populate("users sender","first_name").exec(function(err,chat){
-        console.log(chat)
+
         if(err){
             response.json({
                 error:err
@@ -62,6 +62,25 @@ router.get('/messages/:reciever', function(request,response){
             });
         }
     });
+});
+
+router.put('/messages/read',function(request,response){
+    
+    Message.findById(request.body._id,function(err,message){
+
+        if(err) console.log(err)
+        else{
+            message.read = true
+            
+            message.save(function(err){
+                if(err) console.log(err);
+                console.log(message)
+            
+            });
+        }
+
+    });
+
 });
 
 module.exports = router;

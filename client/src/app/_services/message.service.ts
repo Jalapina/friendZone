@@ -14,4 +14,10 @@ export class MessageService {
     return this._http.post('/api/messages/create',message)
   }
 
+  readMessage(messageId:any){
+    console.log(messageId, "service")
+    
+    return this._http.put('/api/messages/read',messageId).subscribe()
+  }
+
 }

@@ -24,6 +24,7 @@ export class MessageComponent implements OnInit {
   sender
   friendId
   reciever
+  messageId:any = {}
 
   ngOnInit() {
     this.getMessages()
@@ -36,6 +37,9 @@ export class MessageComponent implements OnInit {
         this.reciever = data['chat'][0].users[0].first_name
         this.sender = data['chat'][0].users[1].first_name
         this.chat = data['chat']
+        if(this.user !== this.chat[this.chat.length-1].sender._id){
+          this.readMessage()
+        }
       }else{
         this.firstName = data['user'].first_name
         this.friendId = data['user']._id
@@ -50,7 +54,14 @@ export class MessageComponent implements OnInit {
       this.getMessages()
       this.message.message = ''
     });
+  }
 
+  readMessage(){
+    if(!this.chat[this.chat.length-1].read){
+      this.messageId._id = this.chat[this.chat.length-1]._id
+      this.messageService.readMessage(this.messageId)
+    }
+    
   }
 
   unFriend(){
@@ -58,5 +69,4 @@ export class MessageComponent implements OnInit {
       this._router.navigateByUrl('/friends');      
     })
   }
-
 }

@@ -42,7 +42,7 @@ router.post('/users/authenticate', function(request,response){
 
     const email = request.body.email
     const password = request.body.password
-    console.log(request.body)
+
     if(!password){
         response.json({
             message:"No password provided."
@@ -175,8 +175,6 @@ router.post('/passwordresetrequest', function(request,response){
     User.find({email:request.body.email},function(err,user){
 
         _user = user[0]
-        console.log(_user)
-        console.log(_user)
         if(err) console.log(err);
         else if(user.length < 1){
             response.json({
@@ -239,7 +237,7 @@ router.get('/passwordReset/token/:id', function(request,response){
 });
 
 router.post('/passwordreset',function(request,response){
-    console.log(request.body)
+
     User.findById(request.body._id, function(err,user){
         if(err) console.log(err);
         else{
@@ -247,7 +245,7 @@ router.post('/passwordreset',function(request,response){
                 response.json({
                     message: "Password/s field is empty",
                     success: false
-                })
+                });
             }else{
             bcrypt.hash(request.body.password, saltRounds, function(err, hash) {
                 user.password = hash
@@ -309,6 +307,7 @@ router.get('/users/:term/activity', function(request,response){
     friendList.push(user)
 
     User.findById(user,function(err,user){
+
         if(err){console.log(err)}
         
         userCord = {
@@ -318,51 +317,45 @@ router.get('/users/:term/activity', function(request,response){
         
         FriendShip.find({'users':user},function(err,friends){
             
-                    friends.forEach(friend=>{
-                        friend.users.forEach(function(id,index){
-                                if(id != user){
-                                friendList.push(id)
-                            }
-                        });
-                    });
-            
-                    User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur latitude longitude bio image hobbies birthday').exec(function(err,users){
-            
-                        if(err){
-                            console.log(err);
-                        }else{
-            
-                            shuffleFriendList(users)
-                            response.json({
-                                users:users,
-                                userCordinates:userCord
-                            });
-            
-                        }
-                    });
-            
-                    function shuffleFriendList(array){
-                        let counter = array.length
-            
-                        if(counter > 0){
-                            while(counter > 0){
-            
-                                let index = Math.floor(Math.random() * counter);
-            
-                                counter--
-                                
-                                let temp = array[counter];
-                                array[counter] = array[index];
-                                array[index] = temp;
-            
-            
-                            }
-            
-                            return array;
-                        }
+            friends.forEach(friend=>{
+                friend.users.forEach(function(id,index){
+                        if(id != user){
+                        friendList.push(id)
                     }
-                            
                 });
+            });
+
+            User.find({'_id':{ $nin:friendList},'activity':request.params.term,'active':true}).select('first_name blur latitude longitude bio image hobbies birthday').exec(function(err,users){
+
+                if(err){
+                    console.log(err);
+                }else{
+                    shuffleFriendList(users)
+                    response.json({
+                        users:users,
+                        userCordinates:userCord
+                    });
+                }
+            });
+
+            function shuffleFriendList(array){
+                let counter = array.length
+
+                if(counter > 0){
+                    while(counter > 0){
+
+                        let index = Math.floor(Math.random() * counter);
+
+                        counter--
+                        
+                        let temp = array[counter];
+                        array[counter] = array[index];
+                        array[index] = temp;
+                    }
+                    return array;
+                }
+            }
+        });
     });
 
     
@@ -505,7 +498,5 @@ router.delete('/users/delete',function(request,response){
     });
 
 });
-
-
 
 module.exports = router;
