@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
@@ -20,6 +20,7 @@ TagInputModule.withDefaults({
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+
   categories = [
     new Category(1, 'Food' ),
     new Category(2, 'Exercise'),
@@ -47,15 +48,14 @@ export class ProfileComponent implements OnInit {
   opacity: false
   modal:false
   message 
-  loading = false;  
-  loadingImages = false;
-  setting = false;
-  count = {
-    countTo: 150,
-    from: 0,
-    duration: 1
-  }
-
+  loading = false
+  loadingImages = false
+  setting = false
+  blurWordCount
+  bioWordCount
+  blurWordCountCss = false
+  bioWordCountCss = false
+  disableSave = false
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {
@@ -64,6 +64,9 @@ export class ProfileComponent implements OnInit {
   }
 
   imageUpload(event) {
+    
+    //Handles all Image upload logic
+
     let image = <File>event.target.files[0]
     this.loadingImages = true
     
@@ -82,7 +85,32 @@ export class ProfileComponent implements OnInit {
     });
     
   }
-  
+  wordCountLogic(){
+
+    //Is this shit code? I'll know in a month.
+    
+    this.blurWordCount = 150 - this.userInfo.blur.length
+    this.bioWordCount = 300 - this.userInfo.bio.length
+
+    if (this.blurWordCount <= 0){
+      this.blurWordCountCss = true
+      this.disableSave = true
+      
+    }else if(this.blurWordCount > 0){
+      this.blurWordCountCss = false
+      this.disableSave = false
+
+    }
+    if (this.bioWordCount <= 0){
+      this.bioWordCountCss = true
+      this.disableSave = true
+      
+    }else if(this.bioWordCount > 0){
+      this.bioWordCountCss = false
+      this.disableSave = false
+      
+    }
+  }
   deleteImage(image){
     this.loadingImages = true
     this.userService.imageDelete(image).subscribe(res => {
@@ -94,6 +122,9 @@ export class ProfileComponent implements OnInit {
   }
 
   validateFile(name: String) {
+
+    //Makes sure the user is not submitting other files like mp3 and such.
+    
     var ext = name.substring(name.lastIndexOf('.') + 1);
     if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
       return true;
@@ -120,6 +151,9 @@ export class ProfileComponent implements OnInit {
   }
 
   setUserId(){
+    
+    //Get the user ID first before getting all other data from the JWT
+
     this.authenticateService.getUserInfo().subscribe(data=>{
       this.userId = data["id"]
       this.getUser()
@@ -148,10 +182,14 @@ export class ProfileComponent implements OnInit {
         this.placeHolder = false
         this.activity = data['user'].activity
       }
+      this.wordCountLogic()
     })
   }
 
   private editUser(){
+    
+    // Tbh I forgot why I set this function to private and now I'm too afraid to change it.
+
     this.loading = true
 
     this.userInfo.activity = this.activity

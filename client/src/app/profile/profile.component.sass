@@ -41,6 +41,7 @@
     .blur
         background: #f5f5f5
         padding: 5px
+        outline: none
         font-family: 'Song Myung', serifc
         
     .bio
@@ -56,7 +57,7 @@
         font-family: 'Song Myung', serifc
         
     textarea
-        min-height: 100px
+        min-height: 65px
         width: 95%
         font-size: 15px
         resize: none
@@ -378,10 +379,36 @@
     cursor: pointer
     outline: none
     
-
 .something-to-say
     padding: 15px
     font-size: 17px
     font-weight: bold
     margin: auto
     max-width: 610px
+
+.word-count
+    position: absolute
+    right: 15px
+    color: #43a047
+    top: 463px
+    border-radius: 13px
+    font-family: 'Song Myung', serifc
+.bio-word-count
+    position: absolute
+    right: 15px
+    top: 767px
+    color: #43a047
+    font-family: 'Song Myung', serifc
+.word-count-red
+    color: red
+.bio-word-count-red
+    color: red
+
+.disable-save
+    background: #bdbdbd !important
+    pointer-events: none
+    
+textarea::-webkit-scrollbar
+    display: none !important
+    -ms-overflow-style: none !important
+    overflow: -moz-scrollbars-none !important
