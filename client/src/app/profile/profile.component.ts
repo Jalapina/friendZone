@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { AuthenticateService } from '../_services/authenticate.service'
 import { UserService } from '../_services/user.service'
 import { Category } from './Category'
+import { flatten } from '@angular/router/src/utils/collection';
 
 TagInputModule.withDefaults({
   
@@ -53,9 +54,9 @@ export class ProfileComponent implements OnInit {
   setting = false
   blurWordCount
   bioWordCount
-  blurWordCountCss = false
-  bioWordCountCss = false
-  disableSave = false
+  blurWordCountRedText = false
+  bioWordCountRedText = false
+  disableSave:Boolean = false
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {
@@ -88,29 +89,27 @@ export class ProfileComponent implements OnInit {
   wordCountLogic(){
 
     //Is this shit code? I'll know in a month.
-    
     this.blurWordCount = 150 - this.userInfo.blur.length
     this.bioWordCount = 300 - this.userInfo.bio.length
-
-    if (this.blurWordCount <= 0){
-      this.blurWordCountCss = true
-      this.disableSave = true
-      
-    }else if(this.blurWordCount > 0){
-      this.blurWordCountCss = false
-      this.disableSave = false
-
+    
+    if(this.blurWordCount < 0){
+      this.blurWordCountRedText = true;
+    }if(this.blurWordCount > 0){
+      this.blurWordCountRedText = false;
     }
-    if (this.bioWordCount <= 0){
-      this.bioWordCountCss = true
-      this.disableSave = true
-      
-    }else if(this.bioWordCount > 0){
-      this.bioWordCountCss = false
-      this.disableSave = false
-      
+    if(this.bioWordCount < 0){
+      this.bioWordCountRedText = true;
+    }if(this.bioWordCount > 0){
+      this.bioWordCountRedText = false;
     }
+    if(this.bioWordCount < 0 || this.blurWordCount < 0){
+      this.disableSave = true
+    }if(this.bioWordCount > 0 && this.blurWordCount > 0){
+      this.disableSave = false
+    }
+
   }
+
   deleteImage(image){
     this.loadingImages = true
     this.userService.imageDelete(image).subscribe(res => {

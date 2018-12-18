@@ -496,7 +496,6 @@ router.delete('/users/delete',function(request,response){
             });
         }
     });
-
 });
 
 module.exports = router;

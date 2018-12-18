@@ -14,8 +14,8 @@
   </div>
 
   <div class="messages-friends">
-    <ul class="ul-container2" *ngFor="let friend of friendsWithMessages">
-      <li class="messaged-friend">
+    <ul class="ul-container2"  *ngFor="let friend of friendsWithMessages">
+      <li class="messaged-friend" [ngClass]="{'read': !friend.read}">
         <img class="image" *ngIf="friend.users[0].image.length > 0" [src]="friend.users[0].image[0]" alt="User Image" height="55px" width="55px">
         <img class="image" *ngIf="friend.users[0].image.length == 0" src="http://wattleparkkgn.sa.edu.au/wp-content/uploads/2017/06/placeholder-profile-sq.jpg" alt="User Image" height="55px" width="55px">        
         <p class="name" [routerLink]="['/preview',friend.users[0]._id]">{{friend.users[0].first_name}}</p>

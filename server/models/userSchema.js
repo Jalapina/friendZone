@@ -85,6 +85,10 @@ let userSchema = mongoose.Schema({
         type:String,
         trim: true,        
     }],
+    notification:{
+        type:Boolean,
+        default: false,
+    }
 },{
     timestamps: true,   
 });

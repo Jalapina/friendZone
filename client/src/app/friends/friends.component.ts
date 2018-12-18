@@ -11,6 +11,7 @@ import { setTimeout } from 'timers';
 export class FriendsComponent implements OnInit {
 
   constructor(private friendshipService:FriendshipService) { }
+  
   friendList = []
   user
   friendsWithMessages
@@ -24,6 +25,7 @@ export class FriendsComponent implements OnInit {
     this.friendshipService.getFriends().subscribe(data=>{
       this.friendsWithMessages = data['friendsWithMessages']
       this.friendsWithOutMessages = data['friendsWithOutMessages']
+      console.log(this.friendsWithMessages)      
     })
   }
 

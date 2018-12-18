@@ -48,7 +48,7 @@ router.get('/friendships', function(request,response){
                 usersIds = id._id
             });        
 
-            Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users").exec(function(err,msg){
+            Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users read").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){

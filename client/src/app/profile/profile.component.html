@@ -30,7 +30,7 @@
 
     <textarea class="blur disable" placeholder="Keep it short and simple, what do you want to do?" [(ngModel)]="userInfo.blur" (ngModelChange)="wordCountLogic()" name="blur">{{ userInfo.blur }}</textarea>
     
-    <span class="word-count" [ngClass]="{'word-count-red': blurWordCountCss }">{{blurWordCount}}</span>
+    <span class="word-count" [ngClass]="{'word-count-red': blurWordCountRedText }">{{blurWordCount}}</span>
     
     <p class="left" >What do you want to do?</p>
     
@@ -47,7 +47,7 @@
 
     <textarea class="bio disable" [(ngModel)]="userInfo.bio" name="bio" placeholder="Tell who you are." (ngModelChange)="wordCountLogic()"></textarea>
 
-    <span class="bio-word-count" [ngClass]="{'bio-word-count-red': bioWordCountCss }">{{bioWordCount}}</span>
+    <span class="bio-word-count" [ngClass]="{'bio-word-count-red': bioWordCountRedText }">{{bioWordCount}}</span>
     
     <p class="left">Hobbies</p>
     
