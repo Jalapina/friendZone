@@ -48,11 +48,10 @@ router.get('/friendships', function(request,response){
                 usersIds = id._id
             });        
 
-            Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users read").exec(function(err,msg){
+            Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users sender read").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){
-
                         friend.users.forEach(function(user,index){
                             if(request.decoded.id == user._id){
                                 friend.users.splice(index,1)
@@ -69,9 +68,11 @@ router.get('/friendships', function(request,response){
                         users.forEach(function(userInMessageArray,index){
                             if(request.decoded.id == userInMessageArray._id){
                                 msg.users.splice(index,1)
+                                
+                            }if(request.decoded.id == msg.sender){
+                                msg.read = true
                             }
                         });
-    
                         friendsWithMessages.push(msg);
     
                     }
