@@ -75,7 +75,9 @@ export class UserService {
   }
 
   getUserWithToken(token){
-    console.log('/api/passwordReset/token/'+token)
     return this._http.get('/api/passwordReset/token/'+token)
+  }
+  hasNotification(){ 
+    return this._http.get('/api/users/notification/status')
   }
 }

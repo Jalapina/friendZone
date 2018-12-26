@@ -3,8 +3,9 @@
 
   <div class="icons">
     
-    <img class="icon" [routerLink]="['/friends']" src="../../assets/icons/message.svg" alt="">
-    <img class="icon" [routerLink]="['/profile']" src="../../assets/icons/profile.svg" alt="">
+    <img class="icon" [routerLink]="['/friends']" src="../../assets/icons/message.svg" alt="Message Icon">
+    <span *ngIf="notificationCss" class="notification"></span>
+    <img class="icon" [routerLink]="['/profile']" src="../../assets/icons/profile.svg" alt="Profile Icon">
     
   </div>
 

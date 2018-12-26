@@ -19,17 +19,29 @@ router.post('/messages/create', function(request,response){
         message:request.body.message,
     });
 
-    message.save(function(err,result){
-        if(err){
-            console.log(err)
-            response.json({
-                error:err
-            })
-        }else{
-            response.json({
-                message:"message sent."
-            })
-        }
+    message.save(function(messageErr,result){
+        User.findById(reciever).select("notification").exec(function(userErr,user){
+            if(userErr){
+                console.log(userErr)
+            }else{
+                user.notification = true
+                user.save(function(userSaveErr){
+                    if(userSaveErr) console.log(userSaveErr);
+                    if(messageErr){
+                        console.log(messageErr)
+                        response.json({
+                            error:messageErr
+                        })
+                    }else{
+                        console.log(user)
+                        response.json({
+                            message:"message sent."
+                        })
+                    }
+                })
+            }
+        })
+        
     })
 });
 

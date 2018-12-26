@@ -223,7 +223,7 @@ router.post('/passwordresetrequest', function(request,response){
 });
 
 router.get('/passwordReset/token/:id', function(request,response){
-    console.log(request.params.id)
+
     User.findOne({"resettoken":request.params.id}).select("first_name image").exec(function(err,user){
         console.log(user)
         if(err){
@@ -263,7 +263,7 @@ router.post('/passwordreset',function(request,response){
         }
     });
 
-});
+}); 
 
 router.use(function(request, response, next){
     
@@ -299,13 +299,27 @@ router.get('/users/:id',  function(request,response){
     });
 
 });
+
+router.get('/users/notification/status', function(request,response){
+
+    User.findById(request.decoded.id).select('notification').exec(function(err,user){
+        if (err) console.log(err);
+        else{
+            response.json({
+                notification: user.notification,
+            })
+        }
+    });
+
+});
+
 router.get('/users/:term/activity', function(request,response){
 
     let friendList = []
     let user = request.decoded.id
     let userCord 
     friendList.push(user)
-
+    console.log("Hmmm")
     User.findById(user,function(err,user){
 
         if(err){console.log(err)}

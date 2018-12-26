@@ -49,11 +49,11 @@ let userSchema = mongoose.Schema({
         minlength: [5,"Password Must Be Longer Than 5 Characters"],
     },
     latitude:{
-        type:String,  
+        type: String,  
         trim: true,              
     },
     longitude:{
-        type:String,
+        type: String,
         trim: true,              
     },
     image:[{
@@ -64,11 +64,11 @@ let userSchema = mongoose.Schema({
         default: '',
     },
     bio:{
-        type:String,
+        type: String,
         default: '',
     },
     activity:{
-        type:String,
+        type: String,
         default: '',
         trim: true,       
         lowercase: true,
@@ -82,11 +82,11 @@ let userSchema = mongoose.Schema({
         require:false,
     },
     hobbies:[{
-        type:String,
+        type: String,
         trim: true,        
     }],
     notification:{
-        type:Boolean,
+        type: Boolean,
         default: false,
     }
 },{

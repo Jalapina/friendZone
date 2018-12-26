@@ -24,10 +24,17 @@ router.post('/friendships/create', function(request,response){
 
         if(err) console.log(err);
         else if(friendship == null){
-            newFriendShip.save(function(err,friendShip){
+            User.findById(reciever).select("notification").exec(function(err,user){
                 if(err) console.log(err);
-                console.log(friendShip);
-            });
+                else{
+                    user.notification = true
+                    user.save(function(){
+                        newFriendShip.save(function(err){
+                            if(err) console.log(err);
+                        });
+                    })
+                }
+            })
         }
     });
 
@@ -40,9 +47,14 @@ router.get('/friendships', function(request,response){
     usersIds = []
     friendsWithMessages = []
     friendsWithOutMessages = []
-
+    User.findById(request.decoded.id).select("notification").exec(function(err,user){
+        if(err) console.log(err);
+        else{
+            user.notification = false
+            user.save()
+        }
+    })
     FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
-
         friends.forEach(friend=>{
             friend.users.forEach(id=>{
                 usersIds = id._id
