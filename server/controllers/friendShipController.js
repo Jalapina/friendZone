@@ -7,7 +7,7 @@ const FriendShip = mongoose.model('FriendShip')
 
 router.post('/friendships/create', function(request,response){
     
-    let status = request.body.like
+    let status = request.body.status
     let user = request.decoded.id
     let reciever = request.body.id
     let activity = request.body.activity
@@ -32,9 +32,9 @@ router.post('/friendships/create', function(request,response){
                         newFriendShip.save(function(err){
                             if(err) console.log(err);
                         });
-                    })
+                    });
                 }
-            })
+            });
         }
     });
 
@@ -135,7 +135,6 @@ router.delete('/friendships/:friend/delete',function(request,response){
     users.push(user,friendId);
 
     FriendShip.findOne({'users':users},function(err,friendship){
-        console.log(friendship)
         if(err) console.log(err);
         else if(friendship == null){
             console.log("no friendship")
@@ -149,9 +148,18 @@ router.delete('/friendships/:friend/delete',function(request,response){
                     Message.remove({'users':{$all:users}}).exec(function(err){
                     if(err) console.log(err)
                     else{
-                        response.json({
-                            success:true
-                        });
+                        User.findById(friendId).select("notification").exec(function(err,user){
+                            if(err) console.log(err);
+                            else{
+                                user.notification = false
+                                user.save(function(){
+                                    response.json({
+                                        success:true
+                                    });
+                                })
+                            }
+                        })
+                        
                     }
                     }); 
                 }

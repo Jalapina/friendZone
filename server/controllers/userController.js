@@ -292,7 +292,6 @@ router.get('/users/:id',  function(request,response){
 
     User.findById(request.params.id,{password:0,email:0,createdAt:0,updatedAt:0},function(err,user){
         if(err) return response.json({err:err,message:"NO USER"})
-
         response.json({
             user:user
         });
@@ -319,7 +318,6 @@ router.get('/users/:term/activity', function(request,response){
     let user = request.decoded.id
     let userCord 
     friendList.push(user)
-    console.log("Hmmm")
     User.findById(user,function(err,user){
 
         if(err){console.log(err)}
@@ -371,9 +369,6 @@ router.get('/users/:term/activity', function(request,response){
             }
         });
     });
-
-    
-
 });
 router.put('/users/edit', function(request,response){
 

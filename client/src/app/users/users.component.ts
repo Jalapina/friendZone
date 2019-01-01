@@ -101,7 +101,7 @@ export class UsersComponent implements OnInit {
 
   create(like:any,id){
 
-    this.friend.like = like
+    this.friend.status = like
     this.friend.userId = this.user
     this.friend.id = id
     this.friend.activity = this.term

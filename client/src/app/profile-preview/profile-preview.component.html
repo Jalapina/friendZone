@@ -18,12 +18,12 @@
         <P *ngIf="user.birthday " class="age">{{ calculateAge(user.birthday) }}</P>
     </div>
 
-    <p [ngClass]="{'blur-focus':focus}" class="user-info blur-focus blur">
-        {{ user.blur }}
-    </p>
-    <p class="user-info bio">
-        {{ user.bio }}
-    </p>
+    <div class="user-info blur-focus blur">
+        <p class="blur-para" *ngIf="user.blur">{{ user.blur }}</p>
+    </div>
+    <div class="user-info bio">
+        <p class="bio-para" *ngIf="user.bio">{{ user.bio }}</p>
+    </div>
 
     <div *ngIf="user.hobbies.length > 0"  class="likes">
 

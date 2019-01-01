@@ -33,7 +33,6 @@ router.post('/messages/create', function(request,response){
                             error:messageErr
                         })
                     }else{
-                        console.log(user)
                         response.json({
                             message:"message sent."
                         })
@@ -86,8 +85,6 @@ router.put('/messages/read',function(request,response){
             
             message.save(function(err){
                 if(err) console.log(err);
-                console.log(message)
-            
             });
         }
 
