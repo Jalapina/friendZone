@@ -19,7 +19,7 @@ export class MessageComponent implements OnInit {
   user
   usersId = [this.friend,this.user]
   message:any = {}
-  chat
+  chat = []
   firstName
   sender
   friendId
@@ -41,6 +41,7 @@ export class MessageComponent implements OnInit {
           this.readMessage()
         }
       }else{
+        this.chat = undefined
         this.firstName = data['user'].first_name
         this.friendId = data['user']._id
       }

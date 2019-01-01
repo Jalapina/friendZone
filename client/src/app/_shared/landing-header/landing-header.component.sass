@@ -15,5 +15,24 @@ nav
         font-size: 25px
         &:hover 
             color: #e0e0e0
-        >i
+        >span
             color: #ffcc80 
+            animation-duration: 50s
+            animation-iteration-count: infinite
+            animation-name: color-change
+
+@keyframes color-change
+    0%
+        color: #ffcc80
+    15%
+        color: #ef6464
+    30%
+        color: #f3ef00
+    55%
+        color: #2df300
+    75%
+        color: #994fd8
+    85%
+        color: #fd4df5
+    100%
+        color: #fb5454

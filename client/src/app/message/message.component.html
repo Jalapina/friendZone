@@ -1,36 +1,32 @@
 <app-header></app-header>
-<div class="container">
-    <div class="user-activity">
-        <p class="activity" [routerLink]="['/users',activity]">{{activity}}</p>     
-    </div>           
-    
-    <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="chatbox" *ngIf="chat">
-        <ul class="bubble-container" *ngFor="let message of chat" >
 
-            <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
-                <p class="name">{{message.sender.first_name}}</p>
-                <p class="message">{{message.message}}
-                </p>
+<div *ngIf="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="container">
+    <p class="activity" [routerLink]="['/users',activity]">{{activity}}</p>  
+    <ul  class="bubble-container" *ngFor="let message of chat">
 
-                <!-- <span class="time-right">{{message.createdAt | date: format : timezone}}</span> -->
-            </li>
+        <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
+            <p class="name">{{message.sender.first_name}}</p>
+            <p class="message">{{message.message}}</p>
+            <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
+        </li>
 
-            <li class="speech-bubble left-bubble" *ngIf="user != message.sender._id">
-                <p class="name" [routerLink]="['/preview',message.sender._id]">{{message.sender.first_name}}</p>                    
-                <p class="message">{{message.message}}</p>
-                <!-- <span class="time-left">{{message.createdAt | date: format : timezone}}</span> -->
-            </li>
-        </ul>
-        
-    </div>
+        <li class="speech-bubble left-bubble" *ngIf="user != message.sender._id">
+            <p class="name" [routerLink]="['/preview',message.sender._id]">{{message.sender.first_name}}</p>                    
+            <p class="message">{{message.message}}</p>
+            <span class="time-left">{{message.createdAt | date: format : timezone}}</span>
+        </li>
 
-    <div class="pending chatBox" *ngIf="chat === undefined">
+    </ul>   
+</div>
+
+<div class="pending" *ngIf="!chat">
+    <div class="friend-options">
         <p class="first-name" [routerLink]="['/preview',friendId]">{{firstName}}</p>
         <p (click)="unFriend()" class="unfriend">UnFriend</p>
     </div>
-    
 </div>
+
 <form class="message-form" (submit)="sendMessage()">
-        <textarea class="message message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
-        <input type="submit" class="message-button" value="Send">
+    <textarea class="message-input" placeholder="Say something" [(ngModel)]="message.message" name="message" ></textarea>
+    <input type="submit" class="message-button" value="Send">
 </form>
