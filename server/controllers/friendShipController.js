@@ -127,43 +127,39 @@ router.delete('/friendships/:friend/delete',function(request,response){
 
     const user = request.decoded.id
     const friendId = request.params.friend
-    let users = [];
-    
-    users.push(user,friendId);
+    const users = [user,friendId]
 
-    FriendShip.findOne({'users':users},function(err,friendship){
+    FriendShip.find({'users':{$all:users}},function(err,friendship){
+        
         if(err) console.log(err);
         else if(friendship == null){
             console.log("no friendship")
         }
         else{
             friendship.status = false
-
             friendship.save(function(err){
-                if(err) console.log(err);
+            if(err) console.log(err);
+            else{
+                Message.deleteMany({'users':{$all:users}}).exec(function(err){
+                if(err) console.log(err)
                 else{
-                    Message.deleteMany({'users':{$all:users}}).exec(function(err){
-                    if(err) console.log(err)
-                    else{
-                        User.findById(friendId).select("notification").exec(function(err,user){
-                            if(err) console.log(err);
-                            else{
-                                user.notification = false
-                                user.save(function(){
-                                    response.json({
-                                        success:true
-                                    });
-                                })
-                            }
-                        })
-                        
-                    }
-                    }); 
+                    User.findById(friendId).select("notification").exec(function(err,user){
+                        if(err) console.log(err);
+                        else{
+                            user.notification = false
+                            user.save(function(){
+                                response.json({
+                                    success:true
+                                });
+                            });
+                        }
+                    });
                 }
+                }); 
+            }
             });            
         }
     });
-
 });
 
 module.exports = router;
