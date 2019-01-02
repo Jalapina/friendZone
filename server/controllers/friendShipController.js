@@ -42,24 +42,25 @@ router.post('/friendships/create', function(request,response){
 
 router.get('/friendships', function(request,response){
 
-    friends = []
     image = []
-    usersIds = []
     friendsWithMessages = []
     friendsWithOutMessages = []
+
     User.findById(request.decoded.id).select("notification").exec(function(err,user){
         if(err) console.log(err);
         else{
             user.notification = false
             user.save()
         }
-    })
+    });
     FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
-        friends.forEach(friend=>{
-            friend.users.forEach(id=>{
-                usersIds = id._id
-            });        
 
+        friends.forEach(friend=>{
+            usersIds = []
+            friend.users.forEach(user=>{
+                usersIds.push(user._id)
+            });
+            
             Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users sender read").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
@@ -69,9 +70,7 @@ router.get('/friendships', function(request,response){
                                 friend.users.splice(index,1)
                             }
                         });
-
                         friendsWithOutMessages.push(friend);
-
                     }else{
 
                         let users =  msg.users
@@ -86,14 +85,12 @@ router.get('/friendships', function(request,response){
                             }
                         });
                         friendsWithMessages.push(msg);
-    
                     }
                 }
             });
 
         });
-
-    })
+    });
         
     setTimeout(function(){
         insertionSortForMessages(friendsWithMessages);
@@ -145,7 +142,7 @@ router.delete('/friendships/:friend/delete',function(request,response){
             friendship.save(function(err){
                 if(err) console.log(err);
                 else{
-                    Message.remove({'users':{$all:users}}).exec(function(err){
+                    Message.deleteMany({'users':{$all:users}}).exec(function(err){
                     if(err) console.log(err)
                     else{
                         User.findById(friendId).select("notification").exec(function(err,user){
