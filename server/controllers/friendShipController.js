@@ -129,8 +129,8 @@ router.delete('/friendships/:friend/delete',function(request,response){
     const friendId = request.params.friend
     const users = [user,friendId]
 
-    FriendShip.find({'users':{$all:users}},function(err,friendship){
-        
+    FriendShip.findOne({'users':{$all:users}},function(err,friendship){
+
         if(err) console.log(err);
         else if(friendship == null){
             console.log("no friendship")
