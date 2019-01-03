@@ -17,6 +17,7 @@ import { UsersComponent } from './users/users.component';
 import { MessageComponent } from './message/message.component';
 import { UserService } from './_services/user.service'
 import { GuardAuthenticationService } from './_services/guard-authentication.service'
+import {AuthLoggedInGuard} from './_services/auth-logged-in.guard'
 import { FriendshipService } from './_services/friendship.service'
 import { MessageService } from './_services/message.service';
 import { AuthenticateService } from './_services/authenticate.service'
@@ -79,6 +80,7 @@ import {SlideshowModule} from 'ng-simple-slideshow';
     FriendshipService,
     GuardAuthenticationService,
     AuthenticateService,
+    AuthLoggedInGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

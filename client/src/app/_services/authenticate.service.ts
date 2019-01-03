@@ -28,7 +28,7 @@ export class AuthenticateService {
   }
 
   logout(){
-    // I should also blacklist the token in the backend, but I figue this type of app won't need it yet.
+    // I should also blacklist the token in the backend, but I figue this type of app won't need it as of now.
     localStorage.clear()
   }
 }

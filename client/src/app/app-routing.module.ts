@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {Routes, RouterModule,CanActivate} from '@angular/router';
 import {Route} from '@angular/router/src/config';
 import {GuardAuthenticationService as AuthGuard} from './_services/guard-authentication.service';
+import {AuthLoggedInGuard as AuthInGuard} from './_services/auth-logged-in.guard'
 import {LandingComponent} from './landing/landing.component'
 import {HomeComponent} from './home/home.component'
 import {LoginComponent} from './login/login.component'
@@ -21,6 +22,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: LandingComponent,
+    canActivate: [AuthInGuard],
   },
   {
     path: 'friends',
@@ -62,22 +64,27 @@ const routes: Routes = [
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
+    canActivate: [AuthInGuard],
     
   },
   {
     path: 'register',
     pathMatch: 'full',
     component: RegisterComponent,
+    canActivate: [AuthInGuard],
+    
   },
   {
     path: 'password_reset',
     pathMatch: 'full',
     component: PasswordResetComponent,
+    canActivate: [AuthInGuard],    
   },
   {
     path: 'password_reset/token/:id',
     pathMatch: 'full',
-    component: PasswordResetConfirmationComponent
+    component: PasswordResetConfirmationComponent,
+    canActivate: [AuthInGuard],    
   },
   {
     path: '404',

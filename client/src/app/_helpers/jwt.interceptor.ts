@@ -14,14 +14,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
       let token = this.auth.getToken();
       if(token){
-
         request = request.clone({
           setHeaders: { 
             Authorization: `${token}`
           }
         })
-        
-        
       }
       return next.handle(request)
       .catch(err => { 
