@@ -71,24 +71,43 @@
 .pending
     background-color: tomato
     height: 81%
-    animation-name: color-change
-    animation-duration: 20s
-    animation-iteration-count: infinite
-    @keyframes color-change
-        0%
-            background-color: #d65b5beb
-        15%
-            background-color: #d6d35beb
-        30%
-            background-color: #6dd65beb
-        55%
-            background-color: #5bb9d6eb
-        75%
-            background-color: #755bd6eb
-        85%
-            background-color: #d65bcbeb
-        100%
-            background-color: #d65ba4eb
+    animation-duration: 60s
+    text-align: center
+    -webkit-animation-name: color-change
+    -webkit-animation-duration: 50s
+    -webkit-animation-timing-function: ease-in-out
+    -webkit-animation-iteration-count: infinite    
+    -webkit-animation-play-state: running
+@keyframes color-change
+    0%
+        background-color: #d65b5beb
+    15.0%
+        background-color: #d6d35beb
+    30.0%
+        background-color: #6dd65beb
+    55.0%
+        background-color: #5bb9d6eb
+    75.0%
+        background-color: #755bd6eb
+    85.0%
+        background-color: #d65bcbeb
+    100.0%
+        background-color: #d65ba4eb
+@-webkit-keyframes color-change
+    0.0%
+        background-color: #d65b5beb
+    15.0%
+        background-color: #d6d35beb
+    30.0%
+        background-color: #6dd65beb
+    55.0%
+        background-color: #5bb9d6eb
+    75.0%
+        background-color: #755bd6eb
+    85.0%
+        background-color: #d65bcbeb
+    100.0%
+        background-color: #d65ba4eb
 .friend-options
     position: relative
     top: 150px
@@ -126,6 +145,8 @@
     font-weight: bold
     margin: 12px
     min-height: 20px
+    outline: none
+
 .user-activity
     text-align: center
 .activity

@@ -17,27 +17,46 @@
 .landing-page
     height: 90%
     min-height: 500px
-    background: tomato
+    background-color: tomato
     text-align: center
-    animation-duration: 30s
-    animation-iteration-count: infinite
-    animation-name: color-change
+    -webkit-animation-name: color-change
+    -webkit-animation-duration: 50s
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;    
+    -webkit-animation-play-state: running;
 
 @keyframes color-change
     0%
         background-color: #d65b5beb
-    15%
-        background-color: #d6d35beb
-    30%
-        background-color: #6dd65beb
-    55%
-        background-color: #5bb9d6eb
-    75%
-        background-color: #755bd6eb
-    85%
-        background-color: #d65bcbeb
-    100%
-        background-color: #d65ba4eb
+    15.0%
+        background-color: #ef5350
+    30.0%
+        background-color: #c62828
+    55.0%
+        background-color: #ff8a80
+    75.0%
+        background-color: #ff9e80
+    85.0%
+        background-color: #ff5722
+    100.0%
+        background-color: #e65100
+
+@-webkit-keyframes color-change
+    0%
+        background-color: #d65b5beb
+    15.0%
+        background-color: #ef5350
+    30.0%
+        background-color: #c62828
+    55.0%
+        background-color: #ff8a80
+    75.0%
+        background-color: #ff9e80
+    85.0%
+        background-color: #ff5722
+    100.0%
+        background-color: #e65100
+
 .slide-1
     animation-name: slide1
 .slide-2
