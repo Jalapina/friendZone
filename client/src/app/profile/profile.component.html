@@ -26,7 +26,7 @@
   
   <form (submit)="editUser()">
     
-    <p class="left">Blur</p>
+    <p class="left blur-title">Blur</p>
 
     <textarea class="blur disable" placeholder="Keep it short and simple, what do you want to do?" [(ngModel)]="userInfo.blur" (ngModelChange)="wordCountLogic()" name="blur">{{ userInfo.blur }}</textarea>
     
