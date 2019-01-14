@@ -39,7 +39,7 @@ const upload = multer({
 
 
 router.post('/users/authenticate', function(request,response){
-
+    //user login
     const email = request.body.email
     const password = request.body.password
 
@@ -59,7 +59,7 @@ router.post('/users/authenticate', function(request,response){
             });
         }else{ 
             const hash = user.password
-
+            //unhash users password
             bcrypt.compare(password, hash, function(err, res) {
                 
                 if(err) console.log(err);
@@ -81,7 +81,7 @@ router.post('/users/authenticate', function(request,response){
 }); 
 
 router.post('/users/create', function(request,response){
-
+    //user register
     const name = request.body.first_name
     const email = request.body.email
     const password = request.body.password
@@ -92,7 +92,7 @@ router.post('/users/create', function(request,response){
             error: "Yo everything is empty"
         });
     }
-
+    //hash users password
     bcrypt.hash(password, saltRounds, function(err, hash) {
         
         if(err) console.log(err);
@@ -154,6 +154,7 @@ router.post('/users/create', function(request,response){
                     }
                 }
             }else{
+                //creating jwt token for authenication
                 const token = jwt.sign(
                     { 
                         id: newUser._id, 
@@ -225,7 +226,6 @@ router.post('/passwordresetrequest', function(request,response){
 router.get('/passwordReset/token/:id', function(request,response){
 
     User.findOne({"resettoken":request.params.id}).select("first_name image").exec(function(err,user){
-        console.log(user)
         if(err){
             console.log(err)
         }else{
@@ -266,7 +266,7 @@ router.post('/passwordreset',function(request,response){
 }); 
 
 router.use(function(request, response, next){
-    
+    //middleware for authenicating logged in user
     var token = request.headers['authorization']
 
     if (!token) return response.status(401).send({ auth: false, message: 'No token provided.' });

@@ -20,6 +20,7 @@ router.post('/messages/create', function(request,response){
     });
 
     message.save(function(messageErr,result){
+        //query other user to turn on notification
         User.findById(reciever).select("notification").exec(function(userErr,user){
             if(userErr){
                 console.log(userErr)
@@ -58,6 +59,7 @@ router.get('/messages/:reciever', function(request,response){
                 error:err
         });
         }else if(chat.length == 0){
+            //if no messages than just send back the friends name
             User.findById(friend).select('first_name').exec(function(err,user){
                 
                 if(err) return response.json({err:err,message:"NO USER"})
@@ -76,7 +78,7 @@ router.get('/messages/:reciever', function(request,response){
 });
 
 router.put('/messages/read',function(request,response){
-    
+    //mark messages as read with a boolean
     Message.findById(request.body._id,function(err,message){
 
         if(err) console.log(err)

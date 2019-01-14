@@ -19,11 +19,12 @@ router.post('/friendships/create', function(request,response){
         user: user,
         users: [user,reciever],
     });
-
+    //check if they are already friends
     FriendShip.findOne({"users":users},function(err,friendship){
 
         if(err) console.log(err);
         else if(friendship == null){
+            //Query other user being friendzoned and turn on a notification.
             User.findById(reciever).select("notification").exec(function(err,user){
                 if(err) console.log(err);
                 else{
@@ -45,7 +46,7 @@ router.get('/friendships', function(request,response){
     image = []
     friendsWithMessages = []
     friendsWithOutMessages = []
-
+    //Turn off any notification the user had.
     User.findById(request.decoded.id).select("notification").exec(function(err,user){
         if(err) console.log(err);
         else{
@@ -53,6 +54,7 @@ router.get('/friendships', function(request,response){
             user.save()
         }
     });
+    //find all friendships where they're both friends
     FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
 
         friends.forEach(friend=>{
@@ -60,11 +62,12 @@ router.get('/friendships', function(request,response){
             friend.users.forEach(user=>{
                 usersIds.push(user._id)
             });
-            
+            //Check if they have messages and take the last message for a chat preview
             Message.findOne(({'users':{$all:usersIds}})).lean().sort([['createdAt', 'descending']]).populate("users","first_name image").select("message createdAt users sender read").exec(function(err,msg){
                 if(err) console.log(err);
                 else{
                     if(msg == null){
+                        //if no messages than push the users data in the friendsWithOutMessages array
                         friend.users.forEach(function(user,index){
                             if(request.decoded.id == user._id){
                                 friend.users.splice(index,1)
@@ -72,7 +75,7 @@ router.get('/friendships', function(request,response){
                         });
                         friendsWithOutMessages.push(friend);
                     }else{
-
+                        //else add the user along with the message to the friendsWithMessages array.
                         let users =  msg.users
                         msg.activity = friend.activity
                         
@@ -93,17 +96,19 @@ router.get('/friendships', function(request,response){
     });
         
     setTimeout(function(){
-        insertionSortForMessages(friendsWithMessages);
-        insertionSortForMessages(friendsWithOutMessages)
+        //sort messages from most recent
+        insertionSortForMessagesAndFriends(friendsWithMessages);
+        //sort friends from most recent
+        insertionSortForMessagesAndFriends(friendsWithOutMessages)
 
         response.json({
             friendsWithMessages: friendsWithMessages,
             friendsWithOutMessages: friendsWithOutMessages,
         });
 
-    },300);
+    },0);
 
-    function insertionSortForMessages(array){
+    function insertionSortForMessagesAndFriends(array){
 
         length = array.length
         

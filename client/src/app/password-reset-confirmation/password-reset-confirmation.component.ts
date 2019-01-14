@@ -28,10 +28,8 @@ export class PasswordResetConfirmationComponent implements OnInit {
   }
 
   getUserWithToken(){
-    console.log(this.token)
     this.userService.getUserWithToken(this.token).subscribe(data=>{
       this.user = data["user"]
-      console.log(this.user)
     });
   }
 

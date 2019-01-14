@@ -19,7 +19,6 @@ export class PasswordResetComponent implements OnInit {
 
   passwordResetRequest(){
     this.userService.passwordResetRequest(this.user).subscribe(data=>{
-      console.log(data)
       if(data["message"]){
         this.errorMessages = data["message"]
       }else{

@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit {
   };
 
   getDistance(latitude, longitude){
-    
+    //checks distance between both users if they both have location on.
     let R = 6378137; // Earth’s mean radius in meter
     let dLat = this.rad(this.userCord.latitude - latitude);
     let dLong = this.rad(this.userCord.longitude - longitude);

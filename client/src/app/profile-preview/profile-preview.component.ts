@@ -31,11 +31,10 @@ export class ProfilePreviewComponent implements OnInit {
   }
 
   calculateAge(birthday) {
-    
+    //check users age
     let ageInSec = Date.now() - new Date(birthday).getTime();
     let age = new Date(ageInSec);
     return Math.abs(age.getUTCFullYear() - 1970);
-        
   }
 
 }

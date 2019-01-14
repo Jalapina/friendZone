@@ -204,6 +204,8 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteUser(){
+    //deletes users profile forever.
+    
     this.userService.deleteUser(this.userId).subscribe(data =>{
       if(data['success'] == true){
         this.router.navigateByUrl('/')
