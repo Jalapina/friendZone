@@ -37,7 +37,7 @@ export class MessageComponent implements OnInit {
         this.reciever = data['chat'][0].users[0].first_name
         this.sender = data['chat'][0].users[1].first_name
         this.chat = data['chat']
-        if(this.user !== this.chat[this.chat.length-1].sender._id){
+        if(this.user != this.chat[this.chat.length-1].sender._id){
           this.readMessage()
         }
       }else{

@@ -28,7 +28,8 @@ export class ProfileComponent implements OnInit {
     new Category(3, 'Cinema'),
     new Category(4, 'Bar'),
     new Category(5, 'Music'),
-    new Category(5, 'Dancing'),    
+    new Category(5, 'Dancing'),
+    new Category(5, 'Whatever'),
  ];
 
   classVisible: false
