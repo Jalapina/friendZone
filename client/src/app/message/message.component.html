@@ -5,7 +5,7 @@
     <ul  class="bubble-container" *ngFor="let message of chat">
 
         <li class="speech-bubble right-bubble" *ngIf="user == message.sender._id">
-            <p class="name">{{message.sender.first_name}}</p>
+            <p class="name">You</p>
             <p class="message">{{message.message}}</p>
             <span class="time-right">{{message.createdAt | date: format : timezone}}</span>
         </li>
