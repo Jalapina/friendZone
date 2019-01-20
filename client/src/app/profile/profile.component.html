@@ -5,7 +5,7 @@
   <div class="images-container">
     <div class="image-container disable" *ngFor="let image of images">
       <input type="file" (ngModel)="userImage" name="userImage" id="file" class="inputImage" (change)="imageUpload($event)" *ngIf="!image"/>
-      <label for="file" class="imageLabel" *ngIf="!image">Choose an Image</label>
+      <label for="file" class="imageLabel" *ngIf="!image">Upload an Image</label>
       <ngx-loading [show]="loadingImages" [config]="{ backdropBorderRadius: '25px' }" [template]="customLoadingTemplate"></ngx-loading>
       <div class="image" *ngIf="image">
           <img [src]="image" height="200">

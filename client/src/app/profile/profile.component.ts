@@ -58,6 +58,7 @@ export class ProfileComponent implements OnInit {
   blurWordCountRedText = false
   bioWordCountRedText = false
   disableSave:Boolean = false
+
   constructor(private authenticateService:AuthenticateService, private userService:UserService , private router:Router) {}
 
   ngOnInit() {
@@ -66,7 +67,6 @@ export class ProfileComponent implements OnInit {
   }
 
   imageUpload(event) {
-    
     //Handles all Image upload logic
 
     let image = <File>event.target.files[0]
@@ -87,6 +87,29 @@ export class ProfileComponent implements OnInit {
     });
     
   }
+
+  deleteImage(image){
+    this.loadingImages = true
+    this.userService.imageDelete(image).subscribe(res => {
+      setTimeout(()=>{
+        this.getUser()
+      },0)
+    });
+  }
+
+  validateFile(name: String) {
+
+    //Makes sure the user is not submitting other files like mp3 and such.
+    
+    var ext = name.substring(name.lastIndexOf('.') + 1);
+    if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
+      return true;
+    }
+    else {
+        return false;
+    }
+  }
+
   wordCountLogic(){
 
     //Is this shit code? I'll know in a month.
@@ -109,29 +132,6 @@ export class ProfileComponent implements OnInit {
       this.disableSave = false
     }
 
-  }
-
-  deleteImage(image){
-    this.loadingImages = true
-    this.userService.imageDelete(image).subscribe(res => {
-      setTimeout(()=>{
-        this.getUser()
-      },0)
-    });
-
-  }
-
-  validateFile(name: String) {
-
-    //Makes sure the user is not submitting other files like mp3 and such.
-    
-    var ext = name.substring(name.lastIndexOf('.') + 1);
-    if (ext.toLowerCase() == "jpg" || ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpeg') {
-      return true;
-    }
-    else {
-        return false;
-    }
   }
 
   userActive(){
@@ -177,6 +177,8 @@ export class ProfileComponent implements OnInit {
           }
           while(this.images.length <= 3 )
         }
+      }else{
+        this.images =  [null,null,null,null]
       }
       if(data['user'].activity){
         this.placeHolder = false
