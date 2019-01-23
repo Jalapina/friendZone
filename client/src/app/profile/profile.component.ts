@@ -211,6 +211,7 @@ export class ProfileComponent implements OnInit {
     
     this.userService.deleteUser(this.userId).subscribe(data =>{
       if(data['success'] == true){
+        this.authenticateService.logout()
         this.router.navigateByUrl('/')
       }else{
         this.message = "User could not be deleted, try again later"

@@ -484,9 +484,9 @@ router.put('/users/setlocation',function(request,response){
 
 router.delete('/users/delete',function(request,response){
 
-    user = request.decoded.id
+    userId = request.decoded.id
     
-    User.findByIdAndRemove(user,function(err,user){
+    User.findByIdAndRemove(userId,function(err,user){
         
         if(err){
             console.log(err);
@@ -499,6 +499,9 @@ router.delete('/users/delete',function(request,response){
                     }
                 });
             });
+            FriendShip.deleteMany({"users":userId},function(err){
+                if (err) console.log(err);
+            })
             response.json({
                 success: true,
                 message: "User deleted",

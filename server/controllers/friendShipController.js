@@ -56,6 +56,7 @@ router.get('/friendships', function(request,response){
     });
     //find all friendships where they're both friends
     FriendShip.find({'users':request.decoded.id,"status":true}).populate("users","first_name image").exec(function(err,friends){
+
         friends.forEach(friend=>{
             usersIds = []
             friend.users.forEach(user=>{
