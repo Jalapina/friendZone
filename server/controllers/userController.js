@@ -11,7 +11,7 @@ const saltRounds = 10;
 const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2')
 const inLineCss = require('nodemailer-juice');
-const secret = 'idontmake11time1996for107you2012';
+const secret = 'asdf123asdf123';
 
 const store = multer.diskStorage({
     destination:function(request,file,cb){

@@ -5,7 +5,7 @@
     <form (submit)="create()">
         
         <input type="text" class="form-group validate" (input)="validate()" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name">
-        <input type="email" required [pattern]="emailPattern" class="form-group" placeholder="Email" (input)="validate()" name="email" [(ngModel)]="user.email">
+        <input type="email" required class="form-group" placeholder="Email" (input)="validate()" name="email" [(ngModel)]="user.email">
         <input type="date"  [ngClass]="{'ageValidation': ageValidation,'placeholder': datePicker }" class="form-group date placeholder" (input)="ageValidate();" placeholder="Birthdate" name="birthdate" (input)="validate()" (focus)="datePicker = false;" [(ngModel)]="user.birthday">
         <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate(); validation();" placeholder="Password" name="password" [(ngModel)]="user.password">
         <input type="password" [ngClass]="{'password-compare': isClassVisible }" class="form-group " (input)="validate(); validation();" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
@@ -15,6 +15,6 @@
       
     <button [routerLink]="['/login']" class="form-group button-link">Login</button>
     <p class="error-message" *ngIf="message">{{message}}</p>
-    <ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
+    <ngx-loading [show]="loading"></ngx-loading>
     
 </div>

@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
   selectedImage
   userImage
   images =  [null,null,null,null]
-  opacity: false
-  modal:false
+  opacity:Boolean = false
+  modal:Boolean = false
   message 
   loading = false
   loadingImages = false
-  setting = false
+  setting:Boolean = false
   blurWordCount
   bioWordCount
   blurWordCountRedText = false
@@ -188,7 +188,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  private editUser(){
+  editUser(){
     
     // Tbh I forgot why I set this function to private and now I'm too afraid to change it.
 

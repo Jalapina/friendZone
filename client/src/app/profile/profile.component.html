@@ -14,13 +14,13 @@
     </div>
   </div>
   <div *ngIf="loading" class="loading">
-      <ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
+      <ngx-loading [show]="loading"></ngx-loading>
   </div>
   <div class="header disable">
       <h1 class="left" id="name" [routerLink]="['/preview', userId]">{{ name }}</h1>
       <span class="tool-tip">See Profile Preview</span>
       <img class="settings" (click)="setting = true;" src="../../assets/icons/settings.svg" alt="Settings">
-      <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive($event)"  id="switch">
+      <input type="checkbox" [ngModel]="userIsActive" name="userIsActive" (ngModelChange)="userActive()"  id="switch">
       <label for="switch"></label>
   </div>
   
@@ -75,7 +75,7 @@
   </div>
   <div class="version">
     <p>Version: 1.0.0</p>
-    <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = true; setting = false;">DELETE ACCOUNT</button>
+    <button class="delete-account logoutButton disable" (click)="opacity = !opacity; modal = !modal; setting = !setting;">DELETE ACCOUNT</button>
   </div>
 </div>
 

@@ -6,9 +6,9 @@
     <div class="profile-image">
         <slideshow [imageUrls]="user.image"></slideshow>
     </div>
-    <div (click)="isClassVisible = !isClassVisible" class="user-name">
+    <div class="user-name">
         <p class="name">{{ user.first_name }}</p>
-        <ngx-loading [show]="loadingImages" [template]="customLoadingTemplate"></ngx-loading>
+        <ngx-loading [show]="loadingImages"></ngx-loading>
         
         <div class="active-status">
             <p class="user-is-active activity" *ngIf="user.active == true">Active for: {{ user.activity }}</p>
