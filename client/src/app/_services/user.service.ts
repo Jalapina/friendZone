@@ -32,7 +32,7 @@ export class UserService {
     return this._http.put('/api/users/useractivation',userActivation).subscribe()
   }
   imageUpload(imageFile){
-    return this._http.put('/api/users/images/',imageFile).subscribe()
+    return this._http.put('/api/users/images/',imageFile)
   }
   imageDelete(imageFile){
     return this._http.delete('/api/users/images/'+imageFile)

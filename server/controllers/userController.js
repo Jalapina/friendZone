@@ -445,9 +445,8 @@ router.delete('/users/images/uploads/:term', function(request,response){
 });
 
 router.put('/users/images',upload.single("userImage"), function(request, response) {
-    console.log("um")
+
     User.findById(request.decoded.id,function(err,user){
-        
         if(err){
             console.log(err)
         }else{
