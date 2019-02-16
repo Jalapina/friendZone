@@ -1,20 +1,12 @@
-.card-image {
-  text-align: center;
-  height: 300px;
-  bottom: 5px;
-}
-
-.card-image img {
-  height: 300px;
-  width: 350px;
-}
-
 .card-content {
   text-align: center;
-  padding: 10px;
+  padding: 3px;
   border: 0px solid;
   max-width: 750px;
-  margin: 15px auto;
+  height: 88%;
+  overflow: scroll;
+  position: relative;
+  margin: auto;
 }
 
 @media screen and (min-width: 750px) {
@@ -27,7 +19,10 @@
 }
 
 .card-content .saveButton {
-  width: 350px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  width: 100%;
+  max-width: 350px;
   height: 40px;
   margin-top: 10px;
   font-weight: bold;
@@ -35,11 +30,11 @@
   cursor: pointer;
   border-radius: 30px;
   background: #66bb6a;
+  outline: none;
 }
 
 .card-content .saveButton:hover {
   color: #fff;
-  font-size: 10px;
   background-color: #00c853;
 }
 
@@ -47,7 +42,8 @@
   margin-top: 10px;
   height: 40px;
   font-weight: bold;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   border: 0px;
   border-radius: 30px;
   background: #ef5350;
@@ -57,12 +53,13 @@
 .card-content .logoutButton:hover {
   color: #fff;
   background: #d50000;
-  font-size: 10px;
 }
 
 .card-content .blur {
   background: #f5f5f5;
   padding: 5px;
+  outline: none;
+  font-family: 'Song Myung', serifc;
 }
 
 .card-content .bio {
@@ -75,15 +72,22 @@
   padding: 5px;
   background: #f5f5f5;
   width: 95%;
+  font-family: 'Song Myung', serifc;
 }
 
 .card-content textarea {
-  min-height: 80px;
+  min-height: 65px;
   width: 95%;
   font-size: 15px;
   resize: none;
   border: 0;
   background: transparent;
+}
+
+.card-content::-webkit-scrollbar {
+  display: none !important;
+  -ms-overflow-style: none !important;
+  overflow: -moz-scrollbars-none !important;
 }
 
 .closebtn:hover {
@@ -93,6 +97,7 @@
 .left {
   text-align: left;
   font-weight: bold;
+  cursor: default;
   margin: 5px;
   font-family: 'Song Myung', serifc;
 }
@@ -111,6 +116,10 @@
   margin-bottom: 15px;
   float: left;
   display: inline-block;
+  text-transform: capitalize;
+  cursor: pointer;
+  min-width: 60px;
+  outline: none;
 }
 
 .header input[type=checkbox] {
@@ -136,9 +145,16 @@
   font-family: 'Song Myung', serifc;
   font-size: 20px;
   right: 80px;
-  content: "Active";
   position: absolute;
   top: 5px;
+}
+
+@media screen and (max-width: 320px) {
+  .header label::before {
+    font-size: 15px;
+    top: -20px;
+    right: 15px;
+  }
 }
 
 .header label::after {
@@ -216,6 +232,7 @@
   height: 35px;
   width: 190px;
   margin: auto;
+  text-transform: capitalize;
 }
 
 .dropdown-container:hover {
@@ -246,5 +263,296 @@
     -webkit-transform: none;
             transform: none;
   }
+}
+
+.images-container {
+  height: 310px;
+  margin: auto;
+}
+
+@media screen and (max-width: 729px) {
+  .images-container {
+    max-width: 360px;
+    padding: 10px;
+  }
+}
+
+@media screen and (min-width: 730px) {
+  .images-container {
+    width: auto;
+  }
+  .images-container .image-container {
+    margin-top: 60px;
+    width: 165px;
+  }
+}
+
+.image-container {
+  background-color: #404040;
+  height: 145px;
+  position: relative;
+  width: 45%;
+  vertical-align: top;
+  margin: 2px;
+  display: inline-block;
+  -webkit-box-shadow: 0px 2px 13px #888888;
+          box-shadow: 0px 2px 13px #888888;
+  border-radius: 25px;
+}
+
+.inputImage {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.imageLabel {
+  background-color: #bdbdbd;
+  position: relative;
+  bottom: 85px;
+  padding: 11px;
+  cursor: pointer;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 2px 13px #888888;
+          box-shadow: 0px 2px 13px #888888;
+  font-size: 15px;
+  font-family: 'Song Myung', serifc;
+}
+
+.inputImage:focus + label,
+.inputImage + label:hover {
+  background-color: #ffcc80;
+}
+
+.image {
+  height: 100%;
+}
+
+.image img {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border-radius: 25px;
+}
+
+.delete {
+  height: 35px;
+  width: 35px;
+  background: #e57373;
+  background-image: url("../../assets/icons/delete2.svg");
+  position: relative;
+  z-index: 1;
+  bottom: 160px;
+  float: right;
+  cursor: pointer;
+  border: 0px;
+  left: 5px;
+  border-radius: 25px;
+  outline: none;
+}
+
+.card-content-opacity {
+  opacity: 0.1;
+}
+
+.card-content-opacity .disable {
+  pointer-events: none;
+}
+
+.modal {
+  height: 190px;
+  background-color: #404040;
+  color: #fff;
+  width: 300px;
+  position: fixed;
+  bottom: 350px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  cursor: default;
+  padding: 5px;
+}
+
+.modal > p {
+  width: 60%;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.modal > button {
+  border: 0px;
+  width: 60%;
+  margin-top: 15px;
+  height: 25px;
+}
+
+.modal .yes {
+  background-color: #ef5350;
+  cursor: pointer;
+}
+
+.modal .cancel {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.modal-display-block {
+  display: block;
+  z-index: 1;
+}
+
+.delete-account {
+  background: #b71c1c !important;
+  outline: none;
+}
+
+.tool-tip {
+  float: left;
+  padding: 4px;
+  background-color: #e0e0e0;
+  border-radius: 0px 13px 13px 15px;
+  margin-top: 5px;
+  width: 70px;
+  cursor: default;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#name:hover .tool-tip {
+  background-color: red;
+}
+
+.loading {
+  position: absolute;
+  height: 160%;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+}
+
+.settings {
+  height: 30px;
+  cursor: pointer;
+  float: left;
+  margin: 6px 0px 0px 2px;
+}
+
+.settings-container {
+  position: absolute;
+  top: 0px;
+  background-color: #fff;
+  z-index: 1;
+  height: 100%;
+  display: none;
+  width: 100%;
+  cursor: default;
+}
+
+.settings-container-view {
+  display: block;
+}
+
+.logo-title {
+  background-color: #404040;
+  height: 70px;
+  text-align: center;
+}
+
+.title {
+  font-size: 45px;
+  font-family: 'Modak', cursive;
+  color: #fff;
+  cursor: pointer;
+}
+
+.contact-info {
+  margin: 10px;
+  margin-top: 95px;
+  text-align: center;
+}
+
+.linkedin {
+  text-decoration: none;
+  color: #0076b7;
+  cursor: pointer;
+}
+
+.container {
+  font-family: 'Song Myung', serifc;
+}
+
+.version {
+  background-color: #404040;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+  padding: 15px;
+}
+
+.logoutButton {
+  margin: 5px;
+  height: 40px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 350px;
+  border: 0px;
+  cursor: pointer;
+  outline: none;
+}
+
+.something-to-say {
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  margin: auto;
+  max-width: 610px;
+}
+
+.word-count {
+  position: absolute;
+  right: 20px;
+  color: #43a047;
+  top: 477px;
+  border-radius: 13px;
+  font-family: 'Song Myung', serifc;
+}
+
+.bio-word-count {
+  position: absolute;
+  right: 20px;
+  top: 780px;
+  color: #43a047;
+  font-family: 'Song Myung', serifc;
+}
+
+.word-count-red {
+  color: red;
+}
+
+.bio-word-count-red {
+  color: red;
+}
+
+.disable-save {
+  background: #bdbdbd !important;
+  pointer-events: none;
+}
+
+textarea::-webkit-scrollbar {
+  display: none !important;
+  -ms-overflow-style: none !important;
+  overflow: -moz-scrollbars-none !important;
+}
+
+.blur-title {
+  width: 10%;
 }
 /*# sourceMappingURL=profile.component.css.map */

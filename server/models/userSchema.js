@@ -87,7 +87,7 @@ let userSchema = mongoose.Schema({
     }],
     notification:{
         type: Boolean,
-        default: false,
+        default: true,
     }
 },{
     timestamps: true,   

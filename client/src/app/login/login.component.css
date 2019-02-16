@@ -1,15 +1,23 @@
-div.login {
+.login {
   height: 25%;
-  margin: 150px 0px 0px 0px;
-  padding-top: 65px;
   text-align: center;
+  margin: auto;
+  margin-top: 160px;
+  width: 340px;
+}
+
+@media screen and (min-width: 600px) {
+  .login {
+    width: 550px;
+  }
 }
 
 .form-group {
-  width: 75%;
+  width: 90%;
   margin: 5px 0px 0px 0px;
-  height: 50px;
+  height: 40px;
   border: 0px;
+  outline: none;
 }
 
 .button-link {
@@ -20,10 +28,11 @@ div.login {
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
   color: black;
+  cursor: pointer;
 }
 
 .button-link:hover {
-  background-color: #031424;
+  background-color: #404040;
   color: white;
   border-width: 1px;
 }
@@ -35,6 +44,8 @@ div.login {
   transition-property: background-color color border-width;
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
   color: #fff;
   cursor: not-allowed;
   pointer-events: none;
@@ -48,7 +59,7 @@ div.login {
 
 .form-active {
   pointer-events: auto;
-  background-color: black;
+  background-color: #404040;
   color: #fff;
   cursor: pointer;
 }
@@ -62,5 +73,12 @@ div.login {
   width: 200px;
   margin: 4px auto;
   padding: 5px;
+}
+
+.forgot-password {
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px auto;
+  outline: none;
 }
 /*# sourceMappingURL=login.component.css.map */

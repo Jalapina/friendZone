@@ -1,16 +1,24 @@
-div.register {
+.register {
   text-align: center;
-  height: 40%;
-  margin: 130px 0px 0px 0px;
-  padding: 45px 0px 0px 0px;
+  height: 300px;
+  margin: auto;
+  margin-top: 100px;
+  width: 340px;
+}
+
+@media screen and (min-width: 600px) {
+  .register {
+    width: 550px;
+  }
 }
 
 .form-group {
-  width: 75%;
+  width: 90%;
   margin: 10px 0px 0px 0px;
   padding-left: 10px;
   border: 0px;
   height: 40px;
+  outline: none;
 }
 
 .form-button {
@@ -23,16 +31,18 @@ div.register {
   color: #fff;
   cursor: not-allowed;
   pointer-events: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 .form-button:hover {
-  background-color: #eeeeee;
+  background-color: #404040;
   color: black;
 }
 
 .form-active {
   pointer-events: auto;
-  background-color: black;
+  background-color: #404040;
   color: #fff;
   cursor: pointer;
 }
@@ -50,10 +60,11 @@ div.register {
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
   color: black;
+  cursor: pointer;
 }
 
 .button-link:hover {
-  background-color: #031424;
+  background-color: #404040;
   color: white;
   border-width: 1px;
 }
@@ -63,5 +74,26 @@ div.register {
   width: 200px;
   margin: 4px auto;
   padding: 5px;
+}
+
+.date {
+  font-size: 10px;
+  color: #757575;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  background-color: transparent;
+}
+
+.placeholder::before {
+  content: "Birthday";
+  position: absolute;
+  background-color: #fff;
+  width: 100px;
+  padding-top: 0px;
+  font-size: 12px;
+}
+
+.ageValidation {
+  background-color: #EF9A99;
 }
 /*# sourceMappingURL=register.component.css.map */

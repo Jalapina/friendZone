@@ -1,0 +1,70 @@
+.title {
+  font-family: 'Baloo Bhaijaan', cursive;
+  font-size: 100px;
+}
+
+.message {
+  font-size: 60px;
+  font-family: 'Baloo Bhaijaan', cursive;
+}
+
+.conatiner {
+  text-align: center;
+  background: tomato;
+  height: 69.7%;
+  padding: 75px;
+  -webkit-animation-name: color-change-404;
+  -webkit-animation-duration: 50s;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-play-state: running;
+}
+
+@keyframes color-change-404 {
+  0% {
+    background-color: #d65b5beb;
+  }
+  15.0% {
+    background-color: #ef5350;
+  }
+  30.0% {
+    background-color: #c62828;
+  }
+  55.0% {
+    background-color: #ff8a80;
+  }
+  75.0% {
+    background-color: #ff9e80;
+  }
+  85.0% {
+    background-color: #ff5722;
+  }
+  100.0% {
+    background-color: #e65100;
+  }
+}
+
+@-webkit-keyframes color-change-404 {
+  0% {
+    background-color: #d65b5beb;
+  }
+  15.0% {
+    background-color: #ef5350;
+  }
+  30.0% {
+    background-color: #c62828;
+  }
+  55.0% {
+    background-color: #ff8a80;
+  }
+  75.0% {
+    background-color: #ff9e80;
+  }
+  85.0% {
+    background-color: #ff5722;
+  }
+  100.0% {
+    background-color: #e65100;
+  }
+}
+/*# sourceMappingURL=not-found.component.css.map */

@@ -1,6 +1,7 @@
 nav {
-  background-color: #5d4037;
-  min-height: 70px;
+  background-color: #404040;
+  height: 10%;
+  min-height: 73px;
 }
 
 nav > p {
@@ -8,34 +9,45 @@ nav > p {
   width: 140px;
 }
 
-nav .brand-logo {
+.brand-logo {
   color: white;
   cursor: pointer;
-  font-family: 'Song Myung', serif;
+  font-family: 'Modak', cursive;
   display: inline-block;
   position: relative;
   top: 15px;
   left: 5px;
   font-size: 25px;
+  outline: 0px;
 }
 
-nav .brand-logo:hover {
+.brand-logo:hover {
   color: #e0e0e0;
 }
 
-nav .brand-logo > i {
-  color: #ffcc80;
+.zoe {
+  color: #ffa622;
 }
 
-nav .icons {
+.icons {
   float: right;
   text-align: center;
   margin: 15px;
   margin-right: 5px;
 }
 
-nav .icon {
+.icon {
   cursor: pointer;
   height: 35px;
+  outline: 0px;
+}
+
+.notification {
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  background: #ffcc80;
+  border-radius: 4px;
+  right: 40px;
 }
 /*# sourceMappingURL=header.component.css.map */

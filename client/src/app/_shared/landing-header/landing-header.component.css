@@ -1,17 +1,87 @@
 nav {
-  min-height: 80px;
-  background-color: #30415D;
+  min-height: 73px;
+  height: 10%;
+  background-color: #404040;
   color: #fff;
   text-align: center;
 }
 
-nav .brand-logo {
-  padding: 20px;
-  font-size: 30px;
-  font-family: 'Song Myung', serif;
+.brand-logo {
+  color: white;
+  cursor: pointer;
+  font-family: 'Modak', cursive;
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  left: 5px;
+  font-size: 25px;
 }
 
-nav .brand-logo > i {
+.brand-logo:hover {
+  color: #e0e0e0;
+}
+
+.zone-span {
   color: #ffcc80;
+  -webkit-animation-duration: 50s;
+          animation-duration: 50s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-name: title-color-change;
+          animation-name: title-color-change;
+}
+
+@-webkit-keyframes title-color-change {
+  0% {
+    color: #ffcc80;
+  }
+  15% {
+    color: #ef6464;
+  }
+  30% {
+    color: #f3ef00;
+  }
+  55% {
+    color: #2df300;
+  }
+  75% {
+    color: #994fd8;
+  }
+  85% {
+    color: #fd4df5;
+  }
+  95% {
+    color: #fb5454;
+  }
+  100% {
+    color: #ffcc80;
+  }
+}
+
+@keyframes title-color-change {
+  0% {
+    color: #ffcc80;
+  }
+  15% {
+    color: #ef6464;
+  }
+  30% {
+    color: #f3ef00;
+  }
+  55% {
+    color: #2df300;
+  }
+  75% {
+    color: #994fd8;
+  }
+  85% {
+    color: #fd4df5;
+  }
+  95% {
+    color: #fb5454;
+  }
+  100% {
+    color: #ffcc80;
+  }
 }
 /*# sourceMappingURL=landing-header.component.css.map */

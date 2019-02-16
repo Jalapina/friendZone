@@ -1,70 +1,124 @@
-@charset "UTF-8";
-.slide-1, .slide-2, .slide-3 {
+.slide {
   position: absolute;
-  display: block;
   color: #fff;
   font-size: 2.5em;
-  text-align: center;
-  width: 50%;
-  -webkit-animation-duration: 20s;
-          animation-duration: 20s;
+  width: 300px;
+  -webkit-animation-duration: 15s;
+          animation-duration: 15s;
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Luckiest Guy', cursive;
+  top: 170px;
+  pointer-events: none;
+  margin: auto;
+  left: 0px;
+  right: 0px;
 }
 
-.landing-page-intro {
-  min-height: 76%;
-  background-image: url("https://www.drweil.com/wp-content/uploads/2016/12/health-wellness_body-mind-spirit_mental-health_can-coffee-keep-your-mind-sharp_2716×1810_87102737-1024x768.jpg");
-  background-repeat: no-repeat, repeat;
-  background-size: 100% 600px;
+.landing-page {
+  height: 88%;
+  min-height: 500px;
+  background-color: tomato;
+  text-align: center;
+  -webkit-animation-name: color-change;
+  -webkit-animation-duration: 50s;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-play-state: running;
 }
 
-.landing-page-intro .slide-1 {
+@keyframes color-change {
+  0% {
+    background-color: #d65b5beb;
+  }
+  15.0% {
+    background-color: #ef5350;
+  }
+  30.0% {
+    background-color: #c62828;
+  }
+  55.0% {
+    background-color: #ff8a80;
+  }
+  75.0% {
+    background-color: #ff9e80;
+  }
+  85.0% {
+    background-color: #ff5722;
+  }
+  100.0% {
+    background-color: #e65100;
+  }
+}
+
+@-webkit-keyframes color-change {
+  0% {
+    background-color: #d65b5beb;
+  }
+  15.0% {
+    background-color: #ef5350;
+  }
+  30.0% {
+    background-color: #c62828;
+  }
+  55.0% {
+    background-color: #ff8a80;
+  }
+  75.0% {
+    background-color: #ff9e80;
+  }
+  85.0% {
+    background-color: #ff5722;
+  }
+  100.0% {
+    background-color: #e65100;
+  }
+}
+
+.slide-1 {
   -webkit-animation-name: slide1;
           animation-name: slide1;
-  top: 150px;
 }
 
-.landing-page-intro .slide-2 {
+.slide-2 {
   -webkit-animation-name: slide2;
           animation-name: slide2;
-  top: 230px;
 }
 
-.landing-page-intro .slide-3 {
+.slide-3 {
   -webkit-animation-name: slide3;
           animation-name: slide3;
-  top: 200px;
 }
 
 @-webkit-keyframes slide1 {
-  0%, 8.3% {
+  0%, 13% {
     left: -100%;
     opacity: 0;
   }
-  8.3%, 25% {
-    left: 25%;
+  13%, 18% {
+    left: 0%;
     opacity: 1;
   }
-  33.33%, 100% {
-    left: 45%;
+  61.33%, 100% {
+    left: -50%;
     opacity: 0;
   }
 }
 
 @keyframes slide1 {
-  0%, 8.3% {
+  0%, 13% {
     left: -100%;
     opacity: 0;
   }
-  8.3%, 25% {
-    left: 25%;
+  13%, 18% {
+    left: 0%;
     opacity: 1;
   }
-  33.33%, 100% {
-    left: 45%;
+  61.33%, 100% {
+    left: -50%;
     opacity: 0;
   }
 }
@@ -74,12 +128,12 @@
     left: -100%;
     opacity: 0;
   }
-  41.63%, 58.29% {
-    left: 25%;
+  41.63%, 60% {
+    left: 0%;
     opacity: 1;
   }
   66.66%, 100% {
-    left: 45%;
+    left: -50%;
     opacity: 0;
   }
 }
@@ -89,12 +143,12 @@
     left: -100%;
     opacity: 0;
   }
-  41.63%, 58.29% {
-    left: 25%;
+  41.63%, 60% {
+    left: 0%;
     opacity: 1;
   }
   66.66%, 100% {
-    left: 45%;
+    left: -50%;
     opacity: 0;
   }
 }
@@ -105,11 +159,11 @@
     opacity: 0;
   }
   74.96%, 91.62% {
-    left: 25%;
+    left: 0%;
     opacity: 1;
   }
   100% {
-    left: 45%;
+    left: -50%;
     opacity: 0;
   }
 }
@@ -120,33 +174,34 @@
     opacity: 0;
   }
   74.96%, 91.62% {
-    left: 25%;
+    left: 0%;
     opacity: 1;
   }
   100% {
-    left: 45%;
+    left: -50%;
     opacity: 0;
   }
 }
 
-.signUp {
-  position: absolute;
-  height: 80px;
-  width: 100%;
-  text-align: center;
-}
-
 .foward {
-  background-color: #4CAF50;
+  background-color: #404040;
   color: white;
   border: none;
-  width: 400px;
+  width: 100%;
   cursor: pointer;
-  height: 50px;
-  font-size: 16px;
+  height: 40px;
+  font-size: 13px;
 }
 
 .foward:hover {
-  background-color: #33663a;
+  background-color: #fff;
+  color: #404040;
+}
+
+.options {
+  background-color: #ffffff;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 /*# sourceMappingURL=landing.component.css.map */

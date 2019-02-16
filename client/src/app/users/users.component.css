@@ -1,7 +1,7 @@
 .main {
   text-align: center;
   margin: auto;
-  height: 580px;
+  height: 77%;
   position: relative;
 }
 
@@ -13,7 +13,6 @@
 
 .card {
   border: 1px solid black;
-  height: 580px;
   width: 350px;
   margin: auto;
   position: absolute;
@@ -22,8 +21,12 @@
   top: 20px;
   bottom: 0;
   left: 0;
+  z-index: 1;
+  border-radius: 50px;
   -webkit-box-shadow: 0px 0px 15px 0px #888888;
           box-shadow: 0px 0px 15px 0px #888888;
+  overflow: scroll;
+  -ms-overflow-style: none;
 }
 
 @media screen and (width: 320px) {
@@ -33,13 +36,23 @@
   }
 }
 
+.card::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.profile-image::-webkit-scrollbar {
+  width: 0 !important;
+}
+
 .profile-image {
   height: 250px;
   width: 100%;
-  background-color: #b2dfdb;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .profile-image img {
+  float: left;
   width: 350px;
   height: 250px;
 }
@@ -51,8 +64,7 @@
 }
 
 .user-info {
-  height: 90px;
-  padding: 5px;
+  padding: 20px;
   text-align: left;
 }
 
@@ -68,20 +80,18 @@
 }
 
 .user-name {
-  height: 40px;
-  -webkit-box-shadow: 0px 1px 19px -7px;
-          box-shadow: 0px 1px 19px -7px;
+  height: 37px;
 }
 
 .user-name .name {
   float: left;
   font-size: 25px;
-  cursor: pointer;
+  cursor: default;
   font-family: 'Song Myung', serifc;
   text-transform: uppercase;
   position: relative;
-  top: 3px;
   left: 10px;
+  bottom: 5px;
 }
 
 .user-name .icon {
@@ -97,35 +107,20 @@
   font-size: 30px;
 }
 
-.card-hide {
-  height: 0px;
-  position: absolute;
-  width: 350px;
-  bottom: 0;
-  background-color: #ffffff;
-  overflow: hidden;
-  -webkit-transition: all 800ms;
-  transition: all 800ms;
-  border-bottom: 1px solid black;
+.likes {
+  padding: 5px;
+  text-align: left;
 }
 
-@media screen and (width: 320px) {
-  .card-hide {
-    width: 300px;
-  }
-}
-
-.card-hide > p {
+.likes > p {
   text-align: left;
   width: 90%;
-  margin: auto;
+  margin-left: 15px;
 }
 
-.blue {
-  background-color: darkgray;
-  height: 60px;
-  width: 330px;
-  margin: auto;
+.blur {
+  min-height: 20px;
+  width: 85%;
   text-align: left;
 }
 
@@ -134,13 +129,9 @@
 }
 
 .options {
-  position: relative;
-  width: 370px;
+  max-width: 370px;
   margin: auto;
-  right: 0;
-  left: 0;
-  top: 20px;
-  text-align: center;
+  padding: 8px;
 }
 
 @media screen and (width: 320px) {
@@ -153,11 +144,13 @@
   -webkit-box-shadow: 0px 5px 15px 2px #888888;
           box-shadow: 0px 5px 15px 2px #888888;
   height: 45px;
-  width: 47%;
+  width: 49%;
   border-radius: 20px;
   border: 0;
   text-transform: uppercase;
   color: #fff;
+  cursor: pointer;
+  outline: none;
 }
 
 .pass {
@@ -168,12 +161,88 @@
   background: #66bb6a;
 }
 
-.hobbie {
-  background-color: #b2ebf2;
-  margin: 5px;
+.hobbies {
+  background-color: lavender;
   display: inline-block;
-  padding: 7px;
-  border-radius: 15px;
-  float: left;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 6px;
+  text-transform: capitalize;
+}
+
+.like-title {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.age {
+  margin-right: 5px;
+  font-size: 30px;
+  float: right;
+  margin-top: -8px;
+}
+
+.bio {
+  width: 85%;
+  min-height: 100px;
+}
+
+.blur::before {
+  content: "Blur:";
+  margin: 5px;
+  font-size: 20px;
+}
+
+.bio::before {
+  content: "Bio:";
+  margin: 5px;
+  font-size: 20px;
+}
+
+.distance {
+  display: inline-block;
+}
+
+.loading {
+  position: relative;
+  height: 90%;
+}
+
+.message {
+  width: 115px;
+  margin: auto;
+  position: absolute;
+  bottom: 40%;
+  left: 0px;
+  font-weight: bold;
+  font-family: 'Song Myung', serifc;
+  right: 0px;
+  text-align: center;
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
+  -webkit-animation: text-spin 4s infinite;
+          animation: text-spin 4s infinite;
+}
+
+@-webkit-keyframes text-spin {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
+}
+
+@keyframes text-spin {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
 }
 /*# sourceMappingURL=users.component.css.map */

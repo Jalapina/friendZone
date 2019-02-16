@@ -1,8 +1,7 @@
 .container {
   max-width: 750px;
-  min-height: 85%;
-  padding: 10px;
   margin: auto;
+  height: 87%;
 }
 
 @media screen and (min-width: 750px) {
@@ -14,13 +13,16 @@
   }
 }
 
+.container::-webkit-scrollbar {
+  display: none !important;
+  -ms-overflow-style: none !important;
+  overflow: -moz-scrollbars-none !important;
+}
+
 .photo {
-  background: #ffcc80;
-  height: 50px;
-  width: 50px;
-  margin: 5px;
-  border-radius: 30px;
   display: inline-block;
+  height: 100%;
+  cursor: pointer;
 }
 
 .head {
@@ -29,7 +31,7 @@
   background: linear-gradient(90deg, #ffcc80, #fff3e0);
   color: #424242;
   padding: 5px;
-  font-family: 'Bree Serif', serif;
+  font-family: 'Modak', cursive;
   letter-spacing: 5px;
   font-size: 25px;
   text-align: center;
@@ -72,6 +74,13 @@
 .name {
   font-family: 'Bree Serif', serif;
   text-transform: uppercase;
+  display: inline-block;
+  width: 150px;
+  position: relative;
+  cursor: pointer;
+  left: 5px;
+  top: 3px;
+  outline: none;
 }
 
 .preview {
@@ -85,5 +94,87 @@
   .preview {
     width: 590px;
   }
+}
+
+.image {
+  border-radius: 27px;
+  float: left;
+  cursor: pointer;
+}
+
+.unfriend {
+  float: right;
+  margin-top: 15px;
+  cursor: pointer;
+  height: 20px;
+  position: relative;
+  bottom: 57px;
+  padding: 16px;
+  font-family: 'Bree Serif', serif;
+  font-weight: bold;
+}
+
+.unmessaged-friends {
+  height: 60px;
+  overflow-y: scroll;
+  border-bottom: 1px solid black;
+}
+
+.unmessaged-friends::-webkit-scrollbar {
+  display: none !important;
+  -ms-overflow-style: none !important;
+  overflow: -moz-scrollbars-none !important;
+}
+
+.unmessaged-friend {
+  background-color: cadetblue;
+  height: 55px;
+  width: 55px;
+  margin: 2px;
+  border-radius: 27px;
+  list-style: none;
+  outline: none;
+}
+
+.ul-container {
+  display: inline-block;
+}
+
+.messaged-friend {
+  padding: 5px;
+  list-style: none;
+  height: 55px;
+}
+
+.ul-container2 {
+  height: 65px;
+  margin: 5px;
+}
+
+.message-preview {
+  width: 45%;
+  height: 25px;
+  position: relative;
+  cursor: pointer;
+  left: 5px;
+  font-size: 20px;
+  overflow: hidden;
+  top: 5px;
+  outline: none;
+}
+
+.read {
+  background: lightgrey !important;
+}
+
+.helper {
+  font-family: 'Modak', cursive;
+  width: 60%;
+  padding: 25px;
+  margin: auto;
+  font-size: 25px;
+  text-transform: uppercase;
+  color: darkgray;
+  text-decoration: underline;
 }
 /*# sourceMappingURL=friends.component.css.map */
