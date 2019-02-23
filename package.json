@@ -31,5 +31,9 @@
   "bugs": {
     "url": "https://github.com/Jalapina/friendZone/issues"
   },
-  "homepage": "https://github.com/Jalapina/friendZone#readme"
+  "homepage": "https://github.com/Jalapina/friendZone#readme",
+  "maintainers": [],
+  "contributors": [
+    "David Pina (http://www.linkedin.com/in/david-pina-8a46128a/)"
+  ]
 }
