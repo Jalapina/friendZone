@@ -20,7 +20,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "server server,js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "compile": "projectz compile",
+    "posttest": "npm run compile"
   },
   "repository": {
     "type": "git",
