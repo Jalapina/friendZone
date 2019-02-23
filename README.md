@@ -2,7 +2,7 @@
 
 Friendzone allows users to connect with people and participate in different activities in a platonic environmental.
 
-![alt text](http://demo/screenshot.jpg)
+![alt text](./demo/screenshot.jpg)
 
 ##How To Get Started
 
