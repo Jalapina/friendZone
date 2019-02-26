@@ -9,7 +9,7 @@ participate in different activities in a platonic environmental.
 </tr>
 </td>
 
-![screenshotfz](https://user-images.githubusercontent.com/26069518/53290072-c30a4c00-3764-11e9-9e86-89ba46293f8c.jpg)
+![ezgif com-video-to-gif 1](https://user-images.githubusercontent.com/26069518/53442328-abce9700-39ce-11e9-9496-1f104e6a78c4.gif)
 
 ## How To Get Started
 
